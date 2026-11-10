@@ -1,0 +1,14 @@
+# Test module api-peer-owner-test (plan 230-32). Installed by the KF platform as compose project "kfmod-api-peer-owner-test".
+# The platform adds, through its generated docker-compose.kf.yml, the KF_* environment and the module's own network on
+# the service with kf.expose (protocol 2.0, D-230-10): `api` reaches the platform, never another module.
+# Stateless: no volume (the module keeps its data in memory; a restart forgets it).
+services:
+  api:
+    build: .
+    labels:
+      kf.expose: "8080"
+    environment:
+      JAVA_TOOL_OPTIONS: "-XX:MaxRAMPercentage=50"
+    tmpfs:
+      - /tmp
+    restart: unless-stopped

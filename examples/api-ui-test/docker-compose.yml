@@ -1,0 +1,14 @@
+# Test module api-ui-test. Installed by the KF platform as compose project "kfmod-api-ui-test".
+# The platform adds, through its generated docker-compose.kf.yml, the KF_* environment and its network on the service
+# with kf.expose: `api` is reachable at /m/api-ui-test/... through the backend's proxy (prefix stripped).
+# Stateless: no volume, the root filesystem can be read-only (what the JVM writes goes to /tmp).
+services:
+  api:
+    build: .
+    labels:
+      kf.expose: "8080"
+    environment:
+      JAVA_TOOL_OPTIONS: "-XX:MaxRAMPercentage=50"
+    tmpfs:
+      - /tmp
+    restart: unless-stopped

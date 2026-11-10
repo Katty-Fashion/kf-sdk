@@ -1,0 +1,4 @@
+# the SDK exported by build.sh from the pinned ref (SDK_REF), never committed
+.sdk/
+dist/
+service/target/

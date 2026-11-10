@@ -1,0 +1,8 @@
+# the SDK exported by build.sh from the pinned ref (SDK_REF), never committed
+.sdk/
+dist/
+service/target/
+ui/node_modules/
+ui/dist/
+# built by build.sh from ui/
+service/src/main/resources/static/ui/

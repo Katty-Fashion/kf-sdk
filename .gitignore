@@ -1,0 +1,23 @@
+# Build output and dependencies (never committed)
+node_modules/
+dist/
+target/
+vendor/
+.sdk/
+*.zip
+
+# Secrets and keys never go into this public repository
+.env
+.env.*
+*.key
+*.pem
+*.p12
+module.secrets*
+release.local.json
+
+# IDE / OS
+.idea/
+*.iml
+.vscode/
+.DS_Store
+Thumbs.db

@@ -1,0 +1,96 @@
+{
+  "schemaVersion": 3,
+  "slug": "api-peer-owner-test",
+  "name": "module.name",
+  "description": "module.description",
+  "version": "0.0.0",
+  "author": "Katty Fashion",
+  "platform": ">=6.2",
+  "featureFlags": [],
+  "i18n": {
+    "en": {
+      "module.name": "API Peer Owner Test",
+      "module.description": "Test module (protocol 2.0): offers a slot, a read, a command and an event to other modules.",
+      "page.panel": "Peer owner panel",
+      "slot.panel": "Panel sections"
+    },
+    "ro": {
+      "module.name": "API Peer Owner Test",
+      "module.description": "Modul de test (protocolul 2.0): oferă altor module un slot, o citire, o comandă și un eveniment.",
+      "page.panel": "Panoul proprietarului",
+      "slot.panel": "Secțiunile panoului"
+    }
+  },
+  "capabilities": {
+    "routes": [
+      {
+        "method": "GET",
+        "path": "/m/api-peer-owner-test/items",
+        "right": "api.v1.m.api-peer-owner-test.items.get",
+        "roles": [
+          "BRAND_MANAGER",
+          "DESIGNER",
+          "PRODUCTION_MANAGER",
+          "QC",
+          "OPERATOR"
+        ]
+      },
+      {
+        "method": "POST",
+        "path": "/m/api-peer-owner-test/items",
+        "right": "api.v1.m.api-peer-owner-test.items.post",
+        "roles": [
+          "BRAND_MANAGER",
+          "DESIGNER",
+          "PRODUCTION_MANAGER",
+          "QC",
+          "OPERATOR"
+        ]
+      }
+    ],
+    "surfaces": [
+      {
+        "slug": "module.pages",
+        "kind": "react",
+        "label": "page.panel",
+        "page": "panel"
+      }
+    ],
+    "peerReads": [
+      {
+        "port": "m.api-peer-owner-test.items.v1",
+        "path": "/m/api-peer-owner-test/items",
+        "visibility": "public"
+      }
+    ],
+    "commands": [
+      {
+        "name": "register-item",
+        "path": "/m/api-peer-owner-test/items",
+        "method": "POST",
+        "visibility": "public"
+      }
+    ],
+    "events": [
+      {
+        "name": "item-registered",
+        "visibility": "public"
+      }
+    ],
+    "slots": [
+      {
+        "key": "panel.sections.v1",
+        "kind": "A",
+        "type": "extension",
+        "visibility": "public",
+        "label": "slot.panel",
+        "publicMembers": [
+          "items"
+        ],
+        "actions": [
+          "refresh"
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,86 @@
+# kf-demo-model-card (quick 261102-module-tutorial). Installed by the KF platform as compose project "kfmod-kf-demo-model-card".
+# The platform adds, through its generated docker-compose.kf.yml (docs/modules/specifications/01-structura-modulului.md),
+# the KF_* environment on EVERY service and its network ONLY on the service with kf.expose: `api` is reachable at
+# /m/kf-demo-model-card/... through the backend's proxy (prefix stripped: /m/kf-demo-model-card/pins/42 -> /pins/42).
+#
+# THE MODULE'S OWN DATABASE (sdk-protocol.md §3.3, the pattern of kf-feedback). `db` has no kf.expose
+# and no ports: it is not on the platform's network, so the platform cannot reach it and never reads it; only `api`
+# talks to it, on the project's own network. Its data is the module's: the pins of every tenant, isolated per tenant by RLS.
+#
+# THE PASSWORDS. `db-init` runs once per start and writes, only if missing, two random 32-byte passwords into the named
+# volume db-credentials: `owner-password` (the database owner, used by `db` and by Flyway) and `app-password` (the role
+# kfdemocard_app the application connects as, created by the first migration). They are in no file of the repository,
+# in no environment variable of this file, and do not derive from KF_HOOK_SECRET (which the platform rotates on repair,
+# 214): they survive every rotation and every upgrade. `api` mounts the volume read-only at /run/kfdemocard/ and Spring
+# reads the two files as properties (spring.config.import=optional:configtree:/run/kfdemocard/).
+#
+# READY FOR A READ-ONLY ROOT FILESYSTEM (Î-S7, phase 214): every image is pinned on a digest; what a container writes
+# goes to a tmpfs (the Postgres socket /var/run/postgresql, /tmp) or to a named volume (db-data, db-credentials) — the
+# state lives only in the named volumes.
+# The digest of postgres:16-alpine is the multi-arch index KF-AAS-R3 pinned on 2026-10-22 (anonymous registry request:
+# token from auth.docker.io for library/postgres, then HEAD https://registry-1.docker.io/v2/library/postgres/manifests/
+# 16-alpine -> Docker-Content-Digest). To refresh it: `docker buildx imagetools inspect postgres:16-alpine` -> "Digest:",
+# replace it in BOTH services, release a new module version.
+services:
+  db-init:
+    image: postgres:16-alpine@sha256:deb28ee471183cb0c303113dac9b2433c51eeeeb678def7af9a9ec5820367815
+    # once: the passwords, if missing (hex of 32 random bytes); readable by the postgres user (uid 70) and root only
+    entrypoint: ["/bin/sh", "-c"]
+    command:
+      - >-
+        umask 077 &&
+        for f in owner-password app-password; do
+          [ -s /run/kfdemocard/$$f ] || head -c 32 /dev/urandom | od -An -tx1 | tr -d ' \n' > /run/kfdemocard/$$f;
+        done &&
+        chown 70:70 /run/kfdemocard/owner-password /run/kfdemocard/app-password &&
+        chmod 0400 /run/kfdemocard/owner-password /run/kfdemocard/app-password
+    volumes:
+      - db-credentials:/run/kfdemocard
+    tmpfs:
+      - /tmp
+    restart: "no"
+
+  db:
+    image: postgres:16-alpine@sha256:deb28ee471183cb0c303113dac9b2433c51eeeeb678def7af9a9ec5820367815
+    # no kf.expose, no ports: off the platform's network (the platform never sees this database)
+    environment:
+      POSTGRES_DB: kfdemocard
+      POSTGRES_USER: kfdemocard
+      POSTGRES_PASSWORD_FILE: /run/kfdemocard/owner-password
+    volumes:
+      - db-data:/var/lib/postgresql/data
+      - db-credentials:/run/kfdemocard:ro
+    tmpfs:
+      - /var/run/postgresql
+      - /tmp
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U kfdemocard -d kfdemocard -h 127.0.0.1"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+    depends_on:
+      db-init:
+        condition: service_completed_successfully
+    restart: unless-stopped
+
+  api:
+    build: .
+    labels:
+      kf.expose: "8080"
+    environment:
+      JAVA_TOOL_OPTIONS: "-XX:MaxRAMPercentage=50"
+      SPRING_DATASOURCE_URL: "jdbc:postgresql://db:5432/kfdemocard"
+    volumes:
+      - db-credentials:/run/kfdemocard:ro
+    tmpfs:
+      - /tmp
+    depends_on:
+      db:
+        condition: service_healthy
+    restart: unless-stopped
+
+volumes:
+  # the module's data (the database files); back it up with pg_dump before every upgrade (README)
+  db-data: {}
+  # the two passwords, written once by db-init
+  db-credentials: {}

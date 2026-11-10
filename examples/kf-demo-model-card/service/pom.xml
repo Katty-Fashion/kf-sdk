@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+    <modelVersion>4.0.0</modelVersion>
+
+    <!-- Same Boot / Java as the platform backend (kf-be-platform), the Java module SDK and KF-AAS-R3. -->
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>4.0.6</version>
+        <relativePath/>
+    </parent>
+
+    <groupId>ro.kf.modules</groupId>
+    <artifactId>kf-demo-model-card</artifactId>
+    <!-- set by build.sh: ./mvnw package -Drevision=0.1.0 -->
+    <version>${revision}</version>
+    <name>KF Demo — Model card</name>
+    <description>The demo module of the tutorial "your first module" (quick 261102-module-tutorial), on the Java module SDK
+        0.9.0 (protocol 1.3): the model card in the Overview and the page of pinned cards, the pins in the module's own
+        database, model.after.delete, tenant.after.delete, the tenant-data export.</description>
+
+    <properties>
+        <java.version>21</java.version>
+        <revision>0.0.0-SNAPSHOT</revision>
+        <!-- The Java module SDK, installed into ~/.m2 by build.sh from the PINNED tag (SDK_REF in build.sh): build.sh
+             passes the version read from the pom at that tag (-Dkf-module-sdk.version), this default is for an IDE. -->
+        <kf-module-sdk.version>0.9.1</kf-module-sdk.version>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-webmvc</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>ro.kf</groupId>
+            <artifactId>kf-module-sdk</artifactId>
+            <version>${kf-module-sdk.version}</version>
+        </dependency>
+
+        <!-- The module's OWN database (the pattern of kf-feedback and KF-AAS-R3): Postgres in its compose, its own Flyway, RLS on
+             the GUC kfdemocard.tenant. Versions managed by the Spring Boot 4.0.6 parent (as in kf-be-platform). -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-jdbc</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-flyway</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.flywaydb</groupId>
+            <artifactId>flyway-database-postgresql</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+            <scope>runtime</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <!-- The SDK's platform for tests (213-11): FakePlatform, from the SDK's tests artifact at the pinned version. -->
+        <dependency>
+            <groupId>ro.kf</groupId>
+            <artifactId>kf-module-sdk</artifactId>
+            <version>${kf-module-sdk.version}</version>
+            <type>test-jar</type>
+            <scope>test</scope>
+        </dependency>
+        <!-- Two tenants against a real Postgres (RLS): Testcontainers 2.x, managed by the parent (as in kf-be-platform). -->
+        <dependency>
+            <groupId>org.testcontainers</groupId>
+            <artifactId>testcontainers-junit-jupiter</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.testcontainers</groupId>
+            <artifactId>testcontainers-postgresql</artifactId>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <finalName>kf-demo-model-card</finalName>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+            <!-- The *IT classes (the module's own Postgres through Testcontainers, the SDK's FakePlatform) run with the
+                 unit tests, in `test`: the module has no separate integration phase (a build needs Docker). -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <configuration>
+                    <includes>
+                        <include>**/*Test.java</include>
+                        <include>**/*Tests.java</include>
+                        <include>**/*IT.java</include>
+                    </includes>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+</project>

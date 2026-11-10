@@ -1,0 +1,68 @@
+{
+  "schemaVersion": 2,
+  "slug": "api-ui-test",
+  "name": "module.name",
+  "description": "module.description",
+  "version": "0.0.0",
+  "author": "Katty Fashion",
+  "platform": ">=5.1",
+  "featureFlags": [],
+  "i18n": {
+    "en": {
+      "module.name": "API UI Test",
+      "module.description": "Test module: one contribution on each UI surface of protocol 1.1 (a module page, a setup section, a tenant card, the order rail and the order review).",
+      "page.demo": "API UI Test demo",
+      "section.servers": "API UI Test servers",
+      "card.tenant": "API UI Test",
+      "surface.order-panel": "AAS",
+      "surface.order-review": "AAS (review)"
+    },
+    "ro": {
+      "module.name": "API UI Test",
+      "module.description": "Modul de test: câte o contribuție pe fiecare suprafață UI a protocolului 1.1 (o pagină de modul, o secțiune de setup, un card de tenant, rail-ul și review-ul comenzii).",
+      "page.demo": "Demo API UI Test",
+      "section.servers": "Serverele API UI Test",
+      "card.tenant": "API UI Test",
+      "surface.order-panel": "AAS",
+      "surface.order-review": "AAS (review)"
+    }
+  },
+  "capabilities": {
+    "routes": [
+      {
+        "method": "GET",
+        "path": "/m/api-ui-test/info",
+        "right": "api.v1.m.api-ui-test.info.get",
+        "roles": ["BRAND_MANAGER", "DESIGNER", "PRODUCTION_MANAGER", "QC", "OPERATOR"],
+        "admin": "tenant"
+      }
+    ],
+    "surfaces": [
+      {"slug": "module.pages", "kind": "react", "label": "page.demo", "page": "demo"},
+      {"slug": "setup.sections", "kind": "react", "label": "section.servers", "page": "servers"},
+      {"slug": "tenant-management.cards", "kind": "react", "label": "card.tenant"},
+      {"slug": "orderflow.rail.sections", "kind": "react", "label": "surface.order-panel"},
+      {"slug": "orderflow.review.after", "kind": "react", "label": "surface.order-review"}
+    ],
+    "nav": [
+      {
+        "surface": "staff",
+        "group": "admin-utils",
+        "key": "demo",
+        "label": "page.demo",
+        "url": "/m/api-ui-test/demo",
+        "icon": "FlaskConical",
+        "order": 90
+      },
+      {
+        "surface": "platform",
+        "group": "platform-main",
+        "key": "servers",
+        "label": "section.servers",
+        "url": "/setup/m/api-ui-test/servers",
+        "icon": "Server",
+        "order": 90
+      }
+    ]
+  }
+}

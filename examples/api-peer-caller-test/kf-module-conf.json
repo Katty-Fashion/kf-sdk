@@ -1,0 +1,80 @@
+{
+  "schemaVersion": 3,
+  "slug": "api-peer-caller-test",
+  "name": "module.name",
+  "description": "module.description",
+  "version": "0.0.0",
+  "author": "Katty Fashion",
+  "platform": ">=6.2",
+  "featureFlags": [],
+  "requires": [
+    {
+      "slug": "api-peer-owner-test",
+      "versionRange": ">=0.0.0",
+      "optional": true
+    }
+  ],
+  "i18n": {
+    "en": {
+      "module.name": "API Peer Caller Test",
+      "module.description": "Test module (protocol 2.0): requires api-peer-owner-test as optional, reads its port, calls its command, subscribes to its event and contributes to its slot.",
+      "slot.contribution": "Peer caller"
+    },
+    "ro": {
+      "module.name": "API Peer Caller Test",
+      "module.description": "Modul de test (protocolul 2.0): cere api-peer-owner-test ca opțional, îi citește portul, îi cheamă comanda, se abonează la evenimentul lui și contribuie la slot-ul lui.",
+      "slot.contribution": "Apelantul"
+    }
+  },
+  "capabilities": {
+    "routes": [
+      {
+        "method": "GET",
+        "path": "/m/api-peer-caller-test/probe",
+        "right": "api.v1.m.api-peer-caller-test.probe.get",
+        "roles": [
+          "BRAND_MANAGER",
+          "DESIGNER",
+          "PRODUCTION_MANAGER",
+          "QC",
+          "OPERATOR"
+        ]
+      },
+      {
+        "method": "GET",
+        "path": "/m/api-peer-caller-test/latest",
+        "right": "api.v1.m.api-peer-caller-test.latest.get",
+        "roles": [
+          "BRAND_MANAGER",
+          "DESIGNER",
+          "PRODUCTION_MANAGER",
+          "QC",
+          "OPERATOR"
+        ]
+      }
+    ],
+    "surfaces": [
+      {
+        "slug": "m.api-peer-owner-test.panel.sections.v1",
+        "kind": "react",
+        "label": "slot.contribution"
+      }
+    ],
+    "hooks": [
+      {
+        "point": "m.api-peer-owner-test.after.item-registered"
+      }
+    ],
+    "peers": [
+      {
+        "owner": "api-peer-owner-test",
+        "reads": [
+          "m.api-peer-owner-test.items.v1"
+        ],
+        "commands": [
+          "register-item"
+        ]
+      }
+    ]
+  }
+}

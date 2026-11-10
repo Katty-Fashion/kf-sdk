@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+    <modelVersion>4.0.0</modelVersion>
+
+    <!-- Test module api-peer-caller-test (plan 230-32, protocol 2.0): no Spring, the JDK HTTP server of the SDK
+         (KfHttpServer). One fat jar (shade), copied as app.jar by build.sh. -->
+    <groupId>ro.kf.modules.test</groupId>
+    <artifactId>api-peer-caller-test</artifactId>
+    <!-- set by build.sh: ./mvnw package -Drevision=0.0.1 -->
+    <version>${revision}</version>
+    <name>api-peer-caller-test</name>
+
+    <properties>
+        <revision>0.0.0-SNAPSHOT</revision>
+        <maven.compiler.release>21</maven.compiler.release>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <!-- installed into ~/.m2 by build.sh from the PINNED sha (KF_SDK_REF); this default is for an IDE -->
+        <kf-module-sdk.version>0.10.0-dev</kf-module-sdk.version>
+        <!-- the same JUnit as the SDK (Spring Boot 4.0.6) -->
+        <junit.version>6.0.3</junit.version>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>ro.kf</groupId>
+            <artifactId>kf-module-sdk</artifactId>
+            <version>${kf-module-sdk.version}</version>
+        </dependency>
+
+        <!-- the fake platform of the SDK (ro.kf.sdk.testing.FakePlatform), tests only -->
+        <dependency>
+            <groupId>ro.kf</groupId>
+            <artifactId>kf-module-sdk</artifactId>
+            <version>${kf-module-sdk.version}</version>
+            <type>test-jar</type>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter</artifactId>
+            <version>${junit.version}</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <finalName>api-peer-caller-test</finalName>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.14.0</version>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>3.5.5</version>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>3.4.2</version>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-shade-plugin</artifactId>
+                <version>3.6.0</version>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>shade</goal>
+                        </goals>
+                        <configuration>
+                            <createDependencyReducedPom>false</createDependencyReducedPom>
+                            <transformers>
+                                <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+                                    <mainClass>ro.kf.modules.apipeercallertest.ApiPeerCallerTestModule</mainClass>
+                                </transformer>
+                                <transformer implementation="org.apache.maven.plugins.shade.resource.ServicesResourceTransformer"/>
+                            </transformers>
+                            <filters>
+                                <filter>
+                                    <artifact>*:*</artifact>
+                                    <excludes>
+                                        <exclude>META-INF/*.SF</exclude>
+                                        <exclude>META-INF/*.DSA</exclude>
+                                        <exclude>META-INF/*.RSA</exclude>
+                                    </excludes>
+                                </filter>
+                            </filters>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+</project>

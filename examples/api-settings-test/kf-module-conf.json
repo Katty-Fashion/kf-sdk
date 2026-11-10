@@ -1,0 +1,101 @@
+{
+  "schemaVersion": 2,
+  "slug": "api-settings-test",
+  "name": "module.name",
+  "description": "module.description",
+  "version": "0.0.0",
+  "author": "Katty Fashion",
+  "platform": ">=5.1",
+  "featureFlags": [],
+  "i18n": {
+    "en": {
+      "module.name": "API Settings Test",
+      "module.description": "Test module: reads its NUMBER/ENUM settings, writes its own field on a model version and provides the factory stations (protocol 1.1).",
+      "setting.batch-size.label": "Batch size",
+      "setting.batch-size.description": "A NUMBER setting between 1 and 50 (test of the Module settings card).",
+      "setting.push-mode.label": "Push mode",
+      "setting.push-mode.description": "An ENUM setting: auto, manual or off (test of the Module settings card).",
+      "setting.verbose.label": "Verbose answers",
+      "setting.verbose.description": "A BOOLEAN setting (test of the Module settings card).",
+      "field.aas-shell": "AAS shell (test)"
+    },
+    "ro": {
+      "module.name": "API Settings Test",
+      "module.description": "Modul de test: își citește setările NUMBER/ENUM, își scrie câmpul pe o versiune de model și furnizează stațiile fabricii (protocolul 1.1).",
+      "setting.batch-size.label": "Mărimea lotului",
+      "setting.batch-size.description": "O setare NUMBER între 1 și 50 (testul cardului Module settings).",
+      "setting.push-mode.label": "Modul de trimitere",
+      "setting.push-mode.description": "O setare ENUM: auto, manual sau off (testul cardului Module settings).",
+      "setting.verbose.label": "Răspunsuri detaliate",
+      "setting.verbose.description": "O setare BOOLEAN (testul cardului Module settings).",
+      "field.aas-shell": "Shell AAS (test)"
+    }
+  },
+  "capabilities": {
+    "routes": [
+      {
+        "method": "GET",
+        "path": "/m/api-settings-test/settings",
+        "right": "api.v1.m.api-settings-test.settings.get",
+        "roles": ["BRAND_MANAGER", "DESIGNER", "PRODUCTION_MANAGER", "QC", "OPERATOR"],
+        "admin": "tenant"
+      },
+      {
+        "method": "POST",
+        "path": "/m/api-settings-test/extensions/model-version",
+        "right": "api.v1.m.api-settings-test.extensions.model-version.post",
+        "roles": ["BRAND_MANAGER", "DESIGNER", "PRODUCTION_MANAGER"],
+        "admin": "tenant"
+      },
+      {
+        "method": "GET",
+        "path": "/m/api-settings-test/factory/stations",
+        "right": "api.v1.m.api-settings-test.factory.stations.get",
+        "roles": ["BRAND_MANAGER", "DESIGNER", "PRODUCTION_MANAGER", "QC", "OPERATOR"],
+        "admin": "tenant"
+      }
+    ],
+    "settings": [
+      {
+        "key": "batch-size",
+        "type": "NUMBER",
+        "default": 10,
+        "min": 1,
+        "max": 50,
+        "label": "setting.batch-size.label",
+        "description": "setting.batch-size.description"
+      },
+      {
+        "key": "push-mode",
+        "type": "ENUM",
+        "default": "auto",
+        "values": ["auto", "manual", "off"],
+        "label": "setting.push-mode.label",
+        "description": "setting.push-mode.description"
+      },
+      {
+        "key": "verbose",
+        "type": "BOOLEAN",
+        "default": false,
+        "label": "setting.verbose.label",
+        "description": "setting.verbose.description"
+      }
+    ],
+    "fields": [
+      {
+        "entity": "model_version",
+        "name": "aas_shell",
+        "type": "STRING",
+        "table": "version_aas",
+        "label": "field.aas-shell",
+        "editable": false
+      }
+    ],
+    "provides": [
+      {
+        "port": "factory.stations.v1",
+        "path": "/m/api-settings-test/factory/stations"
+      }
+    ]
+  }
+}

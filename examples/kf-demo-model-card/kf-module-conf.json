@@ -1,0 +1,197 @@
+{
+  "schemaVersion": 2,
+  "slug": "kf-demo-model-card",
+  "name": "module.name",
+  "description": "module.description",
+  "version": "0.1.0",
+  "rollbackFloor": "0.1.0",
+  "author": "Katty Fashion",
+  "platform": ">=6.1",
+  "activation": "tenant",
+  "tenantData": {
+    "format": "kf-demo-model-card/tenant-data/v1",
+    "export": true
+  },
+  "featureFlags": [],
+  "i18n": {
+    "en": {
+      "module.name": "KF Demo — Model card",
+      "module.description": "The demo module of the tutorial: a card of the model in its Overview (the garment image of the selected version or a monogram, name, style number, owner, status, created at, the selected version and a QR code to the model), and a page with the tenant's models, paged, and the cards each user pinned. The pins live in the module's own database, isolated per tenant.",
+      "surface.card": "Model card",
+      "page.cards": "Model cards",
+      "nav.cards": "Model cards",
+      "notification.pinned-model-deleted.subject": "A pinned model was deleted",
+      "notification.pinned-model-deleted.body": "The model **{{modelName}}**, which you pinned to your cards, was deleted. Its card is gone from your page.",
+      "ui.card.title": "Model card",
+      "ui.card.style": "Style number",
+      "ui.card.owner": "Owner",
+      "ui.card.image": "Garment image: {name}",
+      "ui.card.status": "Status",
+      "ui.card.created": "Created",
+      "ui.card.version": "Version",
+      "ui.card.no-version": "No version selected",
+      "ui.card.qr": "Scan to open this model",
+      "ui.card.pin": "Pin to my cards",
+      "ui.card.unpin": "Unpin",
+      "ui.card.pinned": "Pinned to your cards",
+      "ui.card.unpinned": "Removed from your cards",
+      "ui.card.open": "Open",
+      "ui.card.error": "The card could not be loaded.",
+      "ui.page.title": "Model cards",
+      "ui.page.views": "Views",
+      "ui.page.all": "All models",
+      "ui.page.pinned": "Pinned",
+      "ui.page.no-models": "No models in this tenant yet.",
+      "ui.page.forbidden": "You do not have the right to see the models of this tenant (api.v1.models.get).",
+      "ui.page.previous": "Previous",
+      "ui.page.next": "Next",
+      "ui.page.of": "Page {page} of {pages}",
+      "ui.page.empty": "No pinned models yet. Pin a model from its card.",
+      "ui.page.loading": "Loading your cards…",
+      "ui.page.error": "Your cards could not be loaded.",
+      "ui.page.versions": "{count} versions",
+      "ui.host.too-old": "This module needs a newer KF platform (host API {version})."
+    },
+    "ro": {
+      "module.name": "KF Demo — Cardul modelului",
+      "module.description": "Modulul demo al tutorialului: un card al modelului în Overview (poza versiunii selectate sau o monogramă, nume, cod de stil, proprietar, status, data creării, versiunea selectată și un cod QR spre model) și o pagină cu modelele tenantului, paginate, și cardurile pe care fiecare utilizator le-a fixat. Fixările stau în baza de date proprie a modulului, izolate pe tenant.",
+      "surface.card": "Cardul modelului",
+      "page.cards": "Cardurile modelelor",
+      "nav.cards": "Carduri de model",
+      "notification.pinned-model-deleted.subject": "Un model fixat a fost șters",
+      "notification.pinned-model-deleted.body": "Modelul **{{modelName}}**, pe care l-ai fixat în cardurile tale, a fost șters. Cardul lui a dispărut din pagina ta.",
+      "ui.card.title": "Cardul modelului",
+      "ui.card.style": "Cod de stil",
+      "ui.card.owner": "Proprietar",
+      "ui.card.image": "Poza modelului: {name}",
+      "ui.card.status": "Status",
+      "ui.card.created": "Creat la",
+      "ui.card.version": "Versiunea",
+      "ui.card.no-version": "Nicio versiune selectată",
+      "ui.card.qr": "Scanează ca să deschizi modelul",
+      "ui.card.pin": "Fixează în cardurile mele",
+      "ui.card.unpin": "Scoate",
+      "ui.card.pinned": "Fixat în cardurile tale",
+      "ui.card.unpinned": "Scos din cardurile tale",
+      "ui.card.open": "Deschide",
+      "ui.card.error": "Cardul nu s-a putut încărca.",
+      "ui.page.title": "Cardurile modelelor",
+      "ui.page.views": "Vizualizări",
+      "ui.page.all": "Toate modelele",
+      "ui.page.pinned": "Fixate",
+      "ui.page.no-models": "Niciun model în acest tenant încă.",
+      "ui.page.forbidden": "Nu ai dreptul să vezi modelele acestui tenant (api.v1.models.get).",
+      "ui.page.previous": "Înapoi",
+      "ui.page.next": "Înainte",
+      "ui.page.of": "Pagina {page} din {pages}",
+      "ui.page.empty": "Niciun model fixat încă. Fixează un model din cardul lui.",
+      "ui.page.loading": "Se încarcă cardurile…",
+      "ui.page.error": "Cardurile nu s-au putut încărca.",
+      "ui.page.versions": "{count} versiuni",
+      "ui.host.too-old": "Modulul cere o platformă KF mai nouă (API-ul host-ului {version})."
+    }
+  },
+  "capabilities": {
+    "routes": [
+      {
+        "method": "GET",
+        "path": "/m/kf-demo-model-card/cards",
+        "right": "api.v1.m.kf-demo-model-card.cards.get",
+        "audience": "member"
+      },
+      {
+        "method": "GET",
+        "path": "/m/kf-demo-model-card/models",
+        "right": "api.v1.m.kf-demo-model-card.models.get",
+        "audience": "member"
+      },
+      {
+        "method": "GET",
+        "path": "/m/kf-demo-model-card/models/{modelId}",
+        "right": "api.v1.m.kf-demo-model-card.models.get",
+        "audience": "member"
+      },
+      {
+        "method": "PUT",
+        "path": "/m/kf-demo-model-card/pins/{modelId}",
+        "right": "api.v1.m.kf-demo-model-card.pins.put",
+        "audience": "member"
+      },
+      {
+        "method": "DELETE",
+        "path": "/m/kf-demo-model-card/pins/{modelId}",
+        "right": "api.v1.m.kf-demo-model-card.pins.delete",
+        "audience": "member"
+      },
+      {
+        "method": "DELETE",
+        "path": "/m/kf-demo-model-card/admin/pins",
+        "right": "api.v1.m.kf-demo-model-card.admin.pins.delete",
+        "admin": "tenant"
+      },
+      {
+        "method": "GET",
+        "path": "/m/kf-demo-model-card/admin/export",
+        "right": "api.v1.m.kf-demo-model-card.admin.export.get",
+        "admin": "platform",
+        "timeoutSeconds": 60
+      },
+      {
+        "method": "POST",
+        "path": "/m/kf-demo-model-card/admin/import",
+        "right": "api.v1.m.kf-demo-model-card.admin.import.post",
+        "admin": "platform",
+        "timeoutSeconds": 60
+      }
+    ],
+    "hooks": [
+      {
+        "point": "model.after.delete"
+      },
+      {
+        "point": "tenant.after.delete"
+      }
+    ],
+    "reads": [
+      {
+        "port": "model.v1"
+      },
+      {
+        "port": "model-version.garment-image.v1"
+      }
+    ],
+    "notifications": [
+      {
+        "key": "pinned-model-deleted",
+        "variables": ["modelName"],
+        "channels": ["in_app"],
+        "subject": "notification.pinned-model-deleted.subject",
+        "body": "notification.pinned-model-deleted.body"
+      }
+    ],
+    "surfaces": [
+      {
+        "slug": "models.detail.overview.cards",
+        "kind": "react",
+        "label": "surface.card"
+      },
+      {
+        "slug": "module.pages",
+        "kind": "react",
+        "label": "page.cards",
+        "page": "cards"
+      }
+    ],
+    "nav": [
+      {
+        "surface": "staff",
+        "group": "product",
+        "key": "cards",
+        "label": "nav.cards",
+        "url": "/m/kf-demo-model-card/cards",
+        "icon": "LayoutGrid",
+        "order": 50
+      }
+    ]
+  }
+}
