@@ -4,8 +4,9 @@
 published in this repository, not even in part. Every version directory carries `kf-sdk-build.json` with
 `"variant": "external"`; anything else is not a version of this repository.
 
-No version is published yet. Each published version appears as `sdk/<version>/` and is never rewritten: a correction is
-a new version.
+No version is published yet: **the first public version will be 4.1.0**, when the platform, the SDK and the release
+milestone align on the same major.minor. Until then this directory holds only this README. Each published version
+appears as `sdk/<version>/` and is never rewritten: a correction is a new version.
 
 ## A version directory
 

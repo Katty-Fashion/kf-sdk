@@ -1,4 +1,4 @@
-// Smoke test of the hand-written bundle (plan 230-32), with stubbed react / @kf/ui / @kf/host-sdk: the panel the caller
+// Smoke test of the hand-written bundle, with stubbed react / @kf/ui / @kf/host-sdk: the panel the caller
 // contributes to the owner's slot renders and reads GET /latest.
 //   node --import ./loader.mjs --test surfaces.smoke.test.mjs
 import { test } from 'node:test';

@@ -30,16 +30,16 @@ import java.util.concurrent.atomic.AtomicReference;
 import java.util.regex.Pattern;
 
 /**
- * The test module {@code api-peer-caller-test} (phase 230, plan 230-32, protocol 2.0, D-230-15): the CALLER of the proof
+ * The test module {@code api-peer-caller-test} (protocol 2.0): the CALLER of the proof
  * between modules. It requires {@code api-peer-owner-test} as OPTIONAL ({@code requires[].optional}) and:
  * <ul>
  *   <li>reads its port {@code m.api-peer-owner-test.items.v1} and calls its command {@code register-item}, through the
  *       platform ({@code kf.peers()}, {@code capabilities.peers});</li>
  *   <li>subscribes to {@code m.api-peer-owner-test.after.item-registered}: the handler keeps the last event and, with the
- *       delivery's context (D-230-16), reads the owner's port again as a background job would;</li>
+ *       delivery's context, reads the owner's port again as a background job would;</li>
  *   <li>contributes a panel to the owner's slot {@code m.api-peer-owner-test.panel.sections.v1} (it shows the last item
  *       read, {@code GET /latest});</li>
- *   <li>{@code GET /probe} reports, for the human proof of 230-33: the read, the command with a key (201 expected), the
+ *   <li>{@code GET /probe} reports, for the human proof of: the read, the command with a key (201 expected), the
  *       command WITHOUT a key sent by a plain HTTP client (the SDK refuses it locally; the platform answers 400), whether
  *       the owner is unavailable ({@code MODULE_UNAVAILABLE}, typed) and the last event received. Always {@code 200}.</li>
  * </ul>
@@ -87,7 +87,7 @@ public final class ApiPeerCallerTestModule {
         return kf;
     }
 
-    /** The event handler: keeps the event and, with the delivery's context (D-230-16), reads the owner's port again. */
+    /** The event handler: keeps the event and, with the delivery's context, reads the owner's port again. */
     static void onItemRegistered(KfModule kf, State state, HookEvents.ModuleEvent ev) {
         Map<String, Object> seen = new LinkedHashMap<>();
         seen.put("eventId", ev.eventId());
@@ -107,7 +107,7 @@ public final class ApiPeerCallerTestModule {
         server.createContext("/health", exchange -> health(kf, exchange));
     }
 
-    /** {@code GET /probe}: everything the proof of 230-33 looks at, in one answer, always {@code 200}. */
+    /** {@code GET /probe}: everything the proof of looks at, in one answer, always {@code 200}. */
     static HookResult probe(KfModule kf, State state, RawPlatform raw, RequestContext ctx, HttpExchange exchange) {
         Map<String, Object> out = new LinkedHashMap<>();
         Map<String, Object> read = read(() -> kf.peers().read(ctx, OWNER, PORT, Map.of()));

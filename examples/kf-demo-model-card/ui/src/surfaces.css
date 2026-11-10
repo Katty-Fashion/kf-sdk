@@ -1,8 +1,8 @@
 /*
- * The module's own stylesheet (quick 261030-css-module): every Tailwind class the module's UI uses is compiled here,
+ * The module's own stylesheet: every Tailwind class the module's UI uses is compiled here,
  * so the module does not depend on the classes the host happens to compile for its own pages. Built by
  * scripts/build-css.mjs into dist/surfaces.css, declared on every contribution with Surface.css(...). The host
- * injects it once per page, in the cascade layer `kf-modules`, below all of its own layers (205-21).
+ * injects it once per page, in the cascade layer `kf-modules`, below all of its own layers.
  *
  * No preflight: the host's base styles are already on the page. The theme stays the host's: `@kf/sdk-ui/kf-theme.css`
  * (the pinned SDK's sdk/ui/kf-theme.css) maps `bg-primary`, `text-muted-foreground`, ... to the host's CSS

@@ -21,22 +21,22 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * The test module {@code api-settings-test} (quick 261026-pachete-test): three services of protocol 1.1, each behind
- * one route, so that the scenarios 213-14.3, 213-15.1 and 213-16.2 can be checked on a stack through a real module. It
+ * The test module {@code api-settings-test}: three services of protocol 1.1, each behind
+ * one route, so that the scenarios, and can be checked on a stack through a real module. It
  * has no logic of its own.
  *
  * <ul>
  *   <li>{@code GET /m/api-settings-test/settings} → {@code kf.settings().effective(ctx)} (§15.2): {@code 200
  *       {tenant, settings, defaults}} -- the tenant's effective values, typed by the manifest, next to the declared
- *       defaults (213-14.3).</li>
+ *       defaults.</li>
  *   <li>{@code POST /m/api-settings-test/extensions/model-version} with {@code {"id": "<versionId>", "values":
  *       {"aas_shell": "X"}}} → {@code kf.extensions().write(ctx, "model_version", id, values)} (§15.4): {@code 200
  *       {entity, id, values}} with the module's values after the write; the values are sent as given, so
- *       {@code {"aas_shell": 12}} reaches the platform and comes back as its {@code 400} (213-15.1).</li>
+ *       {@code {"aas_shell": 12}} reaches the platform and comes back as its {@code 400}.</li>
  *   <li>{@code GET /m/api-settings-test/factory/stations}, declared in {@code provides: factory.stations.v1} (§15.5):
  *       the stations in the strict shape of {@code FactoryStationsV1}, and one log line with the caller
  *       ({@code actor.type}, {@code actor.via}, {@code user}): the platform's read is {@code via=platform user=null}
- *       (213-16.2).</li>
+ *      .</li>
  * </ul>
  * A refusal of the platform comes back with its own status and {@code {refused: true, status, kind, reason, detail,
  * errors}}; a local refusal of the SDK or a {@code 503} as {@code 502}. {@code /health} answers without a context, for
@@ -145,7 +145,7 @@ public final class ApiSettingsTestModule {
                 + " requestId=" + ctx.requestId());
         Map<String, Object> out = new LinkedHashMap<>();
         out.put("stations", STATIONS);
-        out.put("warnings", List.of("served by the test module api-settings-test (213-16.2)"));
+        out.put("warnings", List.of("served by the test module api-settings-test"));
         return json(200, out);
     }
 

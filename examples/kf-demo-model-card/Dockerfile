@@ -1,6 +1,6 @@
-# kf-demo-model-card (quick 261102-module-tutorial): runs the prebuilt jar staged by build.sh (no Maven needed when the platform installs the module).
-# The base image is PINNED on a digest (plan 214-03, variant B, Î-S4 a): a signed release refuses a FROM without
-# @sha256, and the platform refuses it at upload (214-02). The digest is the multi-arch index of eclipse-temurin:21-jre,
+# kf-demo-model-card: runs the prebuilt jar staged by build.sh (no Maven needed when the platform installs the module).
+# The base image is PINNED on a digest (variant B): a signed release refuses a FROM without
+# @sha256, and the platform refuses it at upload. The digest is the multi-arch index of eclipse-temurin:21-jre,
 # read on 2026-10-21 (anonymous registry request: token from auth.docker.io for library/eclipse-temurin, then
 # HEAD https://registry-1.docker.io/v2/library/eclipse-temurin/manifests/21-jre → Docker-Content-Digest).
 # To refresh it (a new JRE patch): `docker buildx imagetools inspect eclipse-temurin:21-jre` → "Digest:", replace it

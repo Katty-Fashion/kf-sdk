@@ -1,4 +1,4 @@
-# Test module api-peer-caller-test (plan 230-32): runs the jar staged by build.sh (no Maven on the platform).
+# Test module api-peer-caller-test: runs the jar staged by build.sh (no Maven on the platform).
 # The base image is the one of the other test modules, pinned on the same digest (eclipse-temurin:21-jre).
 FROM eclipse-temurin:21-jre@sha256:227118764cccd3c3294617061aaa93a08309c63a395eefa83e6b35032992ea99
 WORKDIR /app

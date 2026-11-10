@@ -45,7 +45,7 @@ public class ProblemAdvice {
 
     /**
      * A failure of the platform: a 502, except the platform's secret store, whose two {@code 503}s pass on with their
-     * type (as KF-AAS-R3, quick 261024-secret-ref): {@code secret-store-unreachable} (transient) and
+     * type (as KF-AAS-R3): {@code secret-store-unreachable} (transient) and
      * {@code secret-store-rejected} (permanent). The platform's detail carries no value (sdk-protocol.md §15.3).
      */
     @ExceptionHandler(KfException.class)

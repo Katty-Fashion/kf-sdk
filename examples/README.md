@@ -19,7 +19,7 @@ platform's module repository, where they are built and tested; changes are made 
 Each example has a `build.sh <version>` that builds its pack, `dist/<slug>-<version>.zip`, after running its tests.
 Today the scripts take the SDK with `git archive` from a git ref (`KF_SDK_REF`) of a repository that holds it under
 `sdk/java/...`, `sdk/ts/...` (`KF_SDK_REPO`) — the layout of the platform's module repository. Building them from an
-`sdk/<version>/` directory of this repository is not wired yet; it comes with the first public SDK version. Until then,
+`sdk/<version>/` directory of this repository is not wired yet; it comes with the first public SDK version, 4.1.0. Until then,
 the code, the manifests and the tests are the part to read. Requirements: Git Bash or another POSIX shell, Java 21,
 Node >= 22. The UI tests of `kf-demo-model-card` run on a Vitest/React install given by `KF_FE_NODE_MODULES`.
 

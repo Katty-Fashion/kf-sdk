@@ -5,7 +5,7 @@
 
     <modelVersion>4.0.0</modelVersion>
 
-    <!-- Test module api-peer-caller-test (plan 230-32, protocol 2.0): no Spring, the JDK HTTP server of the SDK
+    <!-- Test module api-peer-caller-test (protocol 2.0): no Spring, the JDK HTTP server of the SDK
          (KfHttpServer). One fat jar (shade), copied as app.jar by build.sh. -->
     <groupId>ro.kf.modules.test</groupId>
     <artifactId>api-peer-caller-test</artifactId>

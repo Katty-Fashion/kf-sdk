@@ -1,4 +1,4 @@
-// Smoke test of the hand-written bundle (plan 230-32), with stubbed react / @kf/ui / @kf/host-sdk: the page sets its
+// Smoke test of the hand-written bundle, with stubbed react / @kf/ui / @kf/host-sdk: the page sets its
 // title, reads GET /items and mounts the host's Slot on m.api-peer-owner-test.panel.sections.v1.
 //   node --import ./loader.mjs --test surfaces.smoke.test.mjs
 import { test } from 'node:test';

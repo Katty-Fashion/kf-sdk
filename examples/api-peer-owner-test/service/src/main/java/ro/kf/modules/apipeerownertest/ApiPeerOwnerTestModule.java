@@ -26,7 +26,7 @@ import java.util.concurrent.atomic.AtomicLong;
 import java.util.regex.Pattern;
 
 /**
- * The test module {@code api-peer-owner-test} (phase 230, plan 230-32, protocol 2.0, D-230-15): the OWNER of the proof
+ * The test module {@code api-peer-owner-test} (protocol 2.0): the OWNER of the proof
  * between modules. It offers to other modules (manifest {@code schemaVersion} 3):
  * <ul>
  *   <li>the read port {@code m.api-peer-owner-test.items.v1} = {@code GET /items} (the items of the context's tenant);</li>

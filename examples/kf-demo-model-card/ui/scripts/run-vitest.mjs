@@ -1,4 +1,4 @@
-// `npm test`: runs the module's UI tests with kf-fe-platform's vitest (see fe-node-modules.mjs). Extra arguments are
+// `npm test`: runs the module's UI tests with the host UI's vitest (see fe-node-modules.mjs). Extra arguments are
 // passed to vitest (`npm test -- src/pages/utils`).
 import { spawnSync } from 'node:child_process';
 import path from 'node:path';

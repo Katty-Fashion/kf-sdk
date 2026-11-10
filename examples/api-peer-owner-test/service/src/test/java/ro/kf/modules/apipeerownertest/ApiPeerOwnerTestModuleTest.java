@@ -25,7 +25,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
- * {@link ApiPeerOwnerTestModule} on the SDK's {@link FakePlatform} (plan 230-32): the manifest passes the SDK's local
+ * {@link ApiPeerOwnerTestModule} on the SDK's {@link FakePlatform}: the manifest passes the SDK's local
  * check (schema 3, the declarations between modules, the slot); the read answers the tenant's items; the command
  * registers an item and emits {@code item-registered} through the platform; the page that mounts the slot is registered.
  */

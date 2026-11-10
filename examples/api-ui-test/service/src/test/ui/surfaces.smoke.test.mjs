@@ -1,4 +1,4 @@
-// Smoke test of the hand-written bundle (quick 261026-pachete-test), with stubbed react / @kf/ui / @kf/host-sdk:
+// Smoke test of the hand-written bundle, with stubbed react / @kf/ui / @kf/host-sdk:
 // every export renders without throwing, calls the actions it should, and the two crash exports throw.
 //   node --import ./loader.mjs --test surfaces.smoke.test.mjs
 import { test } from 'node:test';
@@ -51,8 +51,8 @@ test('the setup section sets its title and shows the section', () => {
 });
 
 test('the tenant card shows the chosen tenant', () => {
-  const tree = render(bundle.ApiUiTenantCard({ ctx: { tenant: { id: 't-1', name: 'UAT Dev Org' } }, actions: actions([]) }));
-  assert.match(text(tree), /UAT Dev Org/);
+  const tree = render(bundle.ApiUiTenantCard({ ctx: { tenant: { id: 't-1', name: 'Dev Org' } }, actions: actions([]) }));
+  assert.match(text(tree), /Dev Org/);
   assert.match(text(tree), /t-1/);
 });
 

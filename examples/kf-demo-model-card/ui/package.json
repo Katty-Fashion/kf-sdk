@@ -2,7 +2,7 @@
   "name": "kf-demo-model-card-ui",
   "version": "0.0.0",
   "private": true,
-  "description": "UI contributions of kf-demo-model-card, the tutorial's demo module (React, rendered inside the KF host's React tree through the page import map: react, react-dom, @kf/ui, @kf/host-sdk = window.__KF__). Built by ../build.sh into the jar (static/ui/): ModelCard on models.detail.overview.cards and ModelCardsPage on module.pages (page cards). qrcode-generator 1.4.4 is IN the bundle. Texts are explicit keys in ../kf-module-conf.json (i18n.en / ro, prefix ui.), no i18n sync. Tests: vitest + jsdom from kf-fe-platform's node_modules (scripts/run-vitest.mjs, as kf-feedback).",
+  "description": "UI contributions of kf-demo-model-card, the tutorial's demo module (React, rendered inside the KF host's React tree through the page import map: react, react-dom, @kf/ui, @kf/host-sdk = window.__KF__). Built by ../build.sh into the jar (static/ui/): ModelCard on models.detail.overview.cards and ModelCardsPage on module.pages (page cards). qrcode-generator 1.4.4 is IN the bundle. Texts are explicit keys in ../kf-module-conf.json (i18n.en / ro, prefix ui.), no i18n sync. Tests: vitest + jsdom from the host UI's node_modules (scripts/run-vitest.mjs, as kf-feedback).",
   "type": "module",
   "scripts": {
     "typecheck": "tsc --noEmit -p tsconfig.json",

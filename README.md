@@ -16,6 +16,7 @@ kf-sdk/
 │   └── README.md        how to use a version, what each directory holds, how to check it
 ├── examples/            example modules, one directory per module
 │   └── README.md        what each example shows and how to build it
+├── LICENSE              proprietary, all rights reserved (use limited to building and testing KF Platform modules)
 └── README.md            this file
 ```
 
@@ -24,7 +25,8 @@ TypeScript and PHP SDKs derived from it, the UI type definitions and theme, the 
 platform catalogs a module may use, the language-neutral conformance suite and the `kf-module` tool (packing, dev
 builds, signing with your own key, verification). `sdk/<version>/kf-sdk-build.json` lists every file with its SHA-256.
 
-No version is published yet: the first public version is announced here when it is.
+No version is published yet. The first public version will be **4.1.0**: from then on the platform, the SDK and the
+release milestone share the same major.minor.
 
 ## Versions and compatibility
 
@@ -62,4 +64,5 @@ repository's **Security** tab to report it privately.
 
 ## License
 
-The license of this repository has not been decided yet.
+Proprietary, all rights reserved: see [LICENSE](LICENSE). Partners building modules for the KF Platform may use the
+contents only to build and test such modules; redistribution is not permitted.

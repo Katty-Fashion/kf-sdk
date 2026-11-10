@@ -4,7 +4,7 @@ import java.util.Map;
 import java.util.regex.Pattern;
 
 /**
- * The slug the module runs under, read at run time (the pattern of KF-AAS-R3, plan 222-15): the same code runs
+ * The slug the module runs under, read at run time (the pattern of KF-AAS-R3): the same code runs
  * as {@code kf-demo-model-card} and as its dev build {@code kf-demo-model-card-dev} (built by {@code build.sh --dev-identity}, installed
  * unsigned on the development organization). Everything the platform addresses by slug follows it: the base of the
  * routes ({@code /m/<slug>}), the prefix of the route rights ({@code api.v1.m.<slug>.}), the UI bundle and stylesheet,
@@ -118,7 +118,7 @@ public final class ModuleIdentity {
         return route("ui/surfaces.mjs");
     }
 
-    /** The module's own Tailwind build (quick 261030-css-module), declared on every contribution. */
+    /** The module's own Tailwind build, declared on every contribution. */
     public String uiCss() {
         return route("ui/surfaces.css");
     }

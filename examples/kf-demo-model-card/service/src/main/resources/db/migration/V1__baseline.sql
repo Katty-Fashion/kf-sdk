@@ -1,5 +1,5 @@
 -- =============================================================================
--- V1 -- the OWN database of kf-demo-model-card (quick 261102-module-tutorial, sdk-protocol.md §3.3)
+-- V1 -- the OWN database of kf-demo-model-card (sdk-protocol.md §3.3)
 --
 -- The database lives in the module's compose (service `db`, without kf.expose, so off the platform network): the
 -- platform never reaches it, never reads it and never runs DDL in it. Its migrations are the module's own Flyway.
@@ -18,7 +18,7 @@
 -- THE TABLE
 --   model_pin   one row per (tenant, model, user): the user (the OIDC subject of the verified context) pinned the
 --               platform's model model_id to the cards page. model_id is a NUMBER of the platform, never a foreign key
---               (the module has no access to the platform's tables, AR-16). pinned_name keeps the model's name at the
+--               (the module has no access to the platform's tables). pinned_name keeps the model's name at the
 --               last pin, for the notification when the model is deleted.
 -- =============================================================================
 

@@ -13,8 +13,8 @@ import java.util.Map;
 import static org.assertj.core.api.Assertions.assertThat;
 
 /**
- * {@code docker-compose.yml} of the module, read as YAML (plan 218-11, the checks of KF-AAS-R3 213-19 Task 3): ready for
- * a read-only root filesystem (Î-S7, phase 214) and with the module's database off the platform's network (Î-218-01 a).
+ * {@code docker-compose.yml} of the module, read as YAML (the checks of KF-AAS-R3): ready for
+ * a read-only root filesystem and with the module's database off the platform's network.
  */
 class ComposeReadOnlyRootfsTest {
 

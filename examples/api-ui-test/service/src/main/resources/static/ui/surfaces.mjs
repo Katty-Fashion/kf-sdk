@@ -1,13 +1,13 @@
-// api-ui-test (quick 261026-pachete-test): the UI contributions of the test module, one per UI surface of protocol 1.1.
+// api-ui-test: the UI contributions of the test module, one per UI surface of protocol 1.1.
 // Hand-written ES module, no build step: `react`, `@kf/ui` and `@kf/host-sdk` are the host's own instances, resolved by
 // the page import map (sdk-protocol.md §7.9). Only host API 1 primitives are used (Card*, Button, Badge), so it renders
 // on any host that serves module pages. Each export is registered by ApiUiTestModule.configure:
 //
-//   module.pages (page "demo")        ApiUiDemoPage           213-17.1
-//   setup.sections (section "servers") ApiUiServersSection    213-17.3
-//   tenant-management.cards           ApiUiTenantCard         213-17.3
-//   orderflow.rail.sections           ApiUiOrderPanel         213-18.1   (crash pack: ApiUiOrderPanelCrash, 213-18.3)
-//   orderflow.review.after            ApiUiOrderReview        213-18.2   (crash pack: ApiUiOrderReviewCrash, 213-18.3)
+//   module.pages (page "demo")        ApiUiDemoPage
+//   setup.sections (section "servers") ApiUiServersSection
+//   tenant-management.cards           ApiUiTenantCard
+//   orderflow.rail.sections           ApiUiOrderPanel   (crash pack: ApiUiOrderPanelCrash)
+//   orderflow.review.after            ApiUiOrderReview   (crash pack: ApiUiOrderReviewCrash)
 import { createElement as h, useEffect, useState } from 'react';
 import { Badge, Button, Card, CardContent, CardDescription, CardHeader, CardTitle } from '@kf/ui';
 import { apiVersion, http, locale, moduleUrl } from '@kf/host-sdk';
@@ -29,7 +29,7 @@ function Frame(props) {
 }
 
 // ---------------------------------------------------------------------------
-// module.pages — /m/api-ui-test/demo (213-17.1)
+// module.pages — /m/api-ui-test/demo
 
 export function ApiUiDemoPage({ ctx, actions }) {
   const [info, setInfo] = useState(null);
@@ -58,7 +58,7 @@ export function ApiUiDemoPage({ ctx, actions }) {
 }
 
 // ---------------------------------------------------------------------------
-// setup.sections — /setup/m/api-ui-test/servers (213-17.3), platform administrator only
+// setup.sections — /setup/m/api-ui-test/servers, platform administrator only
 
 export function ApiUiServersSection({ ctx, actions }) {
   useEffect(() => {
@@ -72,7 +72,7 @@ export function ApiUiServersSection({ ctx, actions }) {
 }
 
 // ---------------------------------------------------------------------------
-// tenant-management.cards (213-17.3)
+// tenant-management.cards
 
 export function ApiUiTenantCard({ ctx, actions }) {
   const [refreshed, setRefreshed] = useState(0);
@@ -89,7 +89,7 @@ export function ApiUiTenantCard({ ctx, actions }) {
 }
 
 // ---------------------------------------------------------------------------
-// orderflow.rail.sections (213-18.1) and orderflow.review.after (213-18.2)
+// orderflow.rail.sections and orderflow.review.after
 
 function OrderFrame({ ctx, actions, testId, where }) {
   const order = ctx.order || {};
@@ -122,13 +122,13 @@ export function ApiUiOrderReview(props) {
 }
 
 // ---------------------------------------------------------------------------
-// The crash pack (213-18.3): the same surfaces, a component that throws while rendering. The host's isolated wrapper
+// The crash pack: the same surfaces, a component that throws while rendering. The host's isolated wrapper
 // (error boundary) must leave nothing in its place.
 
 export function ApiUiOrderPanelCrash() {
-  throw new Error('api-ui-test: ApiUiOrderPanelCrash throws on purpose (213-18.3)');
+  throw new Error('api-ui-test: ApiUiOrderPanelCrash throws on purpose');
 }
 
 export function ApiUiOrderReviewCrash() {
-  throw new Error('api-ui-test: ApiUiOrderReviewCrash throws on purpose (213-18.3)');
+  throw new Error('api-ui-test: ApiUiOrderReviewCrash throws on purpose');
 }

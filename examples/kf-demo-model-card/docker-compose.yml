@@ -1,4 +1,4 @@
-# kf-demo-model-card (quick 261102-module-tutorial). Installed by the KF platform as compose project "kfmod-kf-demo-model-card".
+# kf-demo-model-card. Installed by the KF platform as compose project "kfmod-kf-demo-model-card".
 # The platform adds, through its generated docker-compose.kf.yml (docs/modules/specifications/01-structura-modulului.md),
 # the KF_* environment on EVERY service and its network ONLY on the service with kf.expose: `api` is reachable at
 # /m/kf-demo-model-card/... through the backend's proxy (prefix stripped: /m/kf-demo-model-card/pins/42 -> /pins/42).
@@ -14,7 +14,7 @@
 # 214): they survive every rotation and every upgrade. `api` mounts the volume read-only at /run/kfdemocard/ and Spring
 # reads the two files as properties (spring.config.import=optional:configtree:/run/kfdemocard/).
 #
-# READY FOR A READ-ONLY ROOT FILESYSTEM (Î-S7, phase 214): every image is pinned on a digest; what a container writes
+# READY FOR A READ-ONLY ROOT FILESYSTEM: every image is pinned on a digest; what a container writes
 # goes to a tmpfs (the Postgres socket /var/run/postgresql, /tmp) or to a named volume (db-data, db-credentials) — the
 # state lives only in the named volumes.
 # The digest of postgres:16-alpine is the multi-arch index KF-AAS-R3 pinned on 2026-10-22 (anonymous registry request:

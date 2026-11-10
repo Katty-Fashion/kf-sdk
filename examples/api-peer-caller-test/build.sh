@@ -1,13 +1,13 @@
 #!/usr/bin/env bash
-# Builds the test module api-peer-caller-test (phase 230, plan 230-32, protocol 2.0, manifest schemaVersion 3):
+# Builds the test module api-peer-caller-test (protocol 2.0, manifest schemaVersion 3):
 #
 #   KF_SDK_REF=<sha of kf-platform-modules> ./build.sh 0.0.1
 #
-# produces dist/api-peer-caller-test-<version>.zip. The caller of the proof of D-230-15: requires the owner as OPTIONAL, contributes to its slot,
+# produces dist/api-peer-caller-test-<version>.zip. The caller of the proof of: requires the owner as OPTIONAL, contributes to its slot,
 # reads its port, calls its command (with and without key) and subscribes to its event; /probe reports all of it.
 #
-# A TEST module: never signed, never installed by the build (D-230-04: no SDK tag during phase 230). Its pack is
-# uploaded by the operator only on the LOCAL stack (230-33): the development organization (/modules/dev, unsigned) or the
+# A TEST module: never signed, never installed by the build (: no SDK tag during). Its pack is
+# uploaded by the operator only on the LOCAL stack: the development organization (/modules/dev, unsigned) or the
 # local runner with KF_RUNNER_ALLOW_UNSIGNED=true, set back to false after the proof. Never on a shared environment.
 #
 # The module SDK is PINNED to KF_SDK_REF (a COMMITTED sha of this repo, mandatory: there is no tag of protocol 2.0
@@ -22,7 +22,7 @@ if [[ ! "$VERSION" =~ ^[0-9]+\.[0-9]+\.[0-9]+([-+][0-9A-Za-z.-]+)?$ || $# -ne 1 
 fi
 
 HERE="$(cd "$(dirname "$0")" && pwd)"
-SDK_REF="${KF_SDK_REF:?KF_SDK_REF is required: the committed sha of kf-platform-modules whose SDK the module is built on (no tag in phase 230, D-230-04)}"
+SDK_REF="${KF_SDK_REF:?KF_SDK_REF is required: the committed sha of kf-platform-modules whose SDK the module is built on (no tag in)}"
 SDK_REPO="${KF_SDK_REPO:-$HERE/../../..}"
 KF_MODULE="$SDK_REPO/sdk/tools/kf-module.mjs"
 VENDOR="$HERE/.sdk"
@@ -95,4 +95,4 @@ PYEOF
 rm -rf "$STAGE"
 echo "==> $DIST/$ZIP"
 node "$KF_MODULE" inspect "$DIST/$ZIP" | sed 's/^/   /'
-echo "==> SDK $SDK_REF = ${SDK_SHA:0:12}, ro.kf:kf-module-sdk:$SDK_VERSION. A test build, unsigned: local stack only (230-33)."
+echo "==> SDK $SDK_REF = ${SDK_SHA:0:12}, ro.kf:kf-module-sdk:$SDK_VERSION. A test build, unsigned: local stack only."

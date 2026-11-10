@@ -1,4 +1,4 @@
-// api-peer-caller-test (plan 230-32, protocol 2.0): the caller's contribution to the owner's slot
+// api-peer-caller-test (protocol 2.0): the caller's contribution to the owner's slot
 // m.api-peer-owner-test.panel.sections.v1 (kind A, sdk-protocol.md §7.12). Hand-written ES module, no build step:
 // `react`, `@kf/ui` and `@kf/host-sdk` are the host's own instances (the page import map).
 //

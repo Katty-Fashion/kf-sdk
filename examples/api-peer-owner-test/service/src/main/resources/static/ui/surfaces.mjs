@@ -1,4 +1,4 @@
-// api-peer-owner-test (plan 230-32, protocol 2.0): the owner's page, which mounts its own slot
+// api-peer-owner-test (protocol 2.0): the owner's page, which mounts its own slot
 // m.api-peer-owner-test.panel.sections.v1 (kind A) with the host's Slot (host API 5, sdk-protocol.md §7.12). Hand-written
 // ES module, no build step: `react`, `@kf/ui` and `@kf/host-sdk` are the host's own instances (the page import map).
 //

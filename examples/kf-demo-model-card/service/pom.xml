@@ -5,7 +5,7 @@
 
     <modelVersion>4.0.0</modelVersion>
 
-    <!-- Same Boot / Java as the platform backend (kf-be-platform), the Java module SDK and KF-AAS-R3. -->
+    <!-- Same Boot / Java as the platform backend (the platform), the Java module SDK and KF-AAS-R3. -->
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
@@ -18,7 +18,7 @@
     <!-- set by build.sh: ./mvnw package -Drevision=0.1.0 -->
     <version>${revision}</version>
     <name>KF Demo — Model card</name>
-    <description>The demo module of the tutorial "your first module" (quick 261102-module-tutorial), on the Java module SDK
+    <description>The demo module of the tutorial "your first module", on the Java module SDK
         0.9.0 (protocol 1.3): the model card in the Overview and the page of pinned cards, the pins in the module's own
         database, model.after.delete, tenant.after.delete, the tenant-data export.</description>
 
@@ -42,7 +42,7 @@
         </dependency>
 
         <!-- The module's OWN database (the pattern of kf-feedback and KF-AAS-R3): Postgres in its compose, its own Flyway, RLS on
-             the GUC kfdemocard.tenant. Versions managed by the Spring Boot 4.0.6 parent (as in kf-be-platform). -->
+             the GUC kfdemocard.tenant. Versions managed by the Spring Boot 4.0.6 parent (as in the platform). -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-jdbc</artifactId>
@@ -66,7 +66,7 @@
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
-        <!-- The SDK's platform for tests (213-11): FakePlatform, from the SDK's tests artifact at the pinned version. -->
+        <!-- The SDK's platform for tests: FakePlatform, from the SDK's tests artifact at the pinned version. -->
         <dependency>
             <groupId>ro.kf</groupId>
             <artifactId>kf-module-sdk</artifactId>
@@ -74,7 +74,7 @@
             <type>test-jar</type>
             <scope>test</scope>
         </dependency>
-        <!-- Two tenants against a real Postgres (RLS): Testcontainers 2.x, managed by the parent (as in kf-be-platform). -->
+        <!-- Two tenants against a real Postgres (RLS): Testcontainers 2.x, managed by the parent (as in the platform). -->
         <dependency>
             <groupId>org.testcontainers</groupId>
             <artifactId>testcontainers-junit-jupiter</artifactId>

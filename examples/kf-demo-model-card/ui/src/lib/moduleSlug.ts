@@ -1,5 +1,5 @@
 /**
- * The slug the bundle runs under, given by the host (copied from kf-aas-r3, plan 222-15 Task 3): every
+ * The slug the bundle runs under, given by the host (copied from kf-aas-r3): every
  * contribution receives `module.slug` in its props (`KfReactSurfaceProps.module`), and every export of surfaces.tsx
  * fixes it here before rendering its children. The same bundle thus runs as `kf-demo-model-card` and as its dev build
  * `kf-demo-model-card-dev` (served from `/m/kf-demo-model-card-dev/ui/surfaces.mjs`, a separate ES module, so the two never share this

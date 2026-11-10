@@ -1,25 +1,25 @@
 #!/usr/bin/env bash
-# Builds the test module api-ui-test (quick 261026-pachete-test) and its variants:
+# Builds the test module api-ui-test and its variants:
 #
 #   ./build.sh 0.1.0-dev.1 [0.1.0-dev.2]
 #
 # produces, in dist/:
 #   api-ui-test-<version>.zip                   one React contribution per UI surface of protocol 1.1: module.pages
-#                                               (page demo, 213-17.1), setup.sections (servers) and
-#                                               tenant-management.cards (213-17.3), orderflow.rail.sections and
-#                                               orderflow.review.after (213-18.1, 213-18.2); nav[] staff + platform
+#                                               (page demo), setup.sections (servers) and
+#                                               tenant-management.cards, orderflow.rail.sections and
+#                                               orderflow.review.after; nav[] staff + platform
 #   api-ui-test-<version>-page-pe-tab.zip       the same pack plus a surface models.detail.tabs with "page": refused at
-#                                               upload, "page only on surfaces of type page (… is of type tab)" (213-17.2)
+#                                               upload, "page only on surfaces of type page (… is of type tab)"
 #   api-ui-test-<version>-pagini-fara-page.zip  the same pack plus a surface module.pages without "page": refused at
-#                                               upload, "page is required on a surface of type page" (213-17.2)
+#                                               upload, "page is required on a surface of type page"
 #   api-ui-test-<crash version>.zip             (second argument, default: none) the same manifest at <crash version>,
 #                                               whose compose sets API_UI_TEST_CRASH=1: the two order contributions are
-#                                               registered on exports that throw while rendering (213-18.3)
+#                                               registered on exports that throw while rendering
 #
 # The UI is one hand-written ES module (service/src/main/resources/static/ui/surfaces.mjs, no build step); it is
 # syntax-checked and smoke-tested with node (service/src/test/ui) before the jar is built.
 #
-# A TEST module: uploaded WITHOUT a key on a development organization (ModuleDevService, plan 214-07), never signed
+# A TEST module: uploaded WITHOUT a key on a development organization (ModuleDevService), never signed
 # (docker/module-trust/README.md: the test modules stay dev modules). Its version is a pre-release (0.1.0-dev.N): a
 # dev version must be strictly newer than the active one.
 #
@@ -94,10 +94,10 @@ const conf = JSON.parse(readFileSync(src, 'utf8'));
 conf.version = version;
 if (conf.slug !== slug || conf.schemaVersion !== 2) { console.error('kf-module-conf.json: slug/schemaVersion'); process.exit(1); }
 if (variant === 'page-pe-tab') {
-  // 213-17.2, first zip: "page" on a surface of type tab
+  //, first zip: "page" on a surface of type tab
   conf.capabilities.surfaces.push({ slug: 'models.detail.tabs', kind: 'react', label: 'page.demo', page: 'demo' });
 } else if (variant === 'pagini-fara-page') {
-  // 213-17.2, second zip: a module.pages surface without "page"
+  //, second zip: a module.pages surface without "page"
   conf.capabilities.surfaces.push({ slug: 'module.pages', kind: 'react', label: 'page.demo' });
 } else if (variant !== 'bun' && variant !== 'crapa') {
   console.error(`unknown variant ${variant}`); process.exit(1);
@@ -107,7 +107,7 @@ console.log(`   manifest ${variant}: ${conf.slug} ${conf.version}`);
 JSEOF
   cp "$HERE/docker-compose.yml" "$HERE/Dockerfile" "$stage/"
   if [[ "$variant" == "crapa" ]]; then
-    # 213-18.3: the order contributions on the exports that throw (ApiUiTestModule.CRASH_ENV)
+    # the order contributions on the exports that throw (ApiUiTestModule.CRASH_ENV)
     node -e 'const f=process.argv[1],fs=require("fs");const s=fs.readFileSync(f,"utf8");fs.writeFileSync(f,s.replace(/^    environment:$/m,"    environment:\n      API_UI_TEST_CRASH: \"1\""))' "$stage/docker-compose.yml"
     grep -q 'API_UI_TEST_CRASH: "1"' "$stage/docker-compose.yml" || { echo "crapa: compose not patched" >&2; exit 1; }
   fi

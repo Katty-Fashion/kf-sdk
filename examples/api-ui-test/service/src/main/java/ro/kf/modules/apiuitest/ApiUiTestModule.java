@@ -18,20 +18,20 @@ import java.util.Map;
 import java.util.regex.Pattern;
 
 /**
- * The test module {@code api-ui-test} (quick 261026-pachete-test): one React contribution on each UI surface of protocol
- * 1.1, from one hand-written ES module ({@code static/ui/surfaces.mjs}, no build step), so that the scenarios 213-17.1,
- * 213-17.3, 213-18.1, 213-18.2 and 213-18.3 can be checked on a stack through a real module.
+ * The test module {@code api-ui-test}: one React contribution on each UI surface of protocol
+ * 1.1, from one hand-written ES module ({@code static/ui/surfaces.mjs}, no build step), so that the scenarios,
+ *, and can be checked on a stack through a real module.
  *
  * <ul>
- *   <li>{@code module.pages}, page {@code demo} → {@code ApiUiDemoPage} (213-17.1; the menu entry is {@code nav[]}
+ *   <li>{@code module.pages}, page {@code demo} → {@code ApiUiDemoPage} (the menu entry is {@code nav[]}
  *       staff → {@code /m/api-ui-test/demo});</li>
  *   <li>{@code setup.sections}, section {@code servers} → {@code ApiUiServersSection} and
- *       {@code tenant-management.cards} → {@code ApiUiTenantCard} (213-17.3; {@code nav[]} platform →
+ *       {@code tenant-management.cards} → {@code ApiUiTenantCard} ({@code nav[]} platform →
  *       {@code /setup/m/api-ui-test/servers});</li>
  *   <li>{@code orderflow.rail.sections} → {@code ApiUiOrderPanel} (label "AAS", a button that calls
- *       {@code refresh()}, 213-18.1) and {@code orderflow.review.after} → {@code ApiUiOrderReview} (213-18.2).</li>
+ *       {@code refresh()}) and {@code orderflow.review.after} → {@code ApiUiOrderReview}.</li>
  * </ul>
- * With {@code API_UI_TEST_CRASH=1} (set by the compose of the "crapa" pack, 213-18.3) the two order contributions are
+ * With {@code API_UI_TEST_CRASH=1} (set by the compose of the "crapa" pack) the two order contributions are
  * registered on {@code ApiUiOrderPanelCrash} / {@code ApiUiOrderReviewCrash}, which throw while rendering; the manifest
  * is the same (it does not name exports).
  *

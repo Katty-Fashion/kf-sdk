@@ -1,15 +1,15 @@
 #!/usr/bin/env bash
-# Builds the test module api-settings-test (quick 261026-pachete-test):
+# Builds the test module api-settings-test:
 #
 #   ./build.sh 0.1.0-dev.1
 #
 # produces, in dist/:
-#   api-settings-test-<version>.zip   settings NUMBER/ENUM/BOOLEAN + GET /settings (kf.settings().effective, 213-14.3),
+#   api-settings-test-<version>.zip   settings NUMBER/ENUM/BOOLEAN + GET /settings (kf.settings().effective),
 #                                     the field model_version.aas_shell (table version_aas) + POST
-#                                     /extensions/model-version (kf.extensions().write, 213-15.1), and
-#                                     provides factory.stations.v1 on GET /factory/stations (213-16.2)
+#                                     /extensions/model-version (kf.extensions().write), and
+#                                     provides factory.stations.v1 on GET /factory/stations
 #
-# A TEST module: uploaded WITHOUT a key on a development organization (ModuleDevService, plan 214-07), never signed
+# A TEST module: uploaded WITHOUT a key on a development organization (ModuleDevService), never signed
 # (docker/module-trust/README.md: the test modules stay dev modules). Its version is a pre-release (0.1.0-dev.N): a
 # dev version must be strictly newer than the active one.
 #

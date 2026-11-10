@@ -25,7 +25,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
- * {@link ApiPeerCallerTestModule} on the SDK's {@link FakePlatform} (plan 230-32): owner present → the read and the
+ * {@link ApiPeerCallerTestModule} on the SDK's {@link FakePlatform}: owner present → the read and the
  * command with a key succeed, the command without a key is the platform's 400; owner stopped → {@code /probe} still 200,
  * {@code ownerUnavailable: true} ({@code MODULE_UNAVAILABLE}); the owner's event reaches the handler with the delivery's
  * context, which serves a read as {@code system via module:api-peer-caller-test}.

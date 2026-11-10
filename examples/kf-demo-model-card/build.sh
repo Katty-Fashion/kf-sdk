@@ -2,7 +2,7 @@
 # Builds the kf-demo-model-card pack: dist/kf-demo-model-card-<version>.zip
 #
 #   ./build.sh 0.1.0              # a dev build: any tree, any SDK ref; kf-build.json records the real state
-#   ./build.sh 0.1.0 --release    # a RELEASE build (plan 214-03, Î-S4 a): refused unless the inputs are pinned
+#   ./build.sh 0.1.0 --release    # a RELEASE build: refused unless the inputs are pinned
 #
 # The two modes (the tutorial, chapter 9):
 #   dev       builds whatever is checked out. The pack carries kf-build.json with the real state (dirty, the commit,
@@ -14,7 +14,7 @@
 # Both modes stage kf-build.json (`kf-module build-info`: kf-build/1, slug, version, source {repo, commit, tag, dirty,
 # tagSigned}, sdk {tag, commit}, baseImages, builtAt, tools) at the root of the zip.
 #
-# After a release build (design §3.1): test the zip on the stack (dev organization, Î-S5) and note its contentSha256
+# After a release build (design §3.1): test the zip on the stack (dev organization) and note its contentSha256
 # (`node sdk/tools/kf-module.mjs inspect dist/<zip>`), then sign it offline with the release key and check it:
 #   node sdk/tools/kf-module.mjs sign dist/kf-demo-model-card-<version>.zip --key <offline>/kf-release-2026-1.key
 #   node sdk/tools/kf-module.mjs verify dist/kf-demo-model-card-<version>.zip --trust <the platform's trust-store.json>
@@ -46,10 +46,10 @@ RELEASE=0
 [[ "$MODE" == "--release" ]] && RELEASE=1
 
 HERE="$(cd "$(dirname "$0")" && pwd)"
-# sdk-v0.8.0 (plan 218-10): protocol 1.2 -- routes[].audience/portal, activation, capabilities.storage (StorageClient),
-# person in the context, tenant.after.delete (TenantHooks). sdk-v0.9.0 (plan 222-13): protocol 1.3 -- the
+# sdk-v0.8.0: protocol 1.2 -- routes[].audience/portal, activation, capabilities.storage (StorageClient),
+# person in the context, tenant.after.delete (TenantHooks). sdk-v0.9.0: protocol 1.3 -- the
 # tenant-data export (TenantDataExport, GET /admin/export) and tenant.v1 listed by the platform's actor (admin/tenants).
-# sdk-v0.9.1 (quick 261102-module-demo-ports): protocol 1.3.1 -- model.v1 with modelOwner and listed without ids by
+# sdk-v0.9.1: protocol 1.3.1 -- model.v1 with modelOwner and listed without ids by
 # staff, the port model-version.garment-image.v1 (a presigned URL of 10 minutes), the surface
 # models.detail.overview.cards with ctx.href; delivered by platform 6.1 (the manifest's "platform": ">=6.1").
 # Bump it here to move the module to a newer SDK.
@@ -108,7 +108,7 @@ UI_OUT="$HERE/service/src/main/resources/static/ui"
 rm -rf "$UI_OUT"
 mkdir -p "$UI_OUT"
 cp "$HERE/ui/dist/surfaces.mjs" "$UI_OUT/"
-# the module's own stylesheet (quick 261030-css-module; theme from the pinned SDK: KF_SDK_DIR=.sdk)
+# the module's own stylesheet (theme from the pinned SDK: KF_SDK_DIR=.sdk)
 cp "$HERE/ui/dist/surfaces.css" "$UI_OUT/"
 
 echo "==> building the jar ($VERSION, SDK $SDK_VERSION)"

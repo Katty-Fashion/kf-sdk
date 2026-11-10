@@ -1,7 +1,7 @@
-// `npm run build:css` (quick 261030-css-module): the module's own Tailwind 4 build, src/surfaces.css → dist/surfaces.css.
+// `npm run build:css`: the module's own Tailwind 4 build, src/surfaces.css → dist/surfaces.css.
 //
 // @tailwindcss/node compiles the stylesheet and @tailwindcss/oxide scans src/ for the classes the module uses (the two
-// packages under @tailwindcss/postcss, at the version and integrity of kf-fe-platform's lockfile). `@kf/sdk-ui/<file>`
+// packages under @tailwindcss/postcss, at the version and integrity of the host UI's lockfile). `@kf/sdk-ui/<file>`
 // resolves to the SDK's sdk/ui/<file>: the PINNED SDK export when build.sh sets KF_SDK_DIR (.sdk/), else this
 // checkout's sdk/ (dev builds and tests). build.sh copies dist/surfaces.css into the jar's static/ui/, which the
 // platform serves at /m/<slug>/ui/surfaces.css (ModuleAssetProxyController: .css allowed, under 2 MiB — checked here).

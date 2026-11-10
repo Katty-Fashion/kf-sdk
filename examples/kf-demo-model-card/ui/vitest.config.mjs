@@ -1,5 +1,5 @@
 // The UI tests of kf-demo-model-card (copied from kf-feedback). Plain object, no `vitest/config` import: vitest is
-// kf-fe-platform's (scripts/run-vitest.mjs). React, Testing Library and jsdom are kf-fe-platform's too — ONE copy of
+// the host UI's (scripts/run-vitest.mjs). React, Testing Library and jsdom are the host UI's too — ONE copy of
 // React, the same the host renders with. `@kf/ui` and `@kf/host-sdk` are the host's at run time (external in the
 // bundle); in the tests they are the small stand-ins under test/. `qrcode-generator` is the module's own
 // (ui/node_modules, in the bundle) and runs for real in the tests.
