@@ -5,9 +5,6 @@ separate service (its own container, its own database if it needs one) that plug
 protocol: it declares what it adds in a manifest (`kf-module-conf.json`), receives signed callbacks and hooks, reads
 platform data through published ports, contributes UI to the platform's pages and is installed as a pack (a zip).
 
-**Only the external (public) SDK variant is published here.** The platform also has an internal SDK variant for its
-own modules; it is never published in this repository, not even in part.
-
 ## Layout
 
 ```text

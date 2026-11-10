@@ -1,9 +1,5 @@
 # The public module SDK
 
-**Only the external (public) SDK variant is published here.** The internal SDK variant of the platform is never
-published in this repository, not even in part. Every version directory carries `kf-sdk-build.json` with
-`"variant": "external"`; anything else is not a version of this repository.
-
 No version is published yet: **the first public version will be 4.1.0**, when the platform, the SDK and the release
 milestone align on the same major.minor. Until then this directory holds only this README. Each published version
 appears as `sdk/<version>/` and is never rewritten: a correction is a new version.
@@ -22,7 +18,7 @@ sdk/<version>/
 ├── php/kf-module-sdk/       the PHP SDK (kf/module-sdk), derived from the Java one
 ├── ui/                      kf-host.d.ts (the host page API for UI contributions) and kf-theme.css
 ├── tools/                   the kf-module tool: inspect, verify, dev builds, keygen and signing with your own key
-└── kf-sdk-build.json        version, variant (external), source commit, every file with its SHA-256
+└── kf-sdk-build.json        version, source commit, every file with its SHA-256
 ```
 
 All three SDKs of a version carry the same semver. Java is the reference implementation; the TypeScript and PHP SDKs
