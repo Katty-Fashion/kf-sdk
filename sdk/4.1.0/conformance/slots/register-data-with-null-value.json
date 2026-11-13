@@ -1,0 +1,42 @@
+{
+  "id": "slots/register-data-with-null-value",
+  "area": "slots",
+  "description": "A data contribution whose value has a JSON null member registers: the body keeps the null and the order of the keys.",
+  "source": "sdk-protocol.md \u00a77.12",
+  "input": {
+    "slug": "slot-contrib",
+    "surfaces": [
+      {
+        "slug": "m.kf-3d.materials.v1",
+        "kind": "data",
+        "data": {
+          "finish": null,
+          "weight": 320,
+          "name": "wool"
+        },
+        "key": "wool"
+      }
+    ],
+    "platform": {
+      "status": 200,
+      "body": {
+        "warnings": []
+      }
+    }
+  },
+  "expect": {
+    "surfaces": [
+      {
+        "slug": "m.kf-3d.materials.v1",
+        "kind": "data",
+        "data": {
+          "finish": null,
+          "weight": 320,
+          "name": "wool"
+        },
+        "key": "wool"
+      }
+    ],
+    "warnings": []
+  }
+}

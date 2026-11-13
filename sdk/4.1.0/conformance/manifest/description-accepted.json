@@ -1,0 +1,34 @@
+{
+  "id": "manifest/description-accepted",
+  "area": "manifest",
+  "description": "The optional top-level description is a translation key defined in i18n.en, like name: no error, no warning; the typed Manifest reads the key.",
+  "source": "sdk-protocol.md §3.1",
+  "input": {
+    "manifest": {
+      "schemaVersion": 2,
+      "slug": "man-mod",
+      "name": "module.name",
+      "description": "module.description",
+      "version": "1.0.0",
+      "platform": ">=4.1",
+      "i18n": {
+        "en": {
+          "module.name": "Manifest module",
+          "module.description": "Adds an author tab to models"
+        },
+        "ro": {
+          "module.name": "Modul manifest",
+          "module.description": "Adaugă un tab de autor pe modele"
+        }
+      }
+    }
+  },
+  "expect": {
+    "valid": true,
+    "warningsContain": [],
+    "read": {
+      "/name": "module.name",
+      "/description": "module.description"
+    }
+  }
+}

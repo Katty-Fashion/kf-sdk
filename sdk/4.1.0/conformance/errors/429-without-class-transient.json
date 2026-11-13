@@ -1,0 +1,8 @@
+{
+  "id": "errors/429-without-class-transient",
+  "area": "errors",
+  "description": "A 429 without class is transient by the status table: the SDK retries.",
+  "source": "the platform ProblemClass.forStatus",
+  "input": {"response": {"status": 429, "headers": {"Content-Type": "text/plain"}, "body": "slow down"}},
+  "expect": {"retry": true, "class": "transient", "messageContains": ["429"]}
+}

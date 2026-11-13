@@ -1,0 +1,8 @@
+{
+  "id": "errors/network-refused-transient",
+  "area": "errors",
+  "description": "No answer at all (the platform is down): a network error is transient and the SDK retries. The error line names the class; which words name the cause is the language's (Java: the exception chain, TS: fetch's cause, PHP: the stream error), so it is fixed by each SDK's own registration-error test, not here.",
+  "source": "sdk-protocol.md v0.1 §2",
+  "input": {"network": "connection-refused"},
+  "expect": {"retry": true, "class": "transient", "messageContains": ["(transient)"]}
+}

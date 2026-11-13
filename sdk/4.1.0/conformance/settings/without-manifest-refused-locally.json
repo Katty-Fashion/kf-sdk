@@ -1,0 +1,45 @@
+{
+  "id": "settings/without-manifest-refused-locally",
+  "area": "settings",
+  "description": "The values are typed by the manifest: without it the call is refused locally, no request.",
+  "source": "sdk-protocol.md §15.2",
+  "input": {
+    "slug": "set-mod",
+    "context": {
+      "v": 1,
+      "tenant": "00000000-0000-0000-0000-00000000000a",
+      "user": "subject-1",
+      "actor": {
+        "type": "user",
+        "via": null,
+        "hookId": null
+      },
+      "locale": "en",
+      "rights": [],
+      "method": "GET",
+      "path": "/x",
+      "query": null,
+      "ts": "$now",
+      "requestId": "req-set-5"
+    },
+    "proof": "3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f",
+    "call": "effective",
+    "args": {},
+    "platform": {
+      "status": 200,
+      "body": "{}"
+    }
+  },
+  "expect": {
+    "outcome": "error",
+    "request": null,
+    "error": {
+      "status": 0,
+      "class": "permanent",
+      "kind": "other",
+      "messageContains": [
+        "settings need the module manifest"
+      ]
+    }
+  }
+}

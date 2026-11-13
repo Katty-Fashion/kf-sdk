@@ -1,0 +1,42 @@
+{
+  "id": "manifest/route-admin-on-hookable-refused",
+  "area": "manifest",
+  "description": "admin on a hookable route is refused: a hook calls as the system, an admin route is a person's.",
+  "source": "sdk-protocol.md §3.2, §15",
+  "input": {
+    "manifest": {
+      "schemaVersion": 2,
+      "slug": "man-mod",
+      "name": "module.name",
+      "version": "1.0.0",
+      "platform": ">=4.1",
+      "i18n": {
+        "en": {
+          "module.name": "Manifest module",
+          "setting.push": "Push on save",
+          "setting.timeout": "Timeout",
+          "setting.mode": "Mode",
+          "setting.mode.help": "How the module pushes",
+          "tab.label": "AAS"
+        }
+      },
+      "capabilities": {
+        "routes": [
+          {
+            "method": "POST",
+            "path": "/m/man-mod/admin/run",
+            "right": "api.v1.m.man-mod.admin.run.post",
+            "admin": "tenant",
+            "hookable": true
+          }
+        ]
+      }
+    }
+  },
+  "expect": {
+    "valid": false,
+    "errorsContain": [
+      "admin and hookable exclude each other"
+    ]
+  }
+}

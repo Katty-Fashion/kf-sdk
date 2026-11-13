@@ -1,0 +1,37 @@
+{
+  "id": "notifications/no-recipients-no-roles-refused-locally",
+  "area": "notifications",
+  "description": "No recipient and no role is refused locally, permanent, and nothing is sent (the platform would answer no-recipients).",
+  "source": "sdk-protocol.md §11.1",
+  "input": {
+    "slug": "notif-mod",
+    "call": "send",
+    "tenantId": "00000000-0000-0000-0000-00000000000a",
+    "key": "m2f-impact-received",
+    "recipients": [],
+    "variables": {
+      "entityName": "Rochie"
+    },
+    "options": {
+      "idempotencyKey": "7a07a07a-0000-4000-8000-000000000222"
+    },
+    "platform": [
+      {
+        "status": 202,
+        "body": "{\"accepted\":1,\"duplicates\":0}"
+      }
+    ]
+  },
+  "expect": {
+    "outcome": "error",
+    "requests": 0,
+    "error": {
+      "status": 0,
+      "class": "permanent",
+      "kind": "other",
+      "messageContains": [
+        "recipients names no one"
+      ]
+    }
+  }
+}

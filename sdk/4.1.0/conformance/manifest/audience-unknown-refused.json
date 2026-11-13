@@ -1,0 +1,37 @@
+{
+  "id": "manifest/audience-unknown-refused",
+  "area": "manifest",
+  "description": "An audience other than \"member\" is refused, naming the value.",
+  "source": "sdk-protocol.md §3.2, §9.1",
+  "input": {
+    "manifest": {
+      "schemaVersion": 2,
+      "slug": "man-mod",
+      "name": "module.name",
+      "version": "1.0.0",
+      "platform": ">=4.1",
+      "i18n": {
+        "en": {
+          "module.name": "Manifest module",
+          "widget.label": "Feedback"
+        }
+      },
+      "capabilities": {
+        "routes": [
+          {
+            "method": "POST",
+            "path": "/m/man-mod/tickets",
+            "right": "api.v1.m.man-mod.tickets.post",
+            "audience": "everyone"
+          }
+        ]
+      }
+    }
+  },
+  "expect": {
+    "valid": false,
+    "errorsContain": [
+      ".audience must be \"member\" (got \"everyone\")"
+    ]
+  }
+}

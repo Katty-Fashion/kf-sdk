@@ -1,0 +1,75 @@
+{
+  "id": "registration/fields-on-model-order-customer",
+  "area": "registration",
+  "description": "Fields on the three extensible entities: each carries its entity and a label KEY; a field without label sends no label.",
+  "source": "the platform RegistrationDtos.RegistrationRequest/HookSpec/FieldSpec/SurfaceSpec",
+  "input": {
+    "slug": "reg-fields",
+    "callbackBase": null,
+    "fields": [
+      {
+        "entity": "model",
+        "name": "author",
+        "type": "STRING",
+        "table": "models_extra",
+        "labelKey": "field.author"
+      },
+      {
+        "entity": "order",
+        "name": "priority_code",
+        "type": "STRING",
+        "table": "orders_extra",
+        "labelKey": "field.priority"
+      },
+      {
+        "entity": "customer",
+        "name": "segment_code",
+        "type": "STRING",
+        "table": "customers_extra",
+        "labelKey": "field.segment"
+      },
+      {
+        "entity": "model",
+        "name": "co2_kg",
+        "type": "NUMBER",
+        "table": "models_extra"
+      }
+    ]
+  },
+  "expect": {
+    "body": {
+      "callbackUrl": null,
+      "hooks": [],
+      "fields": [
+        {
+          "entity": "model",
+          "name": "author",
+          "type": "STRING",
+          "table": "models_extra",
+          "label": "field.author"
+        },
+        {
+          "entity": "order",
+          "name": "priority_code",
+          "type": "STRING",
+          "table": "orders_extra",
+          "label": "field.priority"
+        },
+        {
+          "entity": "customer",
+          "name": "segment_code",
+          "type": "STRING",
+          "table": "customers_extra",
+          "label": "field.segment"
+        },
+        {
+          "entity": "model",
+          "name": "co2_kg",
+          "type": "NUMBER",
+          "table": "models_extra"
+        }
+      ],
+      "surfaces": []
+    }
+  }
+}

@@ -1,0 +1,37 @@
+{
+  "id": "manifest/requires-duplicate-refused",
+  "area": "manifest",
+  "description": "The same module required twice is refused.",
+  "source": "sdk-protocol.md §3.2, §3.5",
+  "input": {
+    "manifest": {
+      "schemaVersion": 2,
+      "slug": "req-mod",
+      "name": "module.name",
+      "version": "1.0.0",
+      "platform": ">=4.1",
+      "i18n": {
+        "en": {
+          "module.name": "Requires",
+          "flag.l": "Flag"
+        }
+      },
+      "requires": [
+        {
+          "slug": "base-mod",
+          "versionRange": ">=1.0.0 <2.0.0"
+        },
+        {
+          "slug": "base-mod",
+          "versionRange": ">=1.0.0 <2.0.0"
+        }
+      ]
+    }
+  },
+  "expect": {
+    "valid": false,
+    "errorsContain": [
+      "duplicate \"requires\" entry for \"base-mod\""
+    ]
+  }
+}

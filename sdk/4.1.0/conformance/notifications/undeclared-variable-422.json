@@ -1,0 +1,62 @@
+{
+  "id": "notifications/undeclared-variable-422",
+  "area": "notifications",
+  "description": "422 with class permanent and reason undeclared-variable is the SDK's Rejected error with that reason; the SDK does not retry.",
+  "source": "the platform ModuleNotificationController / SendModuleNotificationUseCase / ModuleNotificationIT",
+  "input": {
+    "slug": "notif-mod",
+    "call": "send",
+    "tenantId": "00000000-0000-0000-0000-00000000000a",
+    "key": "author-changed",
+    "recipients": [
+      "subject-1",
+      "subject-2"
+    ],
+    "variables": {
+      "modelName": "Rochie",
+      "extra": "x"
+    },
+    "options": {
+      "idempotencyKey": "7a07a07a-0000-4000-8000-000000000207"
+    },
+    "platform": [
+      {
+        "status": 422,
+        "body": "{\"type\": \"https://kf.ro/problems/notification-rejected\", \"title\": \"Unprocessable Entity\", \"status\": 422, \"detail\": \"The notification 'author-changed' does not declare the variable 'extra'.\", \"instance\": \"/api/v1/platform/modules/notif-mod/notifications\", \"reason\": \"undeclared-variable\", \"class\": \"permanent\"}"
+      }
+    ]
+  },
+  "expect": {
+    "outcome": "error",
+    "requests": 1,
+    "request": {
+      "method": "POST",
+      "path": "/api/v1/platform/modules/notif-mod/notifications",
+      "headers": {
+        "Authorization": "Bearer kfm_conformance-token-never-logged"
+      },
+      "body": {
+        "tenantId": "00000000-0000-0000-0000-00000000000a",
+        "key": "author-changed",
+        "recipients": [
+          "subject-1",
+          "subject-2"
+        ],
+        "variables": {
+          "modelName": "Rochie",
+          "extra": "x"
+        },
+        "idempotencyKey": "7a07a07a-0000-4000-8000-000000000207"
+      }
+    },
+    "error": {
+      "status": 422,
+      "class": "permanent",
+      "kind": "rejected",
+      "reason": "undeclared-variable",
+      "messageContains": [
+        "The notification 'author-changed' does n"
+      ]
+    }
+  }
+}

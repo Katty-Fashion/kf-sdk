@@ -1,0 +1,50 @@
+{
+  "id": "manifest/flows-duplicate",
+  "area": "manifest",
+  "description": "Two module flows with the same key, or with the same file, are refused, naming the second; an unknown key of the closed object too.",
+  "source": "sdk-protocol.md §3.2, §17",
+  "input": {
+    "manifest": {
+      "schemaVersion": 3,
+      "slug": "kf-3d",
+      "name": "module.name",
+      "version": "1.0.0",
+      "platform": ">=4.1",
+      "i18n": {
+        "en": {
+          "module.name": "3D",
+          "flow.twin": "Digital twin sample",
+          "flow.fit": "Fit session"
+        }
+      },
+      "capabilities": {
+        "flows": [
+          {
+            "key": "kf-3d-twin",
+            "file": "flows/kf-3d-twin.bpmn",
+            "name": "flow.twin"
+          },
+          {
+            "key": "kf-3d-twin",
+            "file": "flows/kf-3d-other.bpmn",
+            "name": "flow.fit"
+          },
+          {
+            "key": "kf-3d-fit",
+            "file": "flows/kf-3d-twin.bpmn",
+            "name": "flow.fit",
+            "bpmn": "<definitions/>"
+          }
+        ]
+      }
+    }
+  },
+  "expect": {
+    "valid": false,
+    "errorsContain": [
+      "capabilities.flows[1].key \"kf-3d-twin\" is declared twice",
+      "capabilities.flows[2].file \"flows/kf-3d-twin.bpmn\" is declared twice",
+      "capabilities.flows[2]: \"bpmn\" is not a key of a module flow (known: key, file, name)"
+    ]
+  }
+}

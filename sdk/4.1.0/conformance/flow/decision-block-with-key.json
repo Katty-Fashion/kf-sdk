@@ -1,0 +1,23 @@
+{
+  "id": "flow/decision-block-with-key",
+  "area": "flow",
+  "description": "block carries the key (of i18n.en) and its params.",
+  "source": "sdk-protocol.md §16.4",
+  "input": {
+    "decision": "block",
+    "key": "rule.blocked",
+    "params": {
+      "item": "A-1"
+    }
+  },
+  "expect": {
+    "valid": true,
+    "json": {
+      "decision": "block",
+      "key": "rule.blocked",
+      "params": {
+        "item": "A-1"
+      }
+    }
+  }
+}

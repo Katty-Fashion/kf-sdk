@@ -1,0 +1,35 @@
+{
+  "id": "manifest/surfaces-slot-owner-not-required-refused",
+  "area": "manifest",
+  "description": "A contribution to m.{owner}.{key} whose owner is not in requires is refused, with the platform's message.",
+  "source": "sdk-protocol.md §3.2, §7.12",
+  "input": {
+    "manifest": {
+      "schemaVersion": 3,
+      "slug": "slot-contrib",
+      "name": "module.name",
+      "version": "1.0.0",
+      "platform": ">=4.1",
+      "i18n": {
+        "en": {
+          "module.name": "Slot contributor"
+        }
+      },
+      "capabilities": {
+        "surfaces": [
+          {
+            "slug": "m.kf-3d.viewport.layers.v1",
+            "kind": "layer"
+          }
+        ]
+      },
+      "requires": []
+    }
+  },
+  "expect": {
+    "valid": false,
+    "errorsContain": [
+      "capabilities.surfaces[0].slug \"m.kf-3d.viewport.layers.v1\": the owner \"kf-3d\" is not in requires"
+    ]
+  }
+}

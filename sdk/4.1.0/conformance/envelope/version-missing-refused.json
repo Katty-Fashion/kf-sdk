@@ -1,0 +1,69 @@
+{
+  "id": "envelope/version-missing-refused",
+  "area": "envelope",
+  "description": "An envelope with no kfenvelopeversion at all is answered 422 RFC 9457 (unsupported-envelope-version, class permanent, received, supported) without calling the handler.",
+  "source": "a rule of the SDK itself",
+  "input": {
+    "envelope": {
+      "specversion": "1.0",
+      "id": "b9f43a5e-87fe-334e-a088-bfbdb5c39004",
+      "kfeventid": "7a8b9c0d-1e2f-4a3b-8c4d-5e6f7a8b9c0d",
+      "type": "kf.model.before.update",
+      "source": "/api/v1/models/42",
+      "subject": "42",
+      "time": "2026-10-19T10:15:30.123Z",
+      "datacontenttype": "application/json",
+      "kfmodule": "conformance",
+      "kfflags": {
+        "author-form": true,
+        "author-tab": false
+      },
+      "kftenant": "0f1e2d3c-4b5a-4968-8776-655443322110",
+      "kflocale": "ro",
+      "kfactor": "oidc-sub-1",
+      "kfaggregatetype": "model",
+      "data": {
+        "entity": "model",
+        "id": "42",
+        "before": {
+          "id": 42,
+          "name": "Rochie Ana",
+          "materialList": [],
+          "extensions": {
+            "conformance": {
+              "author": "Ana"
+            }
+          }
+        },
+        "after": {
+          "id": 42,
+          "name": "Rochie Ana 2",
+          "materialList": [],
+          "extensions": {
+            "conformance": {
+              "author": "Ana"
+            }
+          }
+        },
+        "changed": [
+          "name"
+        ]
+      }
+    }
+  },
+  "expect": {
+    "status": 422,
+    "handlerCalled": false,
+    "bodyContains": {
+      "type": "https://kf.ro/problems/unsupported-envelope-version",
+      "title": "Unsupported envelope version",
+      "status": 422,
+      "class": "permanent",
+      "supported": [
+        1
+      ],
+      "received": null
+    },
+    "contentType": "application/problem+json"
+  }
+}

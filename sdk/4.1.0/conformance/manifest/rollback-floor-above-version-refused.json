@@ -1,0 +1,27 @@
+{
+  "id": "manifest/rollback-floor-above-version-refused",
+  "area": "manifest",
+  "description": "A rollbackFloor above version is an error naming the key and both versions; the order is semver precedence, not text (1.10.0 is above 1.9.0).",
+  "source": "sdk-protocol.md §3.1, §12",
+  "input": {
+    "manifest": {
+      "schemaVersion": 2,
+      "slug": "man-mod",
+      "name": "module.name",
+      "version": "1.9.0",
+      "rollbackFloor": "1.10.0",
+      "platform": ">=4.1",
+      "i18n": {
+        "en": {
+          "module.name": "Manifest module"
+        }
+      }
+    }
+  },
+  "expect": {
+    "valid": false,
+    "errorsContain": [
+      "\"rollbackFloor\" \"1.10.0\" is above \"version\" \"1.9.0\""
+    ]
+  }
+}

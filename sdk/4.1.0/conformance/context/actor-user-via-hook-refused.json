@@ -1,0 +1,22 @@
+{
+  "id": "context/actor-user-via-hook-refused",
+  "area": "context",
+  "description": "actor user with via hook is refused. 401, class permanent.",
+  "source": "a rule of the SDK itself",
+  "input": {
+    "secret": "kf-hook-secret-conformance",
+    "now": 1760000000,
+    "headers": {
+      "X-KF-Context": "eyJ2IjoxLCJ0ZW5hbnQiOiIwZjFlMmQzYy00YjVhLTQ5NjgtODc3Ni02NTU0NDMzMjIxMTAiLCJ1c2VyIjoib2lkYy1zdWItMSIsImFjdG9yIjp7InR5cGUiOiJ1c2VyIiwidmlhIjoiaG9vayIsImhvb2tJZCI6bnVsbH0sImxvY2FsZSI6InJvIiwicmlnaHRzIjpbImFwaS52MS5tLmNvbmZvcm1hbmNlLm5vdGVzLnBvc3QiXSwibWV0aG9kIjoiR0VUIiwicGF0aCI6Ii9ldmVudHMiLCJxdWVyeSI6bnVsbCwidHMiOjE3NjAwMDAwMDAsInJlcXVlc3RJZCI6InJlcS0wMDA3In0",
+      "X-KF-Timestamp": "1760000000",
+      "X-KF-Signature": "01ccef63b66363d111905be893309b4f418174d727c1af78d83ad57730eaacb0"
+    },
+    "body": ""
+  },
+  "expect": {
+    "valid": false,
+    "status": 401,
+    "class": "permanent",
+    "reasonContains": "actor user has no via and no hookId"
+  }
+}

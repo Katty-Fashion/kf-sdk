@@ -1,0 +1,49 @@
+{
+  "id": "manifest/flowrules-timeout-out-of-range-refused",
+  "area": "manifest",
+  "description": "A flow rule's timeoutSeconds over 60 is refused with the platform's text.",
+  "source": "sdk-protocol.md §3.2, §16",
+  "input": {
+    "manifest": {
+      "schemaVersion": 3,
+      "slug": "kf-step",
+      "name": "module.name",
+      "version": "1.0.0",
+      "platform": ">=4.1",
+      "i18n": {
+        "en": {
+          "module.name": "Step",
+          "step.label": "Item check"
+        }
+      },
+      "capabilities": {
+        "routes": [
+          {
+            "method": "GET",
+            "path": "/m/kf-step/rules/item-ready",
+            "right": "api.v1.m.kf-step.rules.item-ready.get"
+          },
+          {
+            "method": "POST",
+            "path": "/m/kf-step/items",
+            "right": "api.v1.m.kf-step.items.post"
+          }
+        ],
+        "flowRules": [
+          {
+            "key": "item-ready",
+            "path": "/m/kf-step/rules/item-ready",
+            "projection": "order.flow-rule.v1",
+            "timeoutSeconds": 61
+          }
+        ]
+      }
+    }
+  },
+  "expect": {
+    "valid": false,
+    "errorsContain": [
+      "capabilities.flowRules[0].timeoutSeconds 61 must be a whole number from 1 to 60"
+    ]
+  }
+}

@@ -1,0 +1,50 @@
+{
+  "id": "reads/system-context-list-refused-locally",
+  "area": "reads",
+  "description": "The system context reads only objects (§15.1): a list from a system context is refused locally, permanent, no request.",
+  "source": "sdk-protocol.md §15.1",
+  "input": {
+    "slug": "reads-mod",
+    "context": {
+      "v": 1,
+      "tenant": "00000000-0000-0000-0000-00000000000a",
+      "user": null,
+      "actor": {
+        "type": "system",
+        "via": "hook",
+        "hookId": "3c2b1a09-8f7e-4d6c-9b5a-4f3e2d1c0b0a"
+      },
+      "locale": "en",
+      "rights": [],
+      "method": "POST",
+      "path": "/hooked",
+      "query": null,
+      "ts": "$now",
+      "requestId": "req-reads-12"
+    },
+    "proof": "3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f",
+    "call": "list",
+    "args": {
+      "port": "model.v1",
+      "filters": {
+        "ids": "42"
+      }
+    },
+    "platform": {
+      "status": 200,
+      "body": "{}"
+    }
+  },
+  "expect": {
+    "outcome": "error",
+    "request": null,
+    "error": {
+      "status": 0,
+      "class": "permanent",
+      "kind": "other",
+      "messageContains": [
+        "the system context reads only objects"
+      ]
+    }
+  }
+}

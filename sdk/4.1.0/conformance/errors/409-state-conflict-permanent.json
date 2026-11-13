@@ -1,0 +1,14 @@
+{
+  "id": "errors/409-state-conflict-permanent",
+  "area": "errors",
+  "description": "A 409 for a module in the wrong state (FAILED) is permanent: the SDK stops after the first attempt and names the status and the detail.",
+  "source": "the platform ModuleSdkExceptionAdvice.handleModuleStateConflict",
+  "input": {
+    "response": {
+      "status": 409,
+      "headers": {"Content-Type": "application/problem+json"},
+      "body": {"type": "https://kf.ro/problems/conflict", "title": "Conflict", "status": 409, "detail": "Module 'conformance' is FAILED; expected INSTALLED", "state": "FAILED", "class": "permanent"}
+    }
+  },
+  "expect": {"retry": false, "class": "permanent", "messageContains": ["409", "is FAILED; expected INSTALLED"]}
+}

@@ -1,0 +1,40 @@
+{
+  "id": "notifications/invalid-key-refused-locally",
+  "area": "notifications",
+  "description": "A key outside the manifest grammar (here the composed m.<slug>.<key>) is refused locally, permanent, and nothing is sent.",
+  "source": "a rule of the SDK itself",
+  "input": {
+    "slug": "notif-mod",
+    "call": "send",
+    "tenantId": "00000000-0000-0000-0000-00000000000a",
+    "key": "m.notif-mod.author-changed",
+    "recipients": [
+      "subject-1",
+      "subject-2"
+    ],
+    "variables": {
+      "modelName": "Rochie"
+    },
+    "options": {
+      "idempotencyKey": "7a07a07a-0000-4000-8000-000000000207"
+    },
+    "platform": [
+      {
+        "status": 202,
+        "body": "{\"accepted\":1,\"duplicates\":0}"
+      }
+    ]
+  },
+  "expect": {
+    "outcome": "error",
+    "requests": 0,
+    "error": {
+      "status": 0,
+      "class": "permanent",
+      "kind": "other",
+      "messageContains": [
+        "key must match"
+      ]
+    }
+  }
+}

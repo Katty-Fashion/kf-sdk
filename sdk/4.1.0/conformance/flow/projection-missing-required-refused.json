@@ -1,0 +1,13 @@
+{
+  "id": "flow/projection-missing-required-refused",
+  "area": "flow",
+  "description": "A query without a required field (step.to, instance.id) is refused, naming the fields in the order of §3.3.",
+  "source": "sdk-protocol.md §16.4",
+  "input": {
+    "query": "projection=order.flow-rule.v1&rule.key=item-ready&order.id=812&order.status=CONFIRMED&flow.key=g3-production&flow.version=4&step.key=cutting&order.number=PO+2026%2F7&order.internal=false&order.customerId=55&step.behavesLike=IN_PRODUCTION&order.stages=production&order.stages=sampling&line.id=4401&line.modelId=90&line.modelVersionId=901&line.quantity=120"
+  },
+  "expect": {
+    "valid": false,
+    "errorContains": "missing instance.id, step.to"
+  }
+}

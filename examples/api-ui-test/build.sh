@@ -94,10 +94,10 @@ const conf = JSON.parse(readFileSync(src, 'utf8'));
 conf.version = version;
 if (conf.slug !== slug || conf.schemaVersion !== 2) { console.error('kf-module-conf.json: slug/schemaVersion'); process.exit(1); }
 if (variant === 'page-pe-tab') {
-  //, first zip: "page" on a surface of type tab
+  // first zip: "page" on a surface of type tab
   conf.capabilities.surfaces.push({ slug: 'models.detail.tabs', kind: 'react', label: 'page.demo', page: 'demo' });
 } else if (variant === 'pagini-fara-page') {
-  //, second zip: a module.pages surface without "page"
+  // second zip: a module.pages surface without "page"
   conf.capabilities.surfaces.push({ slug: 'module.pages', kind: 'react', label: 'page.demo' });
 } else if (variant !== 'bun' && variant !== 'crapa') {
   console.error(`unknown variant ${variant}`); process.exit(1);

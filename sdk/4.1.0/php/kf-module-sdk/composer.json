@@ -1,0 +1,28 @@
+{
+    "name": "kf/module-sdk",
+    "description": "KF platform module SDK (PHP), derived from the Java reference SDK ro.kf:kf-module-sdk by /kf-sdk-derive: registers hooks, extension fields and UI contributions, answers the signed platform callbacks (POST /_kf/hooks) and verifies the signed context of the module's own routes. Zero runtime dependencies.",
+    "type": "library",
+    "version": "4.1.0",
+    "license": "proprietary",
+    "authors": [
+        {
+            "name": "Katty Fashion"
+        }
+    ],
+    "require": {
+        "php": ">=8.3",
+        "ext-json": "*"
+    },
+    "suggest": {
+        "psr/http-server-middleware": "optional: the PSR-15 adapter Psr15/KfMiddleware",
+        "psr/http-factory": "optional: the PSR-15 adapter Psr15/KfMiddleware (PSR-17 factories)"
+    },
+    "autoload": {
+        "psr-4": {
+            "Kf\\Sdk\\": "src/"
+        }
+    },
+    "bin": [
+        "bin/kf-register"
+    ]
+}

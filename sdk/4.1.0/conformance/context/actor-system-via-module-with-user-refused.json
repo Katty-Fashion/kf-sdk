@@ -1,0 +1,22 @@
+{
+  "id": "context/actor-system-via-module-with-user-refused",
+  "area": "context",
+  "description": "actor system via a module with a user is refused. 401, class permanent.",
+  "source": "sdk-protocol.md §9.2",
+  "input": {
+    "secret": "kf-hook-secret-conformance",
+    "now": 1760000000,
+    "headers": {
+      "X-KF-Context": "eyJ2IjoxLCJ0ZW5hbnQiOiIwZjFlMmQzYy00YjVhLTQ5NjgtODc3Ni02NTU0NDMzMjIxMTAiLCJ1c2VyIjoib2lkYy1zdWItMSIsImFjdG9yIjp7InR5cGUiOiJzeXN0ZW0iLCJ2aWEiOiJtb2R1bGU6a2YtM2QiLCJob29rSWQiOm51bGx9LCJsb2NhbGUiOiJybyIsInJpZ2h0cyI6W10sIm1ldGhvZCI6IkdFVCIsInBhdGgiOiIvY2hlY2tzIiwicXVlcnkiOm51bGwsInRzIjoxNzYwMDAwMDAwLCJyZXF1ZXN0SWQiOiJyZXEtMDMwNCJ9",
+      "X-KF-Timestamp": "1760000000",
+      "X-KF-Signature": "12fb87131b47ac435d1174d6f90c4a7965d5497592c072c61380948ad6ea9916"
+    },
+    "body": ""
+  },
+  "expect": {
+    "valid": false,
+    "status": 401,
+    "class": "permanent",
+    "reasonContains": "actor system has no user"
+  }
+}

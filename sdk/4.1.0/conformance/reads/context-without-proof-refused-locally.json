@@ -1,0 +1,48 @@
+{
+  "id": "reads/context-without-proof-refused-locally",
+  "area": "reads",
+  "description": "A context that came without X-KF-Context-Proof is refused locally, permanent, no request.",
+  "source": "sdk-protocol.md §15.1",
+  "input": {
+    "slug": "reads-mod",
+    "context": {
+      "v": 1,
+      "tenant": "00000000-0000-0000-0000-00000000000a",
+      "user": "subject-1",
+      "actor": {
+        "type": "user",
+        "via": null,
+        "hookId": null
+      },
+      "locale": "en",
+      "rights": [],
+      "method": "GET",
+      "path": "/x",
+      "query": null,
+      "ts": "$now",
+      "requestId": "req-reads-14"
+    },
+    "proof": null,
+    "call": "get",
+    "args": {
+      "port": "model.v1",
+      "id": "42"
+    },
+    "platform": {
+      "status": 200,
+      "body": "{}"
+    }
+  },
+  "expect": {
+    "outcome": "error",
+    "request": null,
+    "error": {
+      "status": 0,
+      "class": "permanent",
+      "kind": "other",
+      "messageContains": [
+        "X-KF-Context-Proof"
+      ]
+    }
+  }
+}

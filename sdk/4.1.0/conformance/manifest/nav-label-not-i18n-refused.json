@@ -1,0 +1,45 @@
+{
+  "id": "manifest/nav-label-not-i18n-refused",
+  "area": "manifest",
+  "description": "A nav label that is not a key of i18n.en is refused.",
+  "source": "sdk-protocol.md §3.2, §7.11",
+  "input": {
+    "manifest": {
+      "schemaVersion": 2,
+      "slug": "man-mod",
+      "name": "module.name",
+      "version": "1.0.0",
+      "platform": ">=4.1",
+      "i18n": {
+        "en": {
+          "module.name": "Manifest module",
+          "nav.events": "Events"
+        }
+      },
+      "capabilities": {
+        "routes": [
+          {
+            "method": "GET",
+            "path": "/m/man-mod/events",
+            "right": "api.v1.m.man-mod.events.get"
+          }
+        ],
+        "nav": [
+          {
+            "surface": "staff",
+            "group": "admin-utils",
+            "key": "events",
+            "label": "nav.missing",
+            "url": "/modules"
+          }
+        ]
+      }
+    }
+  },
+  "expect": {
+    "valid": false,
+    "errorsContain": [
+      "capabilities.nav[0].label \"nav.missing\" is not defined in i18n.en"
+    ]
+  }
+}

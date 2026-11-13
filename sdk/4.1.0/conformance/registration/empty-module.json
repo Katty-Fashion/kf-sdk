@@ -1,0 +1,18 @@
+{
+  "id": "registration/empty-module",
+  "area": "registration",
+  "description": "A module that declares nothing still sends the four keys; without hooks the callbackUrl may be null.",
+  "source": "the platform RegistrationDtos.RegistrationRequest/HookSpec/FieldSpec/SurfaceSpec",
+  "input": {
+    "slug": "reg-empty",
+    "callbackBase": null
+  },
+  "expect": {
+    "body": {
+      "callbackUrl": null,
+      "hooks": [],
+      "fields": [],
+      "surfaces": []
+    }
+  }
+}

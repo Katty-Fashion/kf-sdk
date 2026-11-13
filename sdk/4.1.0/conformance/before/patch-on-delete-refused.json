@@ -1,0 +1,59 @@
+{
+  "id": "before/patch-on-delete-refused",
+  "area": "before",
+  "description": "A patch on model.before.delete is the module's bug: the SDK does not send it and answers 500, class permanent (the platform applies the hook's onFailure).",
+  "source": "the platform HookDecision.from",
+  "input": {
+    "envelope": {
+      "specversion": "1.0",
+      "id": "b9f43a5e-87fe-334e-a088-bfbdb5c39004",
+      "kfeventid": "7a8b9c0d-1e2f-4a3b-8c4d-5e6f7a8b9c0d",
+      "type": "kf.model.before.delete",
+      "source": "/api/v1/models/42",
+      "subject": "42",
+      "time": "2026-10-19T10:15:30.123Z",
+      "datacontenttype": "application/json",
+      "kfmodule": "conformance",
+      "kfflags": {
+        "author-form": true,
+        "author-tab": false
+      },
+      "kftenant": "0f1e2d3c-4b5a-4968-8776-655443322110",
+      "kflocale": "ro",
+      "kfactor": "oidc-sub-1",
+      "kfaggregatetype": "model",
+      "kfenvelopeversion": "1",
+      "data": {
+        "entity": "model",
+        "id": "42",
+        "before": {
+          "id": 42,
+          "name": "Rochie Ana",
+          "materialList": [],
+          "extensions": {
+            "conformance": {
+              "author": "Ana"
+            }
+          }
+        },
+        "after": null,
+        "changed": []
+      }
+    },
+    "answer": {
+      "decision": "patch",
+      "extensions": {
+        "author": "x"
+      }
+    }
+  },
+  "expect": {
+    "status": 500,
+    "handlerCalled": true,
+    "bodyContains": {
+      "type": "https://kf.ro/problems/handler-failed",
+      "status": 500,
+      "class": "permanent"
+    }
+  }
+}

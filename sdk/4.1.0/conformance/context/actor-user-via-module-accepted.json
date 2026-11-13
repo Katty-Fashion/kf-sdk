@@ -1,0 +1,38 @@
+{
+  "id": "context/actor-user-via-module-accepted",
+  "area": "context",
+  "description": "actor user via module:kf-3d (a call between modules): accepted, the user kept.",
+  "source": "sdk-protocol.md §9.2",
+  "input": {
+    "secret": "kf-hook-secret-conformance",
+    "now": 1760000000,
+    "headers": {
+      "X-KF-Context": "eyJ2IjoxLCJ0ZW5hbnQiOiIwZjFlMmQzYy00YjVhLTQ5NjgtODc3Ni02NTU0NDMzMjIxMTAiLCJ1c2VyIjoib2lkYy1zdWItMSIsImFjdG9yIjp7InR5cGUiOiJ1c2VyIiwidmlhIjoibW9kdWxlOmtmLTNkIiwiaG9va0lkIjpudWxsfSwibG9jYWxlIjoicm8iLCJyaWdodHMiOlsiYXBpLnYxLm0ua2YtcWMucGVlci5jaGVja3MuZ2V0Il0sIm1ldGhvZCI6IkdFVCIsInBhdGgiOiIvY2hlY2tzIiwicXVlcnkiOm51bGwsInRzIjoxNzYwMDAwMDAwLCJyZXF1ZXN0SWQiOiJyZXEtMDMwMSJ9",
+      "X-KF-Timestamp": "1760000000",
+      "X-KF-Signature": "0bc7dff1cb9c7aed3facebc01ec7bc12ea5bd2f4934deccee921a47c10485bd1"
+    },
+    "body": ""
+  },
+  "expect": {
+    "valid": true,
+    "context": {
+      "v": 1,
+      "tenant": "0f1e2d3c-4b5a-4968-8776-655443322110",
+      "user": "oidc-sub-1",
+      "actor": {
+        "type": "user",
+        "via": "module:kf-3d",
+        "hookId": null
+      },
+      "locale": "ro",
+      "rights": [
+        "api.v1.m.kf-qc.peer.checks.get"
+      ],
+      "method": "GET",
+      "path": "/checks",
+      "query": null,
+      "ts": 1760000000,
+      "requestId": "req-0301"
+    }
+  }
+}

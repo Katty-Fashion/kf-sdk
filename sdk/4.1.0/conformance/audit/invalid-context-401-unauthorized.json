@@ -1,0 +1,52 @@
+{
+  "id": "audit/invalid-context-401-unauthorized",
+  "area": "audit",
+  "description": "401 (a context the platform did not issue for this module, an expired one, or a bad token) is the SDK's Unauthorized error.",
+  "source": "the platform ModuleAuditController / ModuleAuditService / ModuleAuditPortIT",
+  "input": {
+    "slug": "audit-mod",
+    "context": {
+      "v": 1,
+      "tenant": "00000000-0000-0000-0000-00000000000a",
+      "user": "subject-1",
+      "locale": "en",
+      "rights": [],
+      "method": "POST",
+      "path": "/notes",
+      "query": null,
+      "ts": "$now",
+      "requestId": "req-audit-1"
+    },
+    "proof": "3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f",
+    "call": "list",
+    "query": {
+      "aggregateType": "Note"
+    },
+    "platform": {
+      "status": 401,
+      "body": "{\"type\":\"https://kf.ro/problems/invalid-context\",\"title\":\"Invalid context\",\"status\":401,\"detail\":\"The request context was refused: the context expired (ts outside ±300 s).\",\"class\":\"permanent\"}"
+    }
+  },
+  "expect": {
+    "outcome": "error",
+    "request": {
+      "method": "GET",
+      "path": "/api/v1/platform/modules/audit-mod/audit",
+      "query": "aggregateType=Note",
+      "headers": {
+        "Authorization": "Bearer kfm_conformance-token-never-logged",
+        "X-KF-Context": "$context",
+        "X-KF-Context-Proof": "3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f"
+      },
+      "body": null
+    },
+    "error": {
+      "status": 401,
+      "class": "permanent",
+      "kind": "unauthorized",
+      "messageContains": [
+        "expired"
+      ]
+    }
+  }
+}

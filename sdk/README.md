@@ -1,8 +1,8 @@
 # The public module SDK
 
-No version is published yet: **the first public version will be 4.1.0**, when the platform, the SDK and the release
-milestone align on the same major.minor. Until then this directory holds only this README. Each published version
-appears as `sdk/<version>/` and is never rewritten: a correction is a new version.
+The current version is **4.1.0** (`sdk/4.1.0/`, the first public one): protocol 2.1, manifest `schemaVersion` 3. From
+4.1 on, the platform, the SDK and the release milestone share the same major.minor, and an SDK X.Y.z needs a platform
+>= X.Y. Each published version appears as `sdk/<version>/` and is never rewritten: a correction is a new version.
 
 ## A version directory
 

@@ -1,0 +1,54 @@
+{
+  "id": "slots/register-layer-ok",
+  "area": "slots",
+  "description": "A layer on a declared B slot of a required owner: sent with kind layer, layer and source, no entry; the platform answers without warning.",
+  "source": "sdk-protocol.md §7.10, §7.12",
+  "input": {
+    "slug": "slot-contrib",
+    "surfaces": [
+      {
+        "slug": "m.kf-3d.viewport.layers.v1",
+        "kind": "layer",
+        "layer": "pin",
+        "source": "/m/slot-contrib/api/pins",
+        "key": "pins"
+      },
+      {
+        "slug": "m.kf-3d.materials.v1",
+        "kind": "data",
+        "data": {
+          "name": "wool",
+          "weight": 320
+        },
+        "key": "wool"
+      }
+    ],
+    "platform": {
+      "status": 200,
+      "body": {
+        "warnings": []
+      }
+    }
+  },
+  "expect": {
+    "surfaces": [
+      {
+        "slug": "m.kf-3d.viewport.layers.v1",
+        "kind": "layer",
+        "layer": "pin",
+        "source": "/m/slot-contrib/api/pins",
+        "key": "pins"
+      },
+      {
+        "slug": "m.kf-3d.materials.v1",
+        "kind": "data",
+        "data": {
+          "name": "wool",
+          "weight": 320
+        },
+        "key": "wool"
+      }
+    ],
+    "warnings": []
+  }
+}

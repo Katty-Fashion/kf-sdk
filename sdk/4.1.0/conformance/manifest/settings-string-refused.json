@@ -1,0 +1,67 @@
+{
+  "id": "manifest/settings-string-refused",
+  "area": "manifest",
+  "description": "A STRING setting is refused: settings carry no data (closed scalars only; free text lives on surfaces or in secrets).",
+  "source": "sdk-protocol.md §3.2, §15",
+  "input": {
+    "manifest": {
+      "schemaVersion": 2,
+      "slug": "man-mod",
+      "name": "module.name",
+      "version": "1.0.0",
+      "platform": ">=4.1",
+      "i18n": {
+        "en": {
+          "module.name": "Manifest module",
+          "setting.push": "Push on save",
+          "setting.timeout": "Timeout",
+          "setting.mode": "Mode",
+          "setting.mode.help": "How the module pushes",
+          "tab.label": "AAS"
+        }
+      },
+      "capabilities": {
+        "routes": [
+          {
+            "method": "GET",
+            "path": "/m/man-mod/stations",
+            "right": "api.v1.m.man-mod.stations.get"
+          },
+          {
+            "method": "GET",
+            "path": "/m/man-mod/admin/config",
+            "right": "api.v1.m.man-mod.admin.config.get",
+            "admin": "tenant"
+          },
+          {
+            "method": "PUT",
+            "path": "/m/man-mod/admin/keys",
+            "right": "api.v1.m.man-mod.admin.keys.put",
+            "admin": "platform"
+          },
+          {
+            "method": "PUT",
+            "path": "/m/man-mod/admin/tenant-keys",
+            "right": "api.v1.m.man-mod.admin.tenant-keys.put",
+            "admin": "tenant"
+          }
+        ],
+        "settings": [
+          {
+            "key": "base-url",
+            "type": "STRING",
+            "default": "https://r3.example",
+            "label": "setting.push"
+          }
+        ]
+      }
+    }
+  },
+  "expect": {
+    "valid": false,
+    "errorsContain": [
+      "capabilities.settings[0].type \"STRING\" is not allowed",
+      "settings carry no data: BOOLEAN, NUMBER or ENUM"
+    ]
+  }
+}

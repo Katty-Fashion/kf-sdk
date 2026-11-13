@@ -1,0 +1,39 @@
+{
+  "id": "context/valid-post-with-body",
+  "area": "context",
+  "description": "A POST verifies with its JSON body covered by the signature (ts.context.body).",
+  "source": "the platform HttpModuleApiForwarder.encodeContext",
+  "input": {
+    "secret": "kf-hook-secret-conformance",
+    "now": 1760000010,
+    "headers": {
+      "X-KF-Context": "eyJ2IjoxLCJ0ZW5hbnQiOiIwZjFlMmQzYy00YjVhLTQ5NjgtODc3Ni02NTU0NDMzMjIxMTAiLCJ1c2VyIjoib2lkYy1zdWItMSIsImxvY2FsZSI6InJvIiwicmlnaHRzIjpbImFwaS52MS5tLmNvbmZvcm1hbmNlLmV2ZW50cy5nZXQiLCJhcGkudjEubS5jb25mb3JtYW5jZS5ub3Rlcy5wb3N0Il0sIm1ldGhvZCI6IlBPU1QiLCJwYXRoIjoiL25vdGVzIiwicXVlcnkiOm51bGwsInRzIjoxNzYwMDAwMDAwLCJyZXF1ZXN0SWQiOiJyZXEtMDAwMiJ9",
+      "X-KF-Timestamp": "1760000000",
+      "X-KF-Signature": "c3716b8df49337eb6dea4495323b00bc3beb5ae9523550393a9339a465de8412"
+    },
+    "body": "{\"text\":\"Notă nouă\"}"
+  },
+  "expect": {
+    "valid": true,
+    "context": {
+      "v": 1,
+      "tenant": "0f1e2d3c-4b5a-4968-8776-655443322110",
+      "user": "oidc-sub-1",
+      "actor": {
+        "type": "user",
+        "via": null,
+        "hookId": null
+      },
+      "locale": "ro",
+      "rights": [
+        "api.v1.m.conformance.events.get",
+        "api.v1.m.conformance.notes.post"
+      ],
+      "method": "POST",
+      "path": "/notes",
+      "query": null,
+      "ts": 1760000000,
+      "requestId": "req-0002"
+    }
+  }
+}

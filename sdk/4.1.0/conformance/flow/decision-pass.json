@@ -1,0 +1,15 @@
+{
+  "id": "flow/decision-pass",
+  "area": "flow",
+  "description": "pass is the body {\"decision\": \"pass\"}.",
+  "source": "sdk-protocol.md §16.4",
+  "input": {
+    "decision": "pass"
+  },
+  "expect": {
+    "valid": true,
+    "json": {
+      "decision": "pass"
+    }
+  }
+}

@@ -1,0 +1,61 @@
+{
+  "id": "manifest/peers-path-not-declared-refused",
+  "area": "manifest",
+  "description": "A peer read whose path is not a declared GET route is refused.",
+  "source": "sdk-protocol.md §3.2, §15.9, §6.3",
+  "input": {
+    "manifest": {
+      "schemaVersion": 3,
+      "slug": "kf-qc",
+      "name": "module.name",
+      "version": "1.0.0",
+      "platform": ">=4.1",
+      "i18n": {
+        "en": {
+          "module.name": "Quality"
+        }
+      },
+      "capabilities": {
+        "routes": [
+          {
+            "method": "GET",
+            "path": "/m/kf-qc/peer/checks",
+            "right": "api.v1.m.kf-qc.peer.checks.get"
+          },
+          {
+            "method": "POST",
+            "path": "/m/kf-qc/peer/checks",
+            "right": "api.v1.m.kf-qc.peer.checks.post"
+          }
+        ],
+        "peerReads": [
+          {
+            "port": "m.kf-qc.checks.v1",
+            "path": "/m/kf-qc/peer/undeclared",
+            "visibility": "public"
+          }
+        ],
+        "commands": [
+          {
+            "name": "open-check",
+            "path": "/m/kf-qc/peer/checks",
+            "method": "POST",
+            "visibility": "internal"
+          }
+        ],
+        "events": [
+          {
+            "name": "check-closed",
+            "visibility": "public"
+          }
+        ]
+      }
+    }
+  },
+  "expect": {
+    "valid": false,
+    "errorsContain": [
+      "capabilities.peerReads[0].path \"/m/kf-qc/peer/undeclared\" is not a GET route this module declares"
+    ]
+  }
+}

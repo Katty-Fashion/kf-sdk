@@ -1,0 +1,50 @@
+{
+  "id": "manifest/storage-valid",
+  "area": "manifest",
+  "description": "One storage element with its content types and its byte cap is valid and read.",
+  "source": "sdk-protocol.md §3.2, §15.7",
+  "input": {
+    "manifest": {
+      "schemaVersion": 2,
+      "slug": "man-mod",
+      "name": "module.name",
+      "version": "1.0.0",
+      "platform": ">=4.1",
+      "i18n": {
+        "en": {
+          "module.name": "Manifest module",
+          "widget.label": "Feedback"
+        }
+      },
+      "capabilities": {
+        "routes": [
+          {
+            "method": "POST",
+            "path": "/m/man-mod/tickets",
+            "right": "api.v1.m.man-mod.tickets.post"
+          }
+        ],
+        "storage": [
+          {
+            "contentTypes": [
+              "image/jpeg",
+              "image/png"
+            ],
+            "maxBytes": 5242880
+          }
+        ]
+      }
+    }
+  },
+  "expect": {
+    "valid": true,
+    "warningsContain": [],
+    "read": {
+      "/capabilities/storage/0/contentTypes": [
+        "image/jpeg",
+        "image/png"
+      ],
+      "/capabilities/storage/0/maxBytes": 5242880
+    }
+  }
+}

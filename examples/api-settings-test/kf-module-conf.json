@@ -5,7 +5,7 @@
   "description": "module.description",
   "version": "0.0.0",
   "author": "Katty Fashion",
-  "platform": ">=5.1",
+  "platform": ">=4.1",
   "featureFlags": [],
   "i18n": {
     "en": {

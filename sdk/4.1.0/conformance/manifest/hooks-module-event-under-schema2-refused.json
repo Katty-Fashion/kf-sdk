@@ -1,0 +1,39 @@
+{
+  "id": "manifest/hooks-module-event-under-schema2-refused",
+  "area": "manifest",
+  "description": "An event of a module as a hook needs schemaVersion 3.",
+  "source": "sdk-protocol.md §6.1, §6.3",
+  "input": {
+    "manifest": {
+      "schemaVersion": 2,
+      "slug": "kf-3d",
+      "name": "module.name",
+      "version": "1.0.0",
+      "platform": ">=4.1",
+      "i18n": {
+        "en": {
+          "module.name": "3D"
+        }
+      },
+      "requires": [
+        {
+          "slug": "kf-stock",
+          "versionRange": ">=1.0.0"
+        }
+      ],
+      "capabilities": {
+        "hooks": [
+          {
+            "point": "m.kf-stock.after.level-changed"
+          }
+        ]
+      }
+    }
+  },
+  "expect": {
+    "valid": false,
+    "errorsContain": [
+      "capabilities.hooks[0].point \"m.kf-stock.after.level-changed\": an event of a module requires \"schemaVersion\": 3"
+    ]
+  }
+}

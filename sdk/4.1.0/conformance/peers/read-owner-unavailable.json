@@ -1,0 +1,61 @@
+{
+  "id": "peers/read-owner-unavailable",
+  "area": "peers",
+  "description": "The owner installed but stopped: 503 module-unavailable, class transient — a refusal (kind unavailable) with the reason, retried by the caller.",
+  "source": "sdk-protocol.md §15.9",
+  "input": {
+    "slug": "peers-caller",
+    "context": {
+      "v": 1,
+      "tenant": "00000000-0000-0000-0000-00000000000a",
+      "user": "subject-1",
+      "actor": {
+        "type": "user",
+        "via": null,
+        "hookId": null
+      },
+      "locale": "en",
+      "rights": [],
+      "method": "GET",
+      "path": "/x",
+      "query": null,
+      "ts": "$now",
+      "requestId": "req-peers-2"
+    },
+    "proof": "4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f",
+    "call": "read",
+    "args": {
+      "owner": "kf-stock",
+      "port": "m.kf-stock.level.v1",
+      "query": {}
+    },
+    "platform": {
+      "status": 503,
+      "body": "{\"type\":\"https://kf.ro/problems/module-unavailable\",\"title\":\"module-unavailable\",\"status\":503,\"detail\":\"The module kf-stock is not available now.\",\"class\":\"transient\"}"
+    }
+  },
+  "expect": {
+    "outcome": "error",
+    "request": {
+      "method": "GET",
+      "path": "/api/v1/platform/modules/peers-caller/peers/kf-stock/reads/m.kf-stock.level.v1",
+      "query": null,
+      "headers": {
+        "Authorization": "Bearer kfm_conformance-token-never-logged",
+        "X-KF-Context": "$context",
+        "X-KF-Context-Proof": "4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f"
+      },
+      "body": null
+    },
+    "error": {
+      "status": 503,
+      "class": "transient",
+      "kind": "unavailable",
+      "reason": "module-unavailable",
+      "messageContains": [
+        "HTTP 503",
+        "kf-stock is not available now"
+      ]
+    }
+  }
+}

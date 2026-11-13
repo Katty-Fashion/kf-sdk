@@ -1,0 +1,59 @@
+{
+  "id": "reads/forbidden-insufficient-rights",
+  "area": "reads",
+  "description": "403 insufficient-rights (the context user does not hold the platform right of the port) is the SDK forbidden refusal, with the reason; the SDK does not retry.",
+  "source": "sdk-protocol.md §15.1",
+  "input": {
+    "slug": "reads-mod",
+    "context": {
+      "v": 1,
+      "tenant": "00000000-0000-0000-0000-00000000000a",
+      "user": "subject-1",
+      "actor": {
+        "type": "user",
+        "via": null,
+        "hookId": null
+      },
+      "locale": "en",
+      "rights": [],
+      "method": "GET",
+      "path": "/x",
+      "query": null,
+      "ts": "$now",
+      "requestId": "req-reads-6"
+    },
+    "proof": "3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f",
+    "call": "get",
+    "args": {
+      "port": "model.v1",
+      "id": "42"
+    },
+    "platform": {
+      "status": 403,
+      "body": "{\"type\":\"https://kf.ro/problems/insufficient-rights\",\"title\":\"insufficient-rights\",\"status\":403,\"detail\":\"The user does not hold api.v1.models.get in the tenant\",\"class\":\"permanent\"}"
+    }
+  },
+  "expect": {
+    "outcome": "error",
+    "request": {
+      "method": "GET",
+      "path": "/api/v1/platform/modules/reads-mod/reads/model.v1/42",
+      "query": null,
+      "headers": {
+        "Authorization": "Bearer kfm_conformance-token-never-logged",
+        "X-KF-Context": "$context",
+        "X-KF-Context-Proof": "3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f"
+      },
+      "body": null
+    },
+    "error": {
+      "status": 403,
+      "class": "permanent",
+      "kind": "forbidden",
+      "reason": "insufficient-rights",
+      "messageContains": [
+        "api.v1.models.get"
+      ]
+    }
+  }
+}

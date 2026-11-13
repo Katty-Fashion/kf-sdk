@@ -1,0 +1,35 @@
+{
+  "id": "manifest/unknown-language-warning",
+  "area": "manifest",
+  "description": "A language the platform does not serve is a warning, never a refusal. The SDK warns only when it is given the platform's languages (it does not know them at start).",
+  "source": "the platform ModuleManifestValidator",
+  "input": {
+    "manifest": {
+      "schemaVersion": 2,
+      "slug": "man-mod",
+      "name": "module.name",
+      "version": "1.0.0",
+      "platform": ">=4.1",
+      "i18n": {
+        "en": {
+          "module.name": "M"
+        },
+        "xx": {
+          "module.name": "X"
+        }
+      }
+    },
+    "platformLanguages": [
+      "en",
+      "ro",
+      "de",
+      "fr"
+    ]
+  },
+  "expect": {
+    "valid": true,
+    "warningsContain": [
+      "i18n declares xx"
+    ]
+  }
+}

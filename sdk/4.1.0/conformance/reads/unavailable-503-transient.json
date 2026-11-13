@@ -1,0 +1,58 @@
+{
+  "id": "reads/unavailable-503-transient",
+  "area": "reads",
+  "description": "503 is transient: the SDK reports it (class transient) and does not hide it as a refusal.",
+  "source": "sdk-protocol.md §15.1",
+  "input": {
+    "slug": "reads-mod",
+    "context": {
+      "v": 1,
+      "tenant": "00000000-0000-0000-0000-00000000000a",
+      "user": "subject-1",
+      "actor": {
+        "type": "user",
+        "via": null,
+        "hookId": null
+      },
+      "locale": "en",
+      "rights": [],
+      "method": "GET",
+      "path": "/x",
+      "query": null,
+      "ts": "$now",
+      "requestId": "req-reads-10"
+    },
+    "proof": "3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f",
+    "call": "get",
+    "args": {
+      "port": "model.v1",
+      "id": "42"
+    },
+    "platform": {
+      "status": 503,
+      "body": ""
+    }
+  },
+  "expect": {
+    "outcome": "error",
+    "request": {
+      "method": "GET",
+      "path": "/api/v1/platform/modules/reads-mod/reads/model.v1/42",
+      "query": null,
+      "headers": {
+        "Authorization": "Bearer kfm_conformance-token-never-logged",
+        "X-KF-Context": "$context",
+        "X-KF-Context-Proof": "3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f"
+      },
+      "body": null
+    },
+    "error": {
+      "status": 503,
+      "class": "transient",
+      "kind": "other",
+      "messageContains": [
+        "HTTP 503"
+      ]
+    }
+  }
+}

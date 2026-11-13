@@ -22,7 +22,7 @@ import java.util.Map;
 
 /**
  * The test module {@code api-settings-test}: three services of protocol 1.1, each behind
- * one route, so that the scenarios, and can be checked on a stack through a real module. It
+ * one route, so that the scenarios can be checked on a stack through a real module. It
  * has no logic of its own.
  *
  * <ul>
@@ -35,8 +35,7 @@ import java.util.Map;
  *       {@code {"aas_shell": 12}} reaches the platform and comes back as its {@code 400}.</li>
  *   <li>{@code GET /m/api-settings-test/factory/stations}, declared in {@code provides: factory.stations.v1} (§15.5):
  *       the stations in the strict shape of {@code FactoryStationsV1}, and one log line with the caller
- *       ({@code actor.type}, {@code actor.via}, {@code user}): the platform's read is {@code via=platform user=null}
- *      .</li>
+ *       ({@code actor.type}, {@code actor.via}, {@code user}): the platform's read is {@code via=platform user=null}.</li>
  * </ul>
  * A refusal of the platform comes back with its own status and {@code {refused: true, status, kind, reason, detail,
  * errors}}; a local refusal of the SDK or a {@code 503} as {@code 502}. {@code /health} answers without a context, for

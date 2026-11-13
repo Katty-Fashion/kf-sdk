@@ -1,0 +1,47 @@
+{
+  "id": "manifest/hooks-flow-with-onfailure-refused",
+  "area": "manifest",
+  "description": "A subscription to an event of the flow engine with onFailure is refused: it runs after the step and cannot block it.",
+  "source": "sdk-protocol.md §3.2, §16",
+  "input": {
+    "manifest": {
+      "schemaVersion": 3,
+      "slug": "kf-step",
+      "name": "module.name",
+      "version": "1.0.0",
+      "platform": ">=4.1",
+      "i18n": {
+        "en": {
+          "module.name": "Step",
+          "step.label": "Item check"
+        }
+      },
+      "capabilities": {
+        "routes": [
+          {
+            "method": "GET",
+            "path": "/m/kf-step/rules/item-ready",
+            "right": "api.v1.m.kf-step.rules.item-ready.get"
+          },
+          {
+            "method": "POST",
+            "path": "/m/kf-step/items",
+            "right": "api.v1.m.kf-step.items.post"
+          }
+        ],
+        "hooks": [
+          {
+            "point": "workflow.flow-step-entered",
+            "onFailure": "block"
+          }
+        ]
+      }
+    }
+  },
+  "expect": {
+    "valid": false,
+    "errorsContain": [
+      "capabilities.hooks[0].onFailure is not allowed on the flow event \"workflow.flow-step-entered\": it runs after the step and cannot block it"
+    ]
+  }
+}

@@ -1,0 +1,40 @@
+{
+  "id": "manifest/flows-valid",
+  "area": "manifest",
+  "description": "A module flow with a key, a .bpmn file directly under flows/ and a name defined in i18n.en is valid under schemaVersion 3 and read typed.",
+  "source": "sdk-protocol.md §3.2, §17",
+  "input": {
+    "manifest": {
+      "schemaVersion": 3,
+      "slug": "kf-3d",
+      "name": "module.name",
+      "version": "1.0.0",
+      "platform": ">=4.1",
+      "i18n": {
+        "en": {
+          "module.name": "3D",
+          "flow.twin": "Digital twin sample",
+          "flow.fit": "Fit session"
+        }
+      },
+      "capabilities": {
+        "flows": [
+          {
+            "key": "kf-3d-digital-twin",
+            "file": "flows/kf-3d-digital-twin.bpmn",
+            "name": "flow.twin"
+          }
+        ]
+      }
+    }
+  },
+  "expect": {
+    "valid": true,
+    "warningsContain": [],
+    "read": {
+      "/capabilities/flows/0/key": "kf-3d-digital-twin",
+      "/capabilities/flows/0/file": "flows/kf-3d-digital-twin.bpmn",
+      "/capabilities/flows/0/name": "flow.twin"
+    }
+  }
+}

@@ -1,0 +1,36 @@
+{
+  "id": "manifest/surface-page-on-extension-refused",
+  "area": "manifest",
+  "description": "A page on a surface of type extension is refused, naming the type.",
+  "source": "sdk-protocol.md §3.2, §15.6",
+  "input": {
+    "manifest": {
+      "schemaVersion": 2,
+      "slug": "man-mod",
+      "name": "module.name",
+      "version": "1.0.0",
+      "platform": ">=4.1",
+      "i18n": {
+        "en": {
+          "module.name": "Manifest module",
+          "tab.label": "AAS"
+        }
+      },
+      "capabilities": {
+        "surfaces": [
+          {
+            "slug": "tenant-management.cards",
+            "kind": "react",
+            "page": "r3"
+          }
+        ]
+      }
+    }
+  },
+  "expect": {
+    "valid": false,
+    "errorsContain": [
+      "capabilities.surfaces[0].page: page only on surfaces of type page (\"tenant-management.cards\" is of type extension)"
+    ]
+  }
+}

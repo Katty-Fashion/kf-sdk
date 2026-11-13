@@ -1,0 +1,39 @@
+{
+  "id": "manifest/route-hookable-get-refused",
+  "area": "manifest",
+  "description": "hookable: true on a GET route is refused locally with a permanent error naming the route and the rule.",
+  "source": "a rule of the SDK itself",
+  "input": {
+    "manifest": {
+      "schemaVersion": 2,
+      "slug": "man-mod",
+      "name": "module.name",
+      "version": "1.0.0",
+      "platform": ">=4.1",
+      "i18n": {
+        "en": {
+          "module.name": "Manifest module",
+          "field.priority": "Priority",
+          "tab.label": "Tab"
+        }
+      },
+      "capabilities": {
+        "routes": [
+          {
+            "method": "GET",
+            "path": "/m/man-mod/events",
+            "right": "api.v1.m.man-mod.events.get",
+            "hookable": true
+          }
+        ]
+      }
+    }
+  },
+  "expect": {
+    "valid": false,
+    "errorsContain": [
+      "GET /m/man-mod/events",
+      "hookable only on POST, PUT or PATCH"
+    ]
+  }
+}

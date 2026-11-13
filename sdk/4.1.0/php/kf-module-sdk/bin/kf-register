@@ -1,0 +1,72 @@
+#!/usr/bin/env php
+<?php // kf-sdk-derived-from: sdk/java@bf5512745ef55345ddad6bc20d570bd44dfc99f7 v4.1.0
+// Derived by /kf-sdk-derive from ro/kf/sdk/spring/KfSpringConfiguration.java (SmartLifecycle start: the registration at boot). Do not edit by hand.
+
+/**
+ * kf-register: registers a PHP module with the KF platform. PHP has no long-lived boot (the Java SDK registers from a
+ * background thread when the application starts), so the container runs this once at start, in the background, next to
+ * the web server:
+ *
+ *   php vendor/bin/kf-register [path/to/kf.php] [--once] [--print]
+ *
+ * It loads the module definition file (default: $KF_DEFINITION, else ./kf.php), which must RETURN the configured
+ * Kf\Sdk\KfModule instance (the same file public/index.php requires for the callbacks), then calls registerWithRetry():
+ * the local check of kf-module-conf.json, then PUT /api/v1/platform/modules/{slug}/registrations, retrying only
+ * transient errors (1 s … 30 s); a permanent error stops it at once.
+ *
+ *   --once   a single attempt (register()); exit 1 when it fails
+ *   --print  only print the registration body (no request)
+ *
+ * Exit codes: 0 registered (or printed), 1 refused / failed / misconfigured.
+ */
+
+declare(strict_types=1);
+
+(static function (array $argv): void {
+    // the Composer autoloader: set by Composer's bin proxy, else walk up from this file (vendor/kf/module-sdk/bin)
+    $autoload = $GLOBALS['_composer_autoload_path'] ?? null;
+    if ($autoload === null) {
+        foreach ([__DIR__ . '/../vendor/autoload.php', __DIR__ . '/../../../autoload.php'] as $candidate) {
+            if (is_file($candidate)) {
+                $autoload = $candidate;
+                break;
+            }
+        }
+    }
+    if ($autoload === null) {
+        fwrite(STDERR, "kf-register: vendor/autoload.php not found (run composer install)\n");
+        exit(1);
+    }
+    require_once $autoload;
+
+    $args = array_slice($argv, 1);
+    $once = in_array('--once', $args, true);
+    $print = in_array('--print', $args, true);
+    $positional = array_values(array_filter($args, static fn (string $a) => !str_starts_with($a, '--')));
+    $file = $positional[0] ?? (getenv('KF_DEFINITION') ?: getcwd() . DIRECTORY_SEPARATOR . 'kf.php');
+    if (!is_file($file)) {
+        fwrite(STDERR, "kf-register: module definition $file not found\n");
+        exit(1);
+    }
+
+    $kf = require $file;
+    if (!$kf instanceof \Kf\Sdk\KfModule) {
+        fwrite(STDERR, "kf-register: $file must return a Kf\\Sdk\\KfModule instance (return \$kf;)\n");
+        exit(1);
+    }
+    if ($print) {
+        echo \Kf\Sdk\Json::encode($kf->registrationBody(), true), "\n";
+        exit(0);
+    }
+    try {
+        $summary = $once ? $kf->register() : $kf->registerWithRetry();
+        $n = static fn (mixed $v): int => is_array($v) ? count($v) : (int) $v;   // the summary holds counts
+        fwrite(STDERR, sprintf("kf-register: %s registered (%d hooks, fields %d created / %d existing / %d deactivated, %d surfaces)\n",
+            $kf->slug(), $n($summary['hooks'] ?? 0), $n($summary['fieldsCreated'] ?? 0), $n($summary['fieldsExisting'] ?? 0),
+            $n($summary['fieldsDeactivated'] ?? 0), $n($summary['surfaces'] ?? 0)));
+        exit(0);
+    } catch (\Kf\Sdk\KfException $e) {
+        fwrite(STDERR, 'kf-register: ' . $e->getMessage() . "\n");
+        exit(1);
+    }
+})($argv);

@@ -1,0 +1,47 @@
+{
+  "id": "manifest/peers-read-path-with-param-refused",
+  "area": "manifest",
+  "description": "A peer read on a route with a {param} segment is refused: the platform calls a fixed path.",
+  "source": "sdk-protocol.md §3.2, §15.9, §16.4",
+  "input": {
+    "manifest": {
+      "schemaVersion": 3,
+      "slug": "kf-qc",
+      "name": "module.name",
+      "version": "1.0.0",
+      "platform": ">=4.1",
+      "i18n": {
+        "en": {
+          "module.name": "Quality"
+        }
+      },
+      "capabilities": {
+        "routes": [
+          {
+            "method": "GET",
+            "path": "/m/kf-qc/peer/checks/{id}",
+            "right": "api.v1.m.kf-qc.peer.checks.id.get"
+          },
+          {
+            "method": "POST",
+            "path": "/m/kf-qc/peer/checks/{id}",
+            "right": "api.v1.m.kf-qc.peer.checks.id.post"
+          }
+        ],
+        "peerReads": [
+          {
+            "port": "m.kf-qc.checks.v1",
+            "path": "/m/kf-qc/peer/checks/{id}",
+            "visibility": "public"
+          }
+        ]
+      }
+    }
+  },
+  "expect": {
+    "valid": false,
+    "errorsContain": [
+      "kf-module-conf.json: capabilities.peerReads[0].path \"/m/kf-qc/peer/checks/{id}\" must be a route with literal segments only (no {param} segment)"
+    ]
+  }
+}

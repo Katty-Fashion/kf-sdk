@@ -1,0 +1,50 @@
+{
+  "id": "audit/record-sends-token-context-proof",
+  "area": "audit",
+  "description": "record: POST /api/v1/platform/modules/{slug}/audit with the module token, X-KF-Context and X-KF-Context-Proof exactly as the module received them, the record as a JSON object; 201 is success.",
+  "source": "the platform ModuleAuditController / ModuleAuditService / ModuleAuditPortIT",
+  "input": {
+    "slug": "audit-mod",
+    "context": {
+      "v": 1,
+      "tenant": "00000000-0000-0000-0000-00000000000a",
+      "user": "subject-1",
+      "locale": "en",
+      "rights": [],
+      "method": "POST",
+      "path": "/notes",
+      "query": null,
+      "ts": "$now",
+      "requestId": "req-audit-1"
+    },
+    "proof": "3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f",
+    "call": "record",
+    "record": {
+      "action": "NOTE_CREATED",
+      "aggregateType": "Note",
+      "aggregateRef": "42"
+    },
+    "platform": {
+      "status": 201,
+      "body": "{\"aggregateType\":\"m.audit-mod.Note\",\"aggregateRef\":\"42\",\"action\":\"NOTE_CREATED\"}"
+    }
+  },
+  "expect": {
+    "outcome": "ok",
+    "request": {
+      "method": "POST",
+      "path": "/api/v1/platform/modules/audit-mod/audit",
+      "query": null,
+      "headers": {
+        "Authorization": "Bearer kfm_conformance-token-never-logged",
+        "X-KF-Context": "$context",
+        "X-KF-Context-Proof": "3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f"
+      },
+      "body": {
+        "action": "NOTE_CREATED",
+        "aggregateType": "Note",
+        "aggregateRef": "42"
+      }
+    }
+  }
+}

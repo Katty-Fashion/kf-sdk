@@ -1,0 +1,14 @@
+{
+  "id": "signature/sign-empty-body",
+  "area": "signature",
+  "description": "An empty body signs ts + \".\" alone.",
+  "source": "the platform HookSignatureSigner.sign",
+  "input": {
+    "secret": "kf-hook-secret-conformance",
+    "timestamp": "1760000000",
+    "body": ""
+  },
+  "expect": {
+    "signature": "90150e97eba6b72f99db64d108ed6bc34cad12dd024d78f29d5141e8bd88baa1"
+  }
+}

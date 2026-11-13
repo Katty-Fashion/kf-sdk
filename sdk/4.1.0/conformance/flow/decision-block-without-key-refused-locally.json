@@ -1,0 +1,15 @@
+{
+  "id": "flow/decision-block-without-key-refused-locally",
+  "area": "flow",
+  "description": "A block without a key is refused by the SDK.",
+  "source": "sdk-protocol.md §16.4",
+  "input": {
+    "decision": "block",
+    "key": null,
+    "params": {}
+  },
+  "expect": {
+    "valid": false,
+    "errorContains": "a block needs a key"
+  }
+}

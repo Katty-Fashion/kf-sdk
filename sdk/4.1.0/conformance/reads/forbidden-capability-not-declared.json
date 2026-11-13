@@ -1,0 +1,63 @@
+{
+  "id": "reads/forbidden-capability-not-declared",
+  "area": "reads",
+  "description": "403 capability-not-declared (the active version does not declare the port in capabilities.reads) is the SDK forbidden refusal, with the reason.",
+  "source": "sdk-protocol.md §15.1",
+  "input": {
+    "slug": "reads-mod",
+    "context": {
+      "v": 1,
+      "tenant": "00000000-0000-0000-0000-00000000000a",
+      "user": "subject-1",
+      "actor": {
+        "type": "user",
+        "via": null,
+        "hookId": null
+      },
+      "locale": "en",
+      "rights": [],
+      "method": "GET",
+      "path": "/x",
+      "query": null,
+      "ts": "$now",
+      "requestId": "req-reads-7"
+    },
+    "proof": "3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f",
+    "call": "list",
+    "args": {
+      "port": "order.v1",
+      "filters": {
+        "status": "OPEN"
+      },
+      "page": 1,
+      "size": 10
+    },
+    "platform": {
+      "status": 403,
+      "body": "{\"type\":\"https://kf.ro/problems/capability-not-declared\",\"title\":\"capability-not-declared\",\"status\":403,\"detail\":\"The active version of reads-mod does not declare capabilities.reads order.v1\",\"class\":\"permanent\"}"
+    }
+  },
+  "expect": {
+    "outcome": "error",
+    "request": {
+      "method": "GET",
+      "path": "/api/v1/platform/modules/reads-mod/reads/order.v1",
+      "query": "status=OPEN&page=1&size=10",
+      "headers": {
+        "Authorization": "Bearer kfm_conformance-token-never-logged",
+        "X-KF-Context": "$context",
+        "X-KF-Context-Proof": "3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f"
+      },
+      "body": null
+    },
+    "error": {
+      "status": 403,
+      "class": "permanent",
+      "kind": "forbidden",
+      "reason": "capability-not-declared",
+      "messageContains": [
+        "does not declare capabilities.reads"
+      ]
+    }
+  }
+}

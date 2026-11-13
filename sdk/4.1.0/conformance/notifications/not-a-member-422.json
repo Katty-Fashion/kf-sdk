@@ -1,0 +1,60 @@
+{
+  "id": "notifications/not-a-member-422",
+  "area": "notifications",
+  "description": "422 with class permanent and reason not-a-member is the SDK's Rejected error with that reason; the SDK does not retry.",
+  "source": "the platform ModuleNotificationController / SendModuleNotificationUseCase / ModuleNotificationIT",
+  "input": {
+    "slug": "notif-mod",
+    "call": "send",
+    "tenantId": "00000000-0000-0000-0000-00000000000a",
+    "key": "author-changed",
+    "recipients": [
+      "subject-1",
+      "subject-2"
+    ],
+    "variables": {
+      "modelName": "Rochie"
+    },
+    "options": {
+      "idempotencyKey": "7a07a07a-0000-4000-8000-000000000207"
+    },
+    "platform": [
+      {
+        "status": 422,
+        "body": "{\"type\": \"https://kf.ro/problems/notification-rejected\", \"title\": \"Unprocessable Entity\", \"status\": 422, \"detail\": \"A recipient is not an active member of tenant 00000000-0000-0000-0000-00000000000a.\", \"instance\": \"/api/v1/platform/modules/notif-mod/notifications\", \"reason\": \"not-a-member\", \"class\": \"permanent\"}"
+      }
+    ]
+  },
+  "expect": {
+    "outcome": "error",
+    "requests": 1,
+    "request": {
+      "method": "POST",
+      "path": "/api/v1/platform/modules/notif-mod/notifications",
+      "headers": {
+        "Authorization": "Bearer kfm_conformance-token-never-logged"
+      },
+      "body": {
+        "tenantId": "00000000-0000-0000-0000-00000000000a",
+        "key": "author-changed",
+        "recipients": [
+          "subject-1",
+          "subject-2"
+        ],
+        "variables": {
+          "modelName": "Rochie"
+        },
+        "idempotencyKey": "7a07a07a-0000-4000-8000-000000000207"
+      }
+    },
+    "error": {
+      "status": 422,
+      "class": "permanent",
+      "kind": "rejected",
+      "reason": "not-a-member",
+      "messageContains": [
+        "A recipient is not an active member of t"
+      ]
+    }
+  }
+}

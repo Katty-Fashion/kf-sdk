@@ -1,0 +1,52 @@
+{
+  "id": "peers/command-without-key-refused-locally",
+  "area": "peers",
+  "description": "A command without Idempotency-Key is refused by the SDK, permanent, before any request.",
+  "source": "sdk-protocol.md §15.9",
+  "input": {
+    "slug": "peers-caller",
+    "context": {
+      "v": 1,
+      "tenant": "00000000-0000-0000-0000-00000000000a",
+      "user": "subject-1",
+      "actor": {
+        "type": "user",
+        "via": null,
+        "hookId": null
+      },
+      "locale": "en",
+      "rights": [],
+      "method": "GET",
+      "path": "/x",
+      "query": null,
+      "ts": "$now",
+      "requestId": "req-peers-4"
+    },
+    "proof": "4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f",
+    "call": "command",
+    "args": {
+      "owner": "kf-stock",
+      "name": "reserve",
+      "idempotencyKey": null,
+      "body": {
+        "qty": 3
+      }
+    },
+    "platform": {
+      "status": 201,
+      "body": "{}"
+    }
+  },
+  "expect": {
+    "outcome": "error",
+    "request": null,
+    "error": {
+      "status": 0,
+      "class": "permanent",
+      "kind": "other",
+      "messageContains": [
+        "Idempotency-Key"
+      ]
+    }
+  }
+}

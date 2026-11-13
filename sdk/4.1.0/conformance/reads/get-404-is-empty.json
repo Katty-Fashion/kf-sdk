@@ -1,0 +1,51 @@
+{
+  "id": "reads/get-404-is-empty",
+  "area": "reads",
+  "description": "404 on an object (not visible in the context tenant) is \"no object\" (Optional.empty / null), not an error.",
+  "source": "sdk-protocol.md §15.1",
+  "input": {
+    "slug": "reads-mod",
+    "context": {
+      "v": 1,
+      "tenant": "00000000-0000-0000-0000-00000000000a",
+      "user": "subject-1",
+      "actor": {
+        "type": "user",
+        "via": null,
+        "hookId": null
+      },
+      "locale": "en",
+      "rights": [],
+      "method": "GET",
+      "path": "/x",
+      "query": null,
+      "ts": "$now",
+      "requestId": "req-reads-5"
+    },
+    "proof": "3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f",
+    "call": "get",
+    "args": {
+      "port": "model.v1",
+      "id": "99"
+    },
+    "platform": {
+      "status": 404,
+      "body": "{\"type\":\"https://kf.ro/problems/not-found\",\"title\":\"not-found\",\"status\":404,\"detail\":\"model 99 not found\",\"class\":\"permanent\"}"
+    }
+  },
+  "expect": {
+    "outcome": "ok",
+    "request": {
+      "method": "GET",
+      "path": "/api/v1/platform/modules/reads-mod/reads/model.v1/99",
+      "query": null,
+      "headers": {
+        "Authorization": "Bearer kfm_conformance-token-never-logged",
+        "X-KF-Context": "$context",
+        "X-KF-Context-Proof": "3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f"
+      },
+      "body": null
+    },
+    "result": null
+  }
+}

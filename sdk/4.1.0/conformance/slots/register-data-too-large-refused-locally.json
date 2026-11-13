@@ -1,0 +1,24 @@
+{
+  "id": "slots/register-data-too-large-refused-locally",
+  "area": "slots",
+  "description": "A kind R contribution larger than 64 KiB is refused by the SDK before anything is sent (the platform refuses it too).",
+  "source": "sdk-protocol.md §7.10, §7.12",
+  "input": {
+    "slug": "slot-contrib",
+    "surfaces": [
+      {
+        "slug": "m.kf-3d.materials.v1",
+        "kind": "data",
+        "dataRepeat": {
+          "field": "blob",
+          "char": "x",
+          "count": 65536
+        },
+        "key": "big"
+      }
+    ]
+  },
+  "expect": {
+    "localError": "data must be at most 65536 bytes"
+  }
+}

@@ -1,0 +1,46 @@
+{
+  "id": "manifest/nav-right-on-customer-refused",
+  "area": "manifest",
+  "description": "A right on a customer menu entry is refused: the customer portal menu is filtered on the customer's identity, never on rights.",
+  "source": "sdk-protocol.md §3.2, §7.11",
+  "input": {
+    "manifest": {
+      "schemaVersion": 2,
+      "slug": "man-mod",
+      "name": "module.name",
+      "version": "1.0.0",
+      "platform": ">=4.1",
+      "i18n": {
+        "en": {
+          "module.name": "Manifest module",
+          "nav.events": "Events"
+        }
+      },
+      "capabilities": {
+        "routes": [
+          {
+            "method": "GET",
+            "path": "/m/man-mod/events",
+            "right": "api.v1.m.man-mod.events.get"
+          }
+        ],
+        "nav": [
+          {
+            "surface": "customer",
+            "group": "customer-main",
+            "key": "events",
+            "label": "nav.events",
+            "url": "/modules",
+            "right": "api.v1.m.man-mod.events.get"
+          }
+        ]
+      }
+    }
+  },
+  "expect": {
+    "valid": false,
+    "errorsContain": [
+      "capabilities.nav[0].right is not allowed on the customer surface"
+    ]
+  }
+}

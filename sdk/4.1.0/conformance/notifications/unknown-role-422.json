@@ -1,0 +1,60 @@
+{
+  "id": "notifications/unknown-role-422",
+  "area": "notifications",
+  "description": "422 class permanent reason unknown-role (SUPER_ADMIN is no role a module may address) is the SDK's Rejected error with that reason; no retry. Which roles exist is the platform's answer: the SDK sends the name.",
+  "source": "sdk-protocol.md §11.1",
+  "input": {
+    "slug": "notif-mod",
+    "call": "send",
+    "tenantId": "00000000-0000-0000-0000-00000000000a",
+    "key": "m2f-impact-received",
+    "recipients": [],
+    "variables": {
+      "entityName": "Rochie"
+    },
+    "options": {
+      "idempotencyKey": "7a07a07a-0000-4000-8000-000000000222",
+      "recipientRoles": [
+        "SUPER_ADMIN"
+      ]
+    },
+    "platform": [
+      {
+        "status": 422,
+        "body": "{\"type\": \"https://kf.ro/problems/notification-rejected\", \"title\": \"Unprocessable Entity\", \"status\": 422, \"detail\": \"'SUPER_ADMIN' is not a role a module may address.\", \"instance\": \"/api/v1/platform/modules/notif-mod/notifications\", \"reason\": \"unknown-role\", \"class\": \"permanent\"}"
+      }
+    ]
+  },
+  "expect": {
+    "outcome": "error",
+    "requests": 1,
+    "request": {
+      "method": "POST",
+      "path": "/api/v1/platform/modules/notif-mod/notifications",
+      "headers": {
+        "Authorization": "Bearer kfm_conformance-token-never-logged"
+      },
+      "body": {
+        "tenantId": "00000000-0000-0000-0000-00000000000a",
+        "key": "m2f-impact-received",
+        "recipients": [],
+        "recipientRoles": [
+          "SUPER_ADMIN"
+        ],
+        "variables": {
+          "entityName": "Rochie"
+        },
+        "idempotencyKey": "7a07a07a-0000-4000-8000-000000000222"
+      }
+    },
+    "error": {
+      "status": 422,
+      "class": "permanent",
+      "kind": "rejected",
+      "reason": "unknown-role",
+      "messageContains": [
+        "is not a role a module may address"
+      ]
+    }
+  }
+}

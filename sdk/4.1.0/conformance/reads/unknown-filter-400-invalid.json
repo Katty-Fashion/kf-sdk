@@ -1,0 +1,67 @@
+{
+  "id": "reads/unknown-filter-400-invalid",
+  "area": "reads",
+  "description": "400 validation (an unknown filter, a missing mandatory filter) is the SDK invalid refusal, with the errors of the body.",
+  "source": "sdk-protocol.md §15.1",
+  "input": {
+    "slug": "reads-mod",
+    "context": {
+      "v": 1,
+      "tenant": "00000000-0000-0000-0000-00000000000a",
+      "user": "subject-1",
+      "actor": {
+        "type": "user",
+        "via": null,
+        "hookId": null
+      },
+      "locale": "en",
+      "rights": [],
+      "method": "GET",
+      "path": "/x",
+      "query": null,
+      "ts": "$now",
+      "requestId": "req-reads-9"
+    },
+    "proof": "3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f",
+    "call": "list",
+    "args": {
+      "port": "document.v1",
+      "filters": {
+        "colour": "red"
+      }
+    },
+    "platform": {
+      "status": 400,
+      "body": "{\"type\":\"https://kf.ro/problems/validation\",\"title\":\"validation\",\"status\":400,\"detail\":\"invalid filters\",\"class\":\"permanent\",\"errors\":{\"colour\":\"unknown filter\",\"modelVersionId\":\"required\"}}"
+    }
+  },
+  "expect": {
+    "outcome": "error",
+    "request": {
+      "method": "GET",
+      "path": "/api/v1/platform/modules/reads-mod/reads/document.v1",
+      "query": "colour=red&page=0&size=20",
+      "headers": {
+        "Authorization": "Bearer kfm_conformance-token-never-logged",
+        "X-KF-Context": "$context",
+        "X-KF-Context-Proof": "3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f"
+      },
+      "body": null
+    },
+    "error": {
+      "status": 400,
+      "class": "permanent",
+      "kind": "invalid",
+      "reason": "validation",
+      "errors": {
+        "colour": "unknown filter",
+        "modelVersionId": "required"
+      },
+      "messageContains": [
+        "invalid filters",
+        "colour",
+        "modelVersionId"
+      ]
+    }
+  }
+}

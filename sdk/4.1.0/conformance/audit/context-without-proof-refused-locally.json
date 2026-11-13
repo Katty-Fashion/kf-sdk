@@ -1,0 +1,44 @@
+{
+  "id": "audit/context-without-proof-refused-locally",
+  "area": "audit",
+  "description": "A context that came without X-KF-Context-Proof (an older platform) cannot be sent back: permanent local refusal, nothing sent.",
+  "source": "a rule of the SDK itself",
+  "input": {
+    "slug": "audit-mod",
+    "context": {
+      "v": 1,
+      "tenant": "00000000-0000-0000-0000-00000000000a",
+      "user": "subject-1",
+      "locale": "en",
+      "rights": [],
+      "method": "POST",
+      "path": "/notes",
+      "query": null,
+      "ts": "$now",
+      "requestId": "req-audit-1"
+    },
+    "proof": null,
+    "call": "record",
+    "record": {
+      "action": "NOTE_CREATED",
+      "aggregateType": "Note",
+      "aggregateRef": "42"
+    },
+    "platform": {
+      "status": 201,
+      "body": "{}"
+    }
+  },
+  "expect": {
+    "outcome": "error",
+    "request": null,
+    "error": {
+      "status": 0,
+      "class": "permanent",
+      "kind": "other",
+      "messageContains": [
+        "X-KF-Context-Proof"
+      ]
+    }
+  }
+}

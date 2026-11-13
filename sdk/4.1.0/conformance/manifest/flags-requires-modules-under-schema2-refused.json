@@ -1,0 +1,42 @@
+{
+  "id": "manifest/flags-requires-modules-under-schema2-refused",
+  "area": "manifest",
+  "description": "featureFlags[].requiresModules belongs to schemaVersion 3.",
+  "source": "sdk-protocol.md §3.2, §3.5",
+  "input": {
+    "manifest": {
+      "schemaVersion": 2,
+      "slug": "req-mod",
+      "name": "module.name",
+      "version": "1.0.0",
+      "platform": ">=4.1",
+      "i18n": {
+        "en": {
+          "module.name": "Requires",
+          "flag.l": "Flag"
+        }
+      },
+      "requires": [
+        {
+          "slug": "base-mod",
+          "versionRange": ">=1.0.0 <2.0.0"
+        }
+      ],
+      "featureFlags": [
+        {
+          "key": "needs",
+          "label": "flag.l",
+          "requiresModules": [
+            "base-mod"
+          ]
+        }
+      ]
+    }
+  },
+  "expect": {
+    "valid": false,
+    "errorsContain": [
+      "\"featureFlags[0].requiresModules\" requires \"schemaVersion\": 3"
+    ]
+  }
+}

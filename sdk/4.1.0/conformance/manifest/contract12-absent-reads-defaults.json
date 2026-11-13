@@ -1,0 +1,50 @@
+{
+  "id": "manifest/contract12-absent-reads-defaults",
+  "area": "manifest",
+  "description": "A manifest without any 1.2 key is accepted unchanged: activation reads tenant, audience null, portal false, storage [].",
+  "source": "sdk-protocol.md §1",
+  "input": {
+    "manifest": {
+      "schemaVersion": 2,
+      "slug": "man-mod",
+      "name": "module.name",
+      "version": "1.0.0",
+      "platform": ">=4.1",
+      "i18n": {
+        "en": {
+          "module.name": "Manifest module",
+          "widget.label": "Feedback"
+        }
+      },
+      "capabilities": {
+        "routes": [
+          {
+            "method": "POST",
+            "path": "/m/man-mod/tickets",
+            "right": "api.v1.m.man-mod.tickets.post",
+            "roles": [
+              "QC"
+            ],
+            "hookable": true
+          },
+          {
+            "method": "GET",
+            "path": "/m/man-mod/admin/tickets",
+            "right": "api.v1.m.man-mod.admin.tickets.get",
+            "admin": "platform"
+          }
+        ]
+      }
+    }
+  },
+  "expect": {
+    "valid": true,
+    "warningsContain": [],
+    "read": {
+      "/activation": "tenant",
+      "/capabilities/routes/0/audience": null,
+      "/capabilities/routes/0/portal": false,
+      "/capabilities/storage": []
+    }
+  }
+}

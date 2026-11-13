@@ -1,0 +1,70 @@
+{
+  "id": "manifest/settings-enum-default-outside-values-refused",
+  "area": "manifest",
+  "description": "An ENUM default that is not one of its values is refused.",
+  "source": "sdk-protocol.md §3.2, §15",
+  "input": {
+    "manifest": {
+      "schemaVersion": 2,
+      "slug": "man-mod",
+      "name": "module.name",
+      "version": "1.0.0",
+      "platform": ">=4.1",
+      "i18n": {
+        "en": {
+          "module.name": "Manifest module",
+          "setting.push": "Push on save",
+          "setting.timeout": "Timeout",
+          "setting.mode": "Mode",
+          "setting.mode.help": "How the module pushes",
+          "tab.label": "AAS"
+        }
+      },
+      "capabilities": {
+        "routes": [
+          {
+            "method": "GET",
+            "path": "/m/man-mod/stations",
+            "right": "api.v1.m.man-mod.stations.get"
+          },
+          {
+            "method": "GET",
+            "path": "/m/man-mod/admin/config",
+            "right": "api.v1.m.man-mod.admin.config.get",
+            "admin": "tenant"
+          },
+          {
+            "method": "PUT",
+            "path": "/m/man-mod/admin/keys",
+            "right": "api.v1.m.man-mod.admin.keys.put",
+            "admin": "platform"
+          },
+          {
+            "method": "PUT",
+            "path": "/m/man-mod/admin/tenant-keys",
+            "right": "api.v1.m.man-mod.admin.tenant-keys.put",
+            "admin": "tenant"
+          }
+        ],
+        "settings": [
+          {
+            "key": "mode",
+            "type": "ENUM",
+            "default": "other",
+            "values": [
+              "auto",
+              "manual"
+            ],
+            "label": "setting.mode"
+          }
+        ]
+      }
+    }
+  },
+  "expect": {
+    "valid": false,
+    "errorsContain": [
+      "capabilities.settings[0].default must be one of the values"
+    ]
+  }
+}

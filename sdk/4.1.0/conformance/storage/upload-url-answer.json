@@ -1,0 +1,85 @@
+{
+  "id": "storage/upload-url-answer",
+  "area": "storage",
+  "description": "The upload answer is read whole: {key, url, method: PUT, headers, expiresAt}; the key is chosen by the platform.",
+  "source": "sdk-protocol.md §3.5/§15",
+  "input": {
+    "slug": "fb-mod",
+    "context": {
+      "v": 1,
+      "tenant": "00000000-0000-0000-0000-00000000000a",
+      "user": "subject-1",
+      "actor": {
+        "type": "user",
+        "via": null,
+        "hookId": null
+      },
+      "locale": "en",
+      "rights": [],
+      "method": "POST",
+      "path": "/feedback",
+      "query": null,
+      "ts": "$now",
+      "requestId": "req-st-2"
+    },
+    "proof": "3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f",
+    "manifest": {
+      "schemaVersion": 2,
+      "slug": "fb-mod",
+      "version": "0.1.0",
+      "name": "app.name",
+      "i18n": {
+        "en": {
+          "app.name": "Feedback"
+        }
+      },
+      "capabilities": {
+        "storage": [
+          {
+            "contentTypes": [
+              "image/png",
+              "image/jpeg"
+            ],
+            "maxBytes": 5242880
+          }
+        ]
+      }
+    },
+    "call": "uploadUrl",
+    "args": {
+      "contentType": "image/jpeg",
+      "size": 5242880
+    },
+    "platform": {
+      "status": 200,
+      "body": "{\"key\":\"kf-modules/fb-mod/00000000-0000-0000-0000-00000000000a/5b1f0c1e-1111-4222-8333-444455556666.jpg\",\"url\":\"https://s3.local/kf-assets/put?sig=1\",\"method\":\"PUT\",\"headers\":{\"Content-Type\":\"image/jpeg\",\"Content-Length\":\"5242880\"},\"expiresAt\":\"2026-10-29T10:10:00Z\"}"
+    }
+  },
+  "expect": {
+    "outcome": "ok",
+    "request": {
+      "method": "POST",
+      "path": "/api/v1/platform/modules/fb-mod/storage/upload-url",
+      "query": null,
+      "headers": {
+        "Authorization": "Bearer kfm_conformance-token-never-logged",
+        "X-KF-Context": "$context",
+        "X-KF-Context-Proof": "3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f"
+      },
+      "body": {
+        "contentType": "image/jpeg",
+        "size": 5242880
+      }
+    },
+    "result": {
+      "key": "kf-modules/fb-mod/00000000-0000-0000-0000-00000000000a/5b1f0c1e-1111-4222-8333-444455556666.jpg",
+      "url": "https://s3.local/kf-assets/put?sig=1",
+      "method": "PUT",
+      "headers": {
+        "Content-Type": "image/jpeg",
+        "Content-Length": "5242880"
+      },
+      "expiresAt": "2026-10-29T10:10:00Z"
+    }
+  }
+}

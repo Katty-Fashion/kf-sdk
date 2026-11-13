@@ -1,0 +1,77 @@
+{
+  "id": "storage/download-url-answer",
+  "area": "storage",
+  "description": "downloadUrl(context, key): POST …/storage/download-url {key} → {url, expiresAt}.",
+  "source": "sdk-protocol.md §3.5/§15",
+  "input": {
+    "slug": "fb-mod",
+    "context": {
+      "v": 1,
+      "tenant": "00000000-0000-0000-0000-00000000000a",
+      "user": "subject-1",
+      "actor": {
+        "type": "user",
+        "via": null,
+        "hookId": null
+      },
+      "locale": "en",
+      "rights": [],
+      "method": "POST",
+      "path": "/feedback",
+      "query": null,
+      "ts": "$now",
+      "requestId": "req-st-6"
+    },
+    "proof": "3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f",
+    "manifest": {
+      "schemaVersion": 2,
+      "slug": "fb-mod",
+      "version": "0.1.0",
+      "name": "app.name",
+      "i18n": {
+        "en": {
+          "app.name": "Feedback"
+        }
+      },
+      "capabilities": {
+        "storage": [
+          {
+            "contentTypes": [
+              "image/png",
+              "image/jpeg"
+            ],
+            "maxBytes": 5242880
+          }
+        ]
+      }
+    },
+    "call": "downloadUrl",
+    "args": {
+      "key": "kf-modules/fb-mod/00000000-0000-0000-0000-00000000000a/5b1f0c1e-1111-4222-8333-444455556666.png"
+    },
+    "platform": {
+      "status": 200,
+      "body": "{\"url\":\"https://s3.local/kf-assets/get?sig=2\",\"expiresAt\":\"2026-10-29T11:00:00Z\"}"
+    }
+  },
+  "expect": {
+    "outcome": "ok",
+    "request": {
+      "method": "POST",
+      "path": "/api/v1/platform/modules/fb-mod/storage/download-url",
+      "query": null,
+      "headers": {
+        "Authorization": "Bearer kfm_conformance-token-never-logged",
+        "X-KF-Context": "$context",
+        "X-KF-Context-Proof": "3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f"
+      },
+      "body": {
+        "key": "kf-modules/fb-mod/00000000-0000-0000-0000-00000000000a/5b1f0c1e-1111-4222-8333-444455556666.png"
+      }
+    },
+    "result": {
+      "url": "https://s3.local/kf-assets/get?sig=2",
+      "expiresAt": "2026-10-29T11:00:00Z"
+    }
+  }
+}

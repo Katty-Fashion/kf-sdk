@@ -1,0 +1,66 @@
+{
+  "id": "reads/undeclared-port-refused-locally",
+  "area": "reads",
+  "description": "With the manifest known, a port the module does not declare in capabilities.reads is refused locally, no request.",
+  "source": "sdk-protocol.md §15.1",
+  "input": {
+    "slug": "reads-mod",
+    "context": {
+      "v": 1,
+      "tenant": "00000000-0000-0000-0000-00000000000a",
+      "user": "subject-1",
+      "actor": {
+        "type": "user",
+        "via": null,
+        "hookId": null
+      },
+      "locale": "en",
+      "rights": [],
+      "method": "GET",
+      "path": "/x",
+      "query": null,
+      "ts": "$now",
+      "requestId": "req-reads-17"
+    },
+    "proof": "3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f",
+    "manifest": {
+      "schemaVersion": 2,
+      "slug": "reads-mod",
+      "name": "n",
+      "version": "1.0.0",
+      "i18n": {
+        "en": {
+          "n": "Reads"
+        }
+      },
+      "capabilities": {
+        "reads": [
+          {
+            "port": "model.v1"
+          }
+        ]
+      }
+    },
+    "call": "get",
+    "args": {
+      "port": "order.v1",
+      "id": "1"
+    },
+    "platform": {
+      "status": 200,
+      "body": "{}"
+    }
+  },
+  "expect": {
+    "outcome": "error",
+    "request": null,
+    "error": {
+      "status": 0,
+      "class": "permanent",
+      "kind": "other",
+      "messageContains": [
+        "order.v1 is not declared in capabilities.reads"
+      ]
+    }
+  }
+}

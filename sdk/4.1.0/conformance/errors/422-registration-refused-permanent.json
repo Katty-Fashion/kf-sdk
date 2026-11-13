@@ -1,0 +1,14 @@
+{
+  "id": "errors/422-registration-refused-permanent",
+  "area": "errors",
+  "description": "A 422 refusing the registration (an event the platform does not publish) is permanent.",
+  "source": "the platform ModuleSdkExceptionAdvice.handleRegistration",
+  "input": {
+    "response": {
+      "status": 422,
+      "headers": {"Content-Type": "application/problem+json"},
+      "body": {"type": "https://kf.ro/problems/hook-point-unknown", "title": "Unprocessable Entity", "status": 422, "detail": "The registration was refused", "errors": ["hooks[0]: event \"model.before.archive\" is not a known event (one of model.before.create, model.before.update, model.before.delete, model.after.create, model.after.update, model.after.delete, model.field.changed)"], "class": "permanent"}
+    }
+  },
+  "expect": {"retry": false, "class": "permanent", "messageContains": ["422", "The registration was refused"]}
+}

@@ -1,0 +1,57 @@
+{
+  "id": "envelope/order-field-changed-status",
+  "area": "envelope",
+  "description": "order.field.changed on the path status reaches the order's field handler with the old and the new status (COMPLETED included).",
+  "source": "sdk-protocol.md §16.2, §16.3",
+  "input": {
+    "envelope": {
+      "specversion": "1.0",
+      "id": "3d4e5f6a-7b8c-4d9e-8f0a-1b2c3d4e5f6a",
+      "kfeventid": "2c3d4e5f-6a7b-4c8d-9e0f-1a2b3c4d5e6f",
+      "type": "kf.order.field.changed",
+      "source": "/api/v1/orders/812",
+      "subject": "812",
+      "time": "2026-11-09T10:00:00.000Z",
+      "datacontenttype": "application/json",
+      "kfmodule": "conformance",
+      "kfflags": {},
+      "kftenant": "00000000-0000-0000-0000-00000000000a",
+      "kflocale": "en",
+      "kfactor": null,
+      "kfaggregatetype": "order",
+      "kfenvelopeversion": "1",
+      "data": {
+        "entity": "order",
+        "id": "812",
+        "before": {
+          "status": "SHIPPED"
+        },
+        "after": {
+          "status": "COMPLETED"
+        },
+        "changed": [
+          "status"
+        ],
+        "field": "status",
+        "oldValue": "SHIPPED",
+        "newValue": "COMPLETED"
+      }
+    }
+  },
+  "expect": {
+    "status": 200,
+    "handlerCalled": true,
+    "handler": {
+      "event": "order.field.changed",
+      "id": "812",
+      "field": "status",
+      "oldValue": "SHIPPED",
+      "newValue": "COMPLETED",
+      "eventId": "2c3d4e5f-6a7b-4c8d-9e0f-1a2b3c4d5e6f",
+      "tenant": "00000000-0000-0000-0000-00000000000a"
+    },
+    "body": {
+      "ok": true
+    }
+  }
+}

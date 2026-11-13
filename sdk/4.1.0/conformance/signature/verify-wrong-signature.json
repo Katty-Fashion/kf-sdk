@@ -1,0 +1,17 @@
+{
+  "id": "signature/verify-wrong-signature",
+  "area": "signature",
+  "description": "A signature of another body is refused (constant-time comparison).",
+  "source": "the platform HookSignatureSigner.sign",
+  "input": {
+    "secret": "kf-hook-secret-conformance",
+    "timestamp": "1760000000",
+    "body": "{\"data\":{\"name\":\"Rochie „Ana” — ăîșțâ €\"}}",
+    "now": 1760000000,
+    "signature": "952c40ebda8d2515696acc3eb4774b4615b223160eadde93fa823b497fa054f2"
+  },
+  "expect": {
+    "valid": false,
+    "reasonContains": "bad signature"
+  }
+}

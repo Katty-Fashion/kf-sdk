@@ -39,7 +39,7 @@ import java.util.regex.Pattern;
  *       delivery's context, reads the owner's port again as a background job would;</li>
  *   <li>contributes a panel to the owner's slot {@code m.api-peer-owner-test.panel.sections.v1} (it shows the last item
  *       read, {@code GET /latest});</li>
- *   <li>{@code GET /probe} reports, for the human proof of: the read, the command with a key (201 expected), the
+ *   <li>{@code GET /probe} reports, for the human proof: the read, the command with a key (201 expected), the
  *       command WITHOUT a key sent by a plain HTTP client (the SDK refuses it locally; the platform answers 400), whether
  *       the owner is unavailable ({@code MODULE_UNAVAILABLE}, typed) and the last event received. Always {@code 200}.</li>
  * </ul>

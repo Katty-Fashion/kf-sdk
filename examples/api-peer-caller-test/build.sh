@@ -3,10 +3,10 @@
 #
 #   KF_SDK_REF=<sha of kf-platform-modules> ./build.sh 0.0.1
 #
-# produces dist/api-peer-caller-test-<version>.zip. The caller of the proof of: requires the owner as OPTIONAL, contributes to its slot,
+# produces dist/api-peer-caller-test-<version>.zip. The caller of the proof: requires the owner as OPTIONAL, contributes to its slot,
 # reads its port, calls its command (with and without key) and subscribes to its event; /probe reports all of it.
 #
-# A TEST module: never signed, never installed by the build (: no SDK tag during). Its pack is
+# A TEST module: never signed, never installed by the build (no SDK tag). Its pack is
 # uploaded by the operator only on the LOCAL stack: the development organization (/modules/dev, unsigned) or the
 # local runner with KF_RUNNER_ALLOW_UNSIGNED=true, set back to false after the proof. Never on a shared environment.
 #
@@ -22,7 +22,7 @@ if [[ ! "$VERSION" =~ ^[0-9]+\.[0-9]+\.[0-9]+([-+][0-9A-Za-z.-]+)?$ || $# -ne 1 
 fi
 
 HERE="$(cd "$(dirname "$0")" && pwd)"
-SDK_REF="${KF_SDK_REF:?KF_SDK_REF is required: the committed sha of kf-platform-modules whose SDK the module is built on (no tag in)}"
+SDK_REF="${KF_SDK_REF:?KF_SDK_REF is required: the committed sha of kf-platform-modules whose SDK the module is built on}"
 SDK_REPO="${KF_SDK_REPO:-$HERE/../../..}"
 KF_MODULE="$SDK_REPO/sdk/tools/kf-module.mjs"
 VENDOR="$HERE/.sdk"

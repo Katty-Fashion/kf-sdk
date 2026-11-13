@@ -1,0 +1,125 @@
+{
+  "id": "manifest/valid-v2",
+  "area": "manifest",
+  "description": "A complete manifest v2 (fields on model/order/customer, hooks with block, routes with roles and hookable, surfaces, notifications) has no error and no warning; the typed Manifest reads it.",
+  "source": "the platform ModuleManifestValidator",
+  "input": {
+    "manifest": {
+      "schemaVersion": 2,
+      "slug": "man-mod",
+      "name": "module.name",
+      "version": "1.0.0",
+      "platform": ">=4.1",
+      "i18n": {
+        "en": {
+          "module.name": "Manifest module",
+          "flag.tab.label": "Tab",
+          "field.author": "Author",
+          "field.priority": "Priority",
+          "field.segment": "Segment",
+          "tab.label": "Author",
+          "notif.subject": "Changed",
+          "notif.body": "{{modelName}} changed"
+        },
+        "ro": {
+          "module.name": "Modul manifest",
+          "field.author": "Autor"
+        }
+      },
+      "featureFlags": [
+        {
+          "key": "author-tab",
+          "label": "flag.tab.label",
+          "default": false
+        }
+      ],
+      "capabilities": {
+        "fields": [
+          {
+            "entity": "model",
+            "name": "author",
+            "type": "STRING",
+            "table": "models_extra",
+            "label": "field.author"
+          },
+          {
+            "entity": "order",
+            "name": "priority_code",
+            "type": "STRING",
+            "table": "orders_extra",
+            "label": "field.priority"
+          },
+          {
+            "entity": "customer",
+            "name": "segment_code",
+            "type": "STRING",
+            "table": "customers_extra",
+            "label": "field.segment"
+          }
+        ],
+        "hooks": [
+          {
+            "point": "model.before.update",
+            "onFailure": "block"
+          },
+          {
+            "point": "model.after.create"
+          }
+        ],
+        "routes": [
+          {
+            "method": "GET",
+            "path": "/m/man-mod/events",
+            "right": "api.v1.m.man-mod.events.get",
+            "roles": [
+              "QC"
+            ]
+          },
+          {
+            "method": "POST",
+            "path": "/m/man-mod/notes",
+            "right": "api.v1.m.man-mod.notes.post",
+            "roles": [
+              "BRAND_MANAGER"
+            ],
+            "hookable": true
+          }
+        ],
+        "surfaces": [
+          {
+            "slug": "models.detail.tabs",
+            "kind": "react",
+            "label": "tab.label"
+          }
+        ],
+        "notifications": [
+          {
+            "key": "author-changed",
+            "variables": [
+              "modelName"
+            ],
+            "channels": [
+              "in_app"
+            ],
+            "subject": "notif.subject",
+            "body": "notif.body"
+          }
+        ]
+      }
+    }
+  },
+  "expect": {
+    "valid": true,
+    "warningsContain": [],
+    "read": {
+      "/schemaVersion": 2,
+      "/capabilities/fields/1/entity": "order",
+      "/capabilities/routes/0/hookable": false,
+      "/capabilities/routes/1/hookable": true,
+      "/capabilities/routes/1/roles": [
+        "BRAND_MANAGER"
+      ],
+      "/capabilities/audit": []
+    }
+  }
+}

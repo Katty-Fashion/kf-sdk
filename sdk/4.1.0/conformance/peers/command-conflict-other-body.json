@@ -1,0 +1,68 @@
+{
+  "id": "peers/command-conflict-other-body",
+  "area": "peers",
+  "description": "The same key with another body: 409 idempotency-conflict, permanent — a refusal of kind conflict; the SDK does not retry it.",
+  "source": "sdk-protocol.md §15.9",
+  "input": {
+    "slug": "peers-caller",
+    "context": {
+      "v": 1,
+      "tenant": "00000000-0000-0000-0000-00000000000a",
+      "user": "subject-1",
+      "actor": {
+        "type": "user",
+        "via": null,
+        "hookId": null
+      },
+      "locale": "en",
+      "rights": [],
+      "method": "GET",
+      "path": "/x",
+      "query": null,
+      "ts": "$now",
+      "requestId": "req-peers-6"
+    },
+    "proof": "4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f",
+    "call": "command",
+    "args": {
+      "owner": "kf-stock",
+      "name": "reserve",
+      "idempotencyKey": "order-17-reserve-1",
+      "body": {
+        "sku": "KF-42",
+        "qty": 4
+      }
+    },
+    "platform": {
+      "status": 409,
+      "body": "{\"type\":\"https://kf.ro/problems/idempotency-conflict\",\"title\":\"idempotency-conflict\",\"status\":409,\"detail\":\"The key was used with another body.\",\"class\":\"permanent\"}"
+    }
+  },
+  "expect": {
+    "outcome": "error",
+    "request": {
+      "method": "POST",
+      "path": "/api/v1/platform/modules/peers-caller/peers/kf-stock/commands/reserve",
+      "query": null,
+      "headers": {
+        "Authorization": "Bearer kfm_conformance-token-never-logged",
+        "X-KF-Context": "$context",
+        "X-KF-Context-Proof": "4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f",
+        "Idempotency-Key": "order-17-reserve-1"
+      },
+      "body": {
+        "sku": "KF-42",
+        "qty": 4
+      }
+    },
+    "error": {
+      "status": 409,
+      "class": "permanent",
+      "kind": "conflict",
+      "reason": "idempotency-conflict",
+      "messageContains": [
+        "HTTP 409"
+      ]
+    }
+  }
+}

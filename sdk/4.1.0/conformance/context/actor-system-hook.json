@@ -1,0 +1,38 @@
+{
+  "id": "context/actor-system-hook",
+  "area": "context",
+  "description": "actor {type: system, via: hook, hookId} with user null: a platform hook calls a hookable route as the system.",
+  "source": "a rule of the SDK itself",
+  "input": {
+    "secret": "kf-hook-secret-conformance",
+    "now": 1760000000,
+    "headers": {
+      "X-KF-Context": "eyJ2IjoxLCJ0ZW5hbnQiOiIwZjFlMmQzYy00YjVhLTQ5NjgtODc3Ni02NTU0NDMzMjIxMTAiLCJ1c2VyIjpudWxsLCJhY3RvciI6eyJ0eXBlIjoic3lzdGVtIiwidmlhIjoiaG9vayIsImhvb2tJZCI6IjNjMmIxYTA5LThmN2UtNGQ2Yy05YjVhLTRmM2UyZDFjMGIwYSJ9LCJsb2NhbGUiOiJybyIsInJpZ2h0cyI6WyJhcGkudjEubS5jb25mb3JtYW5jZS5ub3Rlcy5wb3N0Il0sIm1ldGhvZCI6IlBPU1QiLCJwYXRoIjoiL25vdGVzIiwicXVlcnkiOm51bGwsInRzIjoxNzYwMDAwMDAwLCJyZXF1ZXN0SWQiOiJyZXEtMDAwNCJ9",
+      "X-KF-Timestamp": "1760000000",
+      "X-KF-Signature": "7c46be73b82636dc7fe1d1064c7f8cabbeeac33309d05d7caa8a20409343c6a2"
+    },
+    "body": "{\"text\":\"from hook\"}"
+  },
+  "expect": {
+    "valid": true,
+    "context": {
+      "v": 1,
+      "tenant": "0f1e2d3c-4b5a-4968-8776-655443322110",
+      "user": null,
+      "actor": {
+        "type": "system",
+        "via": "hook",
+        "hookId": "3c2b1a09-8f7e-4d6c-9b5a-4f3e2d1c0b0a"
+      },
+      "locale": "ro",
+      "rights": [
+        "api.v1.m.conformance.notes.post"
+      ],
+      "method": "POST",
+      "path": "/notes",
+      "query": null,
+      "ts": 1760000000,
+      "requestId": "req-0004"
+    }
+  }
+}

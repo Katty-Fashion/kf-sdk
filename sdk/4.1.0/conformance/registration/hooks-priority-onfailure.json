@@ -1,0 +1,59 @@
+{
+  "id": "registration/hooks-priority-onfailure",
+  "area": "registration",
+  "description": "Before hooks carry priority and onFailure (allow by default, sent explicitly; block when declared); after hooks carry only the event; field.changed carries its field filter.",
+  "source": "the platform RegistrationDtos.RegistrationRequest/HookSpec/FieldSpec/SurfaceSpec",
+  "input": {
+    "slug": "reg-hooks",
+    "callbackBase": "http://api.reg-hooks.kfmod:8080",
+    "hooks": [
+      {
+        "event": "model.before.update",
+        "priority": 50,
+        "onFailure": "block"
+      },
+      {
+        "event": "model.before.create"
+      },
+      {
+        "event": "model.after.create"
+      },
+      {
+        "event": "model.field.changed",
+        "fields": [
+          "name",
+          "extensions.reg-hooks.author"
+        ]
+      }
+    ]
+  },
+  "expect": {
+    "body": {
+      "callbackUrl": "http://api.reg-hooks.kfmod:8080/_kf/hooks",
+      "hooks": [
+        {
+          "event": "model.before.update",
+          "priority": 50,
+          "onFailure": "block"
+        },
+        {
+          "event": "model.before.create",
+          "priority": 100,
+          "onFailure": "allow"
+        },
+        {
+          "event": "model.after.create"
+        },
+        {
+          "event": "model.field.changed",
+          "fields": [
+            "name",
+            "extensions.reg-hooks.author"
+          ]
+        }
+      ],
+      "fields": [],
+      "surfaces": []
+    }
+  }
+}

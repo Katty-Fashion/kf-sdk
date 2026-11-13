@@ -1,0 +1,60 @@
+{
+  "id": "notifications/too-many-recipients-422",
+  "area": "notifications",
+  "description": "422 class permanent reason too-many-recipients (the roles resolve to more than 200 people) is the SDK's Rejected error; no retry.",
+  "source": "sdk-protocol.md §11.1",
+  "input": {
+    "slug": "notif-mod",
+    "call": "send",
+    "tenantId": "00000000-0000-0000-0000-00000000000a",
+    "key": "m2f-impact-received",
+    "recipients": [],
+    "variables": {
+      "entityName": "Rochie"
+    },
+    "options": {
+      "idempotencyKey": "7a07a07a-0000-4000-8000-000000000222",
+      "recipientRoles": [
+        "QC"
+      ]
+    },
+    "platform": [
+      {
+        "status": 422,
+        "body": "{\"type\": \"https://kf.ro/problems/notification-rejected\", \"title\": \"Unprocessable Entity\", \"status\": 422, \"detail\": \"The roles resolve to 201 people, at most 200.\", \"instance\": \"/api/v1/platform/modules/notif-mod/notifications\", \"reason\": \"too-many-recipients\", \"class\": \"permanent\"}"
+      }
+    ]
+  },
+  "expect": {
+    "outcome": "error",
+    "requests": 1,
+    "request": {
+      "method": "POST",
+      "path": "/api/v1/platform/modules/notif-mod/notifications",
+      "headers": {
+        "Authorization": "Bearer kfm_conformance-token-never-logged"
+      },
+      "body": {
+        "tenantId": "00000000-0000-0000-0000-00000000000a",
+        "key": "m2f-impact-received",
+        "recipients": [],
+        "recipientRoles": [
+          "QC"
+        ],
+        "variables": {
+          "entityName": "Rochie"
+        },
+        "idempotencyKey": "7a07a07a-0000-4000-8000-000000000222"
+      }
+    },
+    "error": {
+      "status": 422,
+      "class": "permanent",
+      "kind": "rejected",
+      "reason": "too-many-recipients",
+      "messageContains": [
+        "at most 200"
+      ]
+    }
+  }
+}

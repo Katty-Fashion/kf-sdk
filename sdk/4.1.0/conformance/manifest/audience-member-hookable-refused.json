@@ -1,0 +1,38 @@
+{
+  "id": "manifest/audience-member-hookable-refused",
+  "area": "manifest",
+  "description": "audience member on a hookable route is refused (a hook calls as the system, a member route is a person's).",
+  "source": "sdk-protocol.md §3.2, §9.1",
+  "input": {
+    "manifest": {
+      "schemaVersion": 2,
+      "slug": "man-mod",
+      "name": "module.name",
+      "version": "1.0.0",
+      "platform": ">=4.1",
+      "i18n": {
+        "en": {
+          "module.name": "Manifest module",
+          "widget.label": "Feedback"
+        }
+      },
+      "capabilities": {
+        "routes": [
+          {
+            "method": "POST",
+            "path": "/m/man-mod/tickets",
+            "right": "api.v1.m.man-mod.tickets.post",
+            "audience": "member",
+            "hookable": true
+          }
+        ]
+      }
+    }
+  },
+  "expect": {
+    "valid": false,
+    "errorsContain": [
+      ": audience member excludes roles, admin and hookable (any member of the tenant calls it)"
+    ]
+  }
+}

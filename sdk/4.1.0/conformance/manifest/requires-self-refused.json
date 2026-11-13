@@ -1,0 +1,33 @@
+{
+  "id": "manifest/requires-self-refused",
+  "area": "manifest",
+  "description": "A module cannot require itself.",
+  "source": "sdk-protocol.md §3.2, §3.5",
+  "input": {
+    "manifest": {
+      "schemaVersion": 2,
+      "slug": "req-mod",
+      "name": "module.name",
+      "version": "1.0.0",
+      "platform": ">=4.1",
+      "i18n": {
+        "en": {
+          "module.name": "Requires",
+          "flag.l": "Flag"
+        }
+      },
+      "requires": [
+        {
+          "slug": "req-mod",
+          "versionRange": ">=1.0.0"
+        }
+      ]
+    }
+  },
+  "expect": {
+    "valid": false,
+    "errorsContain": [
+      "a module cannot require itself (\"req-mod\")"
+    ]
+  }
+}

@@ -22,8 +22,8 @@ TypeScript and PHP SDKs derived from it, the UI type definitions and theme, the 
 platform catalogs a module may use, the language-neutral conformance suite and the `kf-module` tool (packing, dev
 builds, signing with your own key, verification). `sdk/<version>/kf-sdk-build.json` lists every file with its SHA-256.
 
-No version is published yet. The first public version will be **4.1.0**: from then on the platform, the SDK and the
-release milestone share the same major.minor.
+The current version is **4.1.0** (`sdk/4.1.0/`, the first public one): protocol 2.1, manifest `schemaVersion` 3, for a
+platform >= 4.1. From 4.1 on, the platform, the SDK and the release milestone share the same major.minor.
 
 ## Versions and compatibility
 

@@ -1,0 +1,94 @@
+{
+  "id": "settings/effective-typed",
+  "area": "settings",
+  "description": "effective(context): GET …/settings with the token, the context and the proof; the values typed by the manifest (BOOLEAN, NUMBER, ENUM); a key the manifest does not declare is ignored.",
+  "source": "sdk-protocol.md §15.2",
+  "input": {
+    "slug": "set-mod",
+    "context": {
+      "v": 1,
+      "tenant": "00000000-0000-0000-0000-00000000000a",
+      "user": "subject-1",
+      "actor": {
+        "type": "user",
+        "via": null,
+        "hookId": null
+      },
+      "locale": "en",
+      "rights": [],
+      "method": "GET",
+      "path": "/x",
+      "query": null,
+      "ts": "$now",
+      "requestId": "req-set-1"
+    },
+    "proof": "3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f",
+    "manifest": {
+      "schemaVersion": 2,
+      "slug": "set-mod",
+      "name": "n",
+      "version": "1.0.0",
+      "i18n": {
+        "en": {
+          "n": "Settings",
+          "live.label": "Live",
+          "batch.label": "Batch",
+          "mode.label": "Mode"
+        }
+      },
+      "capabilities": {
+        "settings": [
+          {
+            "key": "live",
+            "type": "BOOLEAN",
+            "default": false,
+            "label": "live.label"
+          },
+          {
+            "key": "batch-size",
+            "type": "NUMBER",
+            "default": 50,
+            "label": "batch.label",
+            "min": 1,
+            "max": 500
+          },
+          {
+            "key": "push-mode",
+            "type": "ENUM",
+            "default": "manual",
+            "label": "mode.label",
+            "values": [
+              "manual",
+              "auto"
+            ]
+          }
+        ]
+      }
+    },
+    "call": "effective",
+    "args": {},
+    "platform": {
+      "status": 200,
+      "body": "{\"live\":true,\"batch-size\":120.5,\"push-mode\":\"auto\",\"retired\":\"x\"}"
+    }
+  },
+  "expect": {
+    "outcome": "ok",
+    "request": {
+      "method": "GET",
+      "path": "/api/v1/platform/modules/set-mod/settings",
+      "query": null,
+      "headers": {
+        "Authorization": "Bearer kfm_conformance-token-never-logged",
+        "X-KF-Context": "$context",
+        "X-KF-Context-Proof": "3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f"
+      },
+      "body": null
+    },
+    "result": {
+      "live": true,
+      "batch-size": 120.5,
+      "push-mode": "auto"
+    }
+  }
+}

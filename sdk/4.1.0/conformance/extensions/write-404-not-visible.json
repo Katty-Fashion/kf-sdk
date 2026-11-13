@@ -1,0 +1,64 @@
+{
+  "id": "extensions/write-404-not-visible",
+  "area": "extensions",
+  "description": "404 (the entity is not visible in the context tenant) is the not-found refusal.",
+  "source": "sdk-protocol.md §15.4",
+  "input": {
+    "slug": "ext-mod",
+    "context": {
+      "v": 1,
+      "tenant": "00000000-0000-0000-0000-00000000000a",
+      "user": "subject-1",
+      "actor": {
+        "type": "user",
+        "via": null,
+        "hookId": null
+      },
+      "locale": "en",
+      "rights": [],
+      "method": "GET",
+      "path": "/x",
+      "query": null,
+      "ts": "$now",
+      "requestId": "req-ext-3"
+    },
+    "proof": "3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f",
+    "call": "write",
+    "args": {
+      "entity": "order",
+      "id": "o-9",
+      "values": {
+        "priority_code": "A"
+      }
+    },
+    "platform": {
+      "status": 404,
+      "body": "{\"type\":\"https://kf.ro/problems/not-found\",\"title\":\"not-found\",\"status\":404,\"detail\":\"order o-9 not found\",\"class\":\"permanent\"}"
+    }
+  },
+  "expect": {
+    "outcome": "error",
+    "request": {
+      "method": "PATCH",
+      "path": "/api/v1/platform/modules/ext-mod/extensions/order/o-9",
+      "query": null,
+      "headers": {
+        "Authorization": "Bearer kfm_conformance-token-never-logged",
+        "X-KF-Context": "$context",
+        "X-KF-Context-Proof": "3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f"
+      },
+      "body": {
+        "priority_code": "A"
+      }
+    },
+    "error": {
+      "status": 404,
+      "class": "permanent",
+      "kind": "not-found",
+      "reason": "not-found",
+      "messageContains": [
+        "o-9"
+      ]
+    }
+  }
+}

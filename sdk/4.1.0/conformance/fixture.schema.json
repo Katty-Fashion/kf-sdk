@@ -1,0 +1,39 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://kf.ro/schemas/kf-module-sdk/conformance-fixture.json",
+  "title": "KF module SDK conformance fixture",
+  "description": "One case of the shared conformance suite. Every SDK runner (Java by hand, TS/PHP derived) reads every fixture, checks it against this shape, and fails on an unknown area, a failing case or a case it cannot run. There is no skip.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["id", "area", "description", "source", "input", "expect"],
+  "properties": {
+    "id": {
+      "description": "<area>/<file name without .json>; unique in the suite",
+      "type": "string",
+      "pattern": "^[a-z]+/[a-z0-9][a-z0-9-]*$"
+    },
+    "area": {
+      "description": "The behaviour the case fixes; equal to the fixture's directory name",
+      "type": "string",
+      "enum": ["errors", "registration", "manifest", "signature", "envelope", "before", "flags", "context", "audit", "notifications", "reads", "settings", "secrets", "extensions", "storage", "peers", "events", "slots", "flow", "services"]
+    },
+    "description": {
+      "description": "What the case proves, in one or two sentences",
+      "type": "string",
+      "minLength": 1
+    },
+    "source": {
+      "description": "Where the wire shape comes from: a platform class/IT with the platform sha, a section of sdk-protocol.md, or a plan that defines an SDK rule (e.g. \"\")",
+      "type": "string",
+      "minLength": 1
+    },
+    "input": {
+      "description": "Area-specific input (see README.md, one section per area)",
+      "type": "object"
+    },
+    "expect": {
+      "description": "Area-specific expected behaviour (see README.md)",
+      "type": "object"
+    }
+  }
+}

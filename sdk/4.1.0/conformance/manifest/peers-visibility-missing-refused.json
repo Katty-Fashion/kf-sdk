@@ -1,0 +1,60 @@
+{
+  "id": "manifest/peers-visibility-missing-refused",
+  "area": "manifest",
+  "description": "visibility is required on an offered event (no default).",
+  "source": "sdk-protocol.md §3.2, §15.9, §6.3",
+  "input": {
+    "manifest": {
+      "schemaVersion": 3,
+      "slug": "kf-qc",
+      "name": "module.name",
+      "version": "1.0.0",
+      "platform": ">=4.1",
+      "i18n": {
+        "en": {
+          "module.name": "Quality"
+        }
+      },
+      "capabilities": {
+        "routes": [
+          {
+            "method": "GET",
+            "path": "/m/kf-qc/peer/checks",
+            "right": "api.v1.m.kf-qc.peer.checks.get"
+          },
+          {
+            "method": "POST",
+            "path": "/m/kf-qc/peer/checks",
+            "right": "api.v1.m.kf-qc.peer.checks.post"
+          }
+        ],
+        "peerReads": [
+          {
+            "port": "m.kf-qc.checks.v1",
+            "path": "/m/kf-qc/peer/checks",
+            "visibility": "public"
+          }
+        ],
+        "commands": [
+          {
+            "name": "open-check",
+            "path": "/m/kf-qc/peer/checks",
+            "method": "POST",
+            "visibility": "internal"
+          }
+        ],
+        "events": [
+          {
+            "name": "check-closed"
+          }
+        ]
+      }
+    }
+  },
+  "expect": {
+    "valid": false,
+    "errorsContain": [
+      "capabilities.events[0].visibility null must be one of internal, public (required, no default)"
+    ]
+  }
+}

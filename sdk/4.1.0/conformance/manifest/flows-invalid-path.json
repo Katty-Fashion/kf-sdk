@@ -1,0 +1,56 @@
+{
+  "id": "manifest/flows-invalid-path",
+  "area": "manifest",
+  "description": "A module flow file with \"..\", outside flows/, in a sub-directory of flows/ or without the .bpmn extension is refused, named; a name missing from i18n.en too.",
+  "source": "sdk-protocol.md §3.2, §17",
+  "input": {
+    "manifest": {
+      "schemaVersion": 3,
+      "slug": "kf-3d",
+      "name": "module.name",
+      "version": "1.0.0",
+      "platform": ">=4.1",
+      "i18n": {
+        "en": {
+          "module.name": "3D",
+          "flow.twin": "Digital twin sample",
+          "flow.fit": "Fit session"
+        }
+      },
+      "capabilities": {
+        "flows": [
+          {
+            "key": "kf-3d-a",
+            "file": "flows/../kf-module-conf.json",
+            "name": "flow.twin"
+          },
+          {
+            "key": "kf-3d-b",
+            "file": "bpmn/kf-3d-b.bpmn",
+            "name": "flow.twin"
+          },
+          {
+            "key": "kf-3d-c",
+            "file": "flows/sub/kf-3d-c.bpmn",
+            "name": "flow.twin"
+          },
+          {
+            "key": "kf-3d-d",
+            "file": "flows/kf-3d-d.xml",
+            "name": "flow.missing"
+          }
+        ]
+      }
+    }
+  },
+  "expect": {
+    "valid": false,
+    "errorsContain": [
+      "capabilities.flows[0].file \"flows/../kf-module-conf.json\" must not contain \"..\"",
+      "capabilities.flows[1].file \"bpmn/kf-3d-b.bpmn\" must be a .bpmn file directly under flows/",
+      "capabilities.flows[2].file \"flows/sub/kf-3d-c.bpmn\" must be a .bpmn file directly under flows/",
+      "capabilities.flows[3].file \"flows/kf-3d-d.xml\" must be a .bpmn file directly under flows/",
+      "capabilities.flows[3].name \"flow.missing\" is not defined in i18n.en"
+    ]
+  }
+}

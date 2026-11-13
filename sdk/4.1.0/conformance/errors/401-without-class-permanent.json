@@ -1,0 +1,14 @@
+{
+  "id": "errors/401-without-class-permanent",
+  "area": "errors",
+  "description": "A refusal written by a filter of the main chain carries no class: the status table makes 401 permanent.",
+  "source": "the platform ModuleProtocolErrorContractIT",
+  "input": {
+    "response": {
+      "status": 401,
+      "headers": {"Content-Type": "application/problem+json"},
+      "body": {"type": "about:blank", "title": "Unauthorized", "status": 401, "detail": "Full authentication is required"}
+    }
+  },
+  "expect": {"retry": false, "class": "permanent", "messageContains": ["401", "Full authentication is required"]}
+}

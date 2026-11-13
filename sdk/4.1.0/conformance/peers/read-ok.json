@@ -1,0 +1,60 @@
+{
+  "id": "peers/read-ok",
+  "area": "peers",
+  "description": "read(context, owner, port, query): GET …/modules/{caller}/peers/{owner}/reads/{port}?query with the token, the context and the proof unchanged; the owner's status and JSON body pass unchanged ({status, body}).",
+  "source": "sdk-protocol.md §15.9",
+  "input": {
+    "slug": "peers-caller",
+    "context": {
+      "v": 1,
+      "tenant": "00000000-0000-0000-0000-00000000000a",
+      "user": "subject-1",
+      "actor": {
+        "type": "user",
+        "via": null,
+        "hookId": null
+      },
+      "locale": "en",
+      "rights": [],
+      "method": "GET",
+      "path": "/x",
+      "query": null,
+      "ts": "$now",
+      "requestId": "req-peers-1"
+    },
+    "proof": "4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f",
+    "call": "read",
+    "args": {
+      "owner": "kf-stock",
+      "port": "m.kf-stock.level.v1",
+      "query": {
+        "sku": "KF-42"
+      }
+    },
+    "platform": {
+      "status": 200,
+      "body": "{\"sku\":\"KF-42\",\"level\":7}"
+    }
+  },
+  "expect": {
+    "outcome": "ok",
+    "request": {
+      "method": "GET",
+      "path": "/api/v1/platform/modules/peers-caller/peers/kf-stock/reads/m.kf-stock.level.v1",
+      "query": "sku=KF-42",
+      "headers": {
+        "Authorization": "Bearer kfm_conformance-token-never-logged",
+        "X-KF-Context": "$context",
+        "X-KF-Context-Proof": "4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f"
+      },
+      "body": null
+    },
+    "result": {
+      "status": 200,
+      "body": {
+        "sku": "KF-42",
+        "level": 7
+      }
+    }
+  }
+}

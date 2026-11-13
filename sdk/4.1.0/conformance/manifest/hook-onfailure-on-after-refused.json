@@ -1,0 +1,36 @@
+{
+  "id": "manifest/hook-onfailure-on-after-refused",
+  "area": "manifest",
+  "description": "onFailure on an after point is refused: it runs after the mutation and cannot block it.",
+  "source": "the platform ModuleManifestValidator",
+  "input": {
+    "manifest": {
+      "schemaVersion": 2,
+      "slug": "man-mod",
+      "name": "module.name",
+      "version": "1.0.0",
+      "platform": ">=4.1",
+      "i18n": {
+        "en": {
+          "module.name": "Manifest module",
+          "field.priority": "Priority",
+          "tab.label": "Tab"
+        }
+      },
+      "capabilities": {
+        "hooks": [
+          {
+            "point": "model.after.update",
+            "onFailure": "block"
+          }
+        ]
+      }
+    }
+  },
+  "expect": {
+    "valid": false,
+    "errorsContain": [
+      "onFailure only on before points"
+    ]
+  }
+}

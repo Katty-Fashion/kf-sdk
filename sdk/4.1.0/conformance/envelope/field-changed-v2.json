@@ -1,0 +1,72 @@
+{
+  "id": "envelope/field-changed-v2",
+  "area": "envelope",
+  "description": "A field change calls the field handler once, with the path and the delivery id derived per path.",
+  "source": "the platform CloudEvents.modelChange/fieldChanged",
+  "input": {
+    "envelope": {
+      "specversion": "1.0",
+      "id": "8f3363ff-d825-3a3c-8ee0-2397a6c68b3e",
+      "kfeventid": "7a8b9c0d-1e2f-4a3b-8c4d-5e6f7a8b9c0d",
+      "type": "kf.model.field.changed",
+      "source": "/api/v1/models/42",
+      "subject": "42",
+      "time": "2026-10-19T10:15:30.123Z",
+      "datacontenttype": "application/json",
+      "kfmodule": "conformance",
+      "kfflags": {
+        "author-form": true,
+        "author-tab": false
+      },
+      "kftenant": "0f1e2d3c-4b5a-4968-8776-655443322110",
+      "kflocale": "ro",
+      "kfactor": "oidc-sub-1",
+      "kfaggregatetype": "model",
+      "kfenvelopeversion": "1",
+      "data": {
+        "entity": "model",
+        "id": "42",
+        "before": {
+          "id": 42,
+          "name": "Rochie Ana",
+          "materialList": [],
+          "extensions": {
+            "conformance": {
+              "author": "Ana"
+            }
+          }
+        },
+        "after": {
+          "id": 42,
+          "name": "Rochie Ana 2",
+          "materialList": [],
+          "extensions": {
+            "conformance": {
+              "author": "Ana"
+            }
+          }
+        },
+        "changed": [
+          "name"
+        ],
+        "field": "name",
+        "oldValue": "Rochie Ana",
+        "newValue": "Rochie Ana 2"
+      }
+    }
+  },
+  "expect": {
+    "status": 200,
+    "handlerCalled": true,
+    "handler": {
+      "event": "model.field.changed",
+      "field": "name",
+      "eventId": "7a8b9c0d-1e2f-4a3b-8c4d-5e6f7a8b9c0d",
+      "deliveryId": "8f3363ff-d825-3a3c-8ee0-2397a6c68b3e",
+      "tenant": "0f1e2d3c-4b5a-4968-8776-655443322110"
+    },
+    "body": {
+      "ok": true
+    }
+  }
+}

@@ -1,0 +1,43 @@
+{
+  "id": "manifest/requires-valid-with-optional",
+  "area": "manifest",
+  "description": "Two required modules, one optional, under schemaVersion 3: valid and read on the typed manifest.",
+  "source": "sdk-protocol.md §3.2, §3.5",
+  "input": {
+    "manifest": {
+      "schemaVersion": 3,
+      "slug": "req-mod",
+      "name": "module.name",
+      "version": "1.0.0",
+      "platform": ">=4.1",
+      "i18n": {
+        "en": {
+          "module.name": "Requires",
+          "flag.l": "Flag"
+        }
+      },
+      "requires": [
+        {
+          "slug": "base-mod",
+          "versionRange": ">=1.0.0 <2.0.0"
+        },
+        {
+          "slug": "extra-mod",
+          "versionRange": ">=0.5.0",
+          "optional": true
+        }
+      ]
+    }
+  },
+  "expect": {
+    "valid": true,
+    "warningsContain": [],
+    "read": {
+      "/requires/0/slug": "base-mod",
+      "/requires/0/versionRange": ">=1.0.0 <2.0.0",
+      "/requires/0/optional": false,
+      "/requires/1/slug": "extra-mod",
+      "/requires/1/optional": true
+    }
+  }
+}

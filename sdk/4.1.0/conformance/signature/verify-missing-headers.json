@@ -1,0 +1,17 @@
+{
+  "id": "signature/verify-missing-headers",
+  "area": "signature",
+  "description": "A callback without X-KF-Signature is refused.",
+  "source": "sdk-protocol.md v0.1 §3",
+  "input": {
+    "secret": "kf-hook-secret-conformance",
+    "timestamp": "1760000000",
+    "body": "{}",
+    "now": 1760000000,
+    "signature": null
+  },
+  "expect": {
+    "valid": false,
+    "reasonContains": "missing"
+  }
+}

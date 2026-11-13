@@ -1,0 +1,14 @@
+{
+  "id": "signature/sign-non-ascii-body",
+  "area": "signature",
+  "description": "The signature covers the UTF-8 bytes of a body with non-ASCII characters (diacritics, quotes, euro).",
+  "source": "the platform HookSignatureSigner.sign",
+  "input": {
+    "secret": "kf-hook-secret-conformance",
+    "timestamp": "1760000000",
+    "body": "{\"data\":{\"name\":\"Rochie „Ana” — ăîșțâ €\"}}"
+  },
+  "expect": {
+    "signature": "165ec842eadae3c94ac6b0eb32209a693e95b75846a99e19e0c2aacaa9439cb5"
+  }
+}

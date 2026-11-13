@@ -1,0 +1,36 @@
+{
+  "id": "manifest/hooks-module-event-valid",
+  "area": "manifest",
+  "description": "A hook on m.{owner}.after.{name} under schemaVersion 3, with the owner in requires, is valid.",
+  "source": "sdk-protocol.md §6.1, §6.3",
+  "input": {
+    "manifest": {
+      "schemaVersion": 3,
+      "slug": "kf-3d",
+      "name": "module.name",
+      "version": "1.0.0",
+      "platform": ">=4.1",
+      "i18n": {
+        "en": {
+          "module.name": "3D"
+        }
+      },
+      "requires": [
+        {
+          "slug": "kf-stock",
+          "versionRange": ">=1.0.0"
+        }
+      ],
+      "capabilities": {
+        "hooks": [
+          {
+            "point": "m.kf-stock.after.level-changed"
+          }
+        ]
+      }
+    }
+  },
+  "expect": {
+    "valid": true
+  }
+}

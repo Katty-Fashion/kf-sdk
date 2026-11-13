@@ -1,0 +1,30 @@
+{
+  "id": "manifest/i18n-key-without-en",
+  "area": "manifest",
+  "description": "A key defined in another language but not in en is an error.",
+  "source": "the platform ModuleManifestValidator",
+  "input": {
+    "manifest": {
+      "schemaVersion": 2,
+      "slug": "man-mod",
+      "name": "module.name",
+      "version": "1.0.0",
+      "platform": ">=4.1",
+      "i18n": {
+        "en": {
+          "module.name": "M"
+        },
+        "ro": {
+          "module.name": "M",
+          "only.ro": "Doar ro"
+        }
+      }
+    }
+  },
+  "expect": {
+    "valid": false,
+    "errorsContain": [
+      "i18n.ro.only.ro has no \"en\" text"
+    ]
+  }
+}

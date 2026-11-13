@@ -1,0 +1,41 @@
+{
+  "id": "manifest/route-timeout-over-cap-refused",
+  "area": "manifest",
+  "description": "A timeoutSeconds over the platform cap (60) is refused, naming the route, the value and the cap.",
+  "source": "sdk-protocol.md §3.2, §9.1",
+  "input": {
+    "manifest": {
+      "schemaVersion": 2,
+      "slug": "man-mod",
+      "name": "module.name",
+      "version": "1.0.0",
+      "platform": ">=4.1",
+      "i18n": {
+        "en": {
+          "module.name": "Manifest module",
+          "setting.push": "Push on save",
+          "setting.timeout": "Timeout",
+          "setting.mode": "Mode",
+          "setting.mode.help": "How the module pushes",
+          "tab.label": "AAS"
+        }
+      },
+      "capabilities": {
+        "routes": [
+          {
+            "method": "GET",
+            "path": "/m/man-mod/shells",
+            "right": "api.v1.m.man-mod.shells.get",
+            "timeoutSeconds": 61
+          }
+        ]
+      }
+    }
+  },
+  "expect": {
+    "valid": false,
+    "errorsContain": [
+      "(GET /m/man-mod/shells).timeoutSeconds must be a whole number of seconds between 1 and 60 (got 61)"
+    ]
+  }
+}

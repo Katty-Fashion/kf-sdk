@@ -1,0 +1,44 @@
+{
+  "id": "manifest/hook-not-declared",
+  "area": "manifest",
+  "description": "A hook the manifest does not declare in capabilities.hooks is refused locally (hook-point-not-requested on the platform).",
+  "source": "the platform ManifestCapabilityGuard",
+  "input": {
+    "manifest": {
+      "schemaVersion": 2,
+      "slug": "man-mod",
+      "name": "module.name",
+      "version": "1.0.0",
+      "platform": ">=4.1",
+      "i18n": {
+        "en": {
+          "module.name": "Manifest module",
+          "field.priority": "Priority",
+          "tab.label": "Tab"
+        }
+      },
+      "capabilities": {
+        "hooks": [
+          {
+            "point": "model.before.update"
+          }
+        ]
+      }
+    },
+    "registration": {
+      "slug": "man-mod",
+      "callbackBase": "http://api.man-mod.kfmod:8080",
+      "hooks": [
+        {
+          "event": "model.after.delete"
+        }
+      ]
+    }
+  },
+  "expect": {
+    "valid": false,
+    "errorsContain": [
+      "event \"model.after.delete\" is not declared in kf-module-conf.json capabilities.hooks"
+    ]
+  }
+}

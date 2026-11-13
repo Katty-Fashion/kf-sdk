@@ -1,0 +1,42 @@
+{
+  "id": "manifest/slots-key-without-major-refused",
+  "area": "manifest",
+  "description": "A slot key whose last segment is not its major (v1, v2, ...) is refused.",
+  "source": "sdk-protocol.md §1, §1.A, §3.2, §7.12",
+  "input": {
+    "manifest": {
+      "schemaVersion": 3,
+      "slug": "slot-owner",
+      "name": "module.name",
+      "version": "1.0.0",
+      "platform": ">=4.1",
+      "i18n": {
+        "en": {
+          "module.name": "Slot owner",
+          "slot.layers": "Viewport layers"
+        }
+      },
+      "capabilities": {
+        "slots": [
+          {
+            "key": "viewport.layers",
+            "kind": "B",
+            "type": "layer",
+            "visibility": "public",
+            "label": "slot.layers",
+            "layerKinds": [
+              "pin",
+              "highlight"
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "expect": {
+    "valid": false,
+    "errorsContain": [
+      "capabilities.slots[0].key \"viewport.layers\" must match"
+    ]
+  }
+}

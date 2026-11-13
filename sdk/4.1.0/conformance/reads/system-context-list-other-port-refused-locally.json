@@ -1,0 +1,50 @@
+{
+  "id": "reads/system-context-list-other-port-refused-locally",
+  "area": "reads",
+  "description": "The platform's own context lists only tenant.v1 (protocol 1.3): a list of any other port from it is still refused locally, permanent, no request.",
+  "source": "sdk-protocol.md §15.1",
+  "input": {
+    "slug": "reads-mod",
+    "context": {
+      "v": 1,
+      "tenant": "00000000-0000-0000-0000-00000000000a",
+      "user": null,
+      "actor": {
+        "type": "system",
+        "via": "platform",
+        "hookId": null
+      },
+      "locale": "en",
+      "rights": [],
+      "method": "GET",
+      "path": "/admin/export",
+      "query": null,
+      "ts": "$now",
+      "requestId": "req-reads-223"
+    },
+    "proof": "3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f",
+    "call": "list",
+    "args": {
+      "port": "model.v1",
+      "filters": {
+        "ids": "42"
+      }
+    },
+    "platform": {
+      "status": 200,
+      "body": "{}"
+    }
+  },
+  "expect": {
+    "outcome": "error",
+    "request": null,
+    "error": {
+      "status": 0,
+      "class": "permanent",
+      "kind": "other",
+      "messageContains": [
+        "the system context reads only objects"
+      ]
+    }
+  }
+}

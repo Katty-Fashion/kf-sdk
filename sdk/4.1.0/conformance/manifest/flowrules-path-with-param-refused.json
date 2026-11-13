@@ -1,0 +1,42 @@
+{
+  "id": "manifest/flowrules-path-with-param-refused",
+  "area": "manifest",
+  "description": "A flow rule on a route with a {param} segment is refused.",
+  "source": "sdk-protocol.md §16.4",
+  "input": {
+    "manifest": {
+      "schemaVersion": 3,
+      "slug": "kf-step",
+      "name": "module.name",
+      "version": "1.0.0",
+      "platform": ">=4.1",
+      "i18n": {
+        "en": {
+          "module.name": "Step"
+        }
+      },
+      "capabilities": {
+        "routes": [
+          {
+            "method": "GET",
+            "path": "/m/kf-step/rules/{id}",
+            "right": "api.v1.m.kf-step.rules.id.get"
+          }
+        ],
+        "flowRules": [
+          {
+            "key": "item-ready",
+            "path": "/m/kf-step/rules/{id}",
+            "projection": "order.flow-rule.v1"
+          }
+        ]
+      }
+    }
+  },
+  "expect": {
+    "valid": false,
+    "errorsContain": [
+      "kf-module-conf.json: capabilities.flowRules[0].path \"/m/kf-step/rules/{id}\" must be a route with literal segments only (no {param} segment)"
+    ]
+  }
+}

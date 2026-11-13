@@ -19,8 +19,7 @@ import java.util.regex.Pattern;
 
 /**
  * The test module {@code api-ui-test}: one React contribution on each UI surface of protocol
- * 1.1, from one hand-written ES module ({@code static/ui/surfaces.mjs}, no build step), so that the scenarios,
- *, and can be checked on a stack through a real module.
+ * 1.1, from one hand-written ES module ({@code static/ui/surfaces.mjs}, no build step), so that the scenarios can be checked on a stack through a real module.
  *
  * <ul>
  *   <li>{@code module.pages}, page {@code demo} → {@code ApiUiDemoPage} (the menu entry is {@code nav[]}

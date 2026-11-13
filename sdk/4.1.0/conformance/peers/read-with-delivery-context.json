@@ -1,0 +1,61 @@
+{
+  "id": "peers/read-with-delivery-context",
+  "area": "peers",
+  "description": "A background job reads with the context of an after delivery (system via hook) and its proof, within ±300 s: both are sent unchanged.",
+  "source": "sdk-protocol.md §5.5 and §15.9",
+  "input": {
+    "slug": "peers-caller",
+    "contextSource": "delivery",
+    "context": {
+      "v": 1,
+      "tenant": "00000000-0000-0000-0000-00000000000a",
+      "user": null,
+      "actor": {
+        "type": "system",
+        "via": "hook",
+        "hookId": "d-peers-7"
+      },
+      "locale": "en",
+      "rights": [],
+      "method": "POST",
+      "path": "/_kf/hooks",
+      "query": null,
+      "ts": "$now",
+      "requestId": "d-peers-7"
+    },
+    "proof": "4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f",
+    "call": "read",
+    "args": {
+      "owner": "kf-stock",
+      "port": "m.kf-stock.level.v1",
+      "query": {
+        "sku": "KF-42"
+      }
+    },
+    "platform": {
+      "status": 200,
+      "body": "{\"sku\":\"KF-42\",\"level\":7}"
+    }
+  },
+  "expect": {
+    "outcome": "ok",
+    "request": {
+      "method": "GET",
+      "path": "/api/v1/platform/modules/peers-caller/peers/kf-stock/reads/m.kf-stock.level.v1",
+      "query": "sku=KF-42",
+      "headers": {
+        "Authorization": "Bearer kfm_conformance-token-never-logged",
+        "X-KF-Context": "$context",
+        "X-KF-Context-Proof": "4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f"
+      },
+      "body": null
+    },
+    "result": {
+      "status": 200,
+      "body": {
+        "sku": "KF-42",
+        "level": 7
+      }
+    }
+  }
+}

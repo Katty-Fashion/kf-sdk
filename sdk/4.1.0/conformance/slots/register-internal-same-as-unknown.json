@@ -1,0 +1,38 @@
+{
+  "id": "slots/register-internal-same-as-unknown",
+  "area": "slots",
+  "description": "An internal slot asked by a module that is not of the internal class gets exactly the answer of a missing slot (no oracle): 200, the same warning, the same text and field path. The plan named it register-internal-refused-generic; makes it the treatment, not a refusal.",
+  "source": "sdk-protocol.md §7.10, §7.12",
+  "input": {
+    "slug": "slot-contrib",
+    "surfaces": [
+      {
+        "slug": "m.kf-3d.studio.inspector.v1",
+        "kind": "react",
+        "entry": "/m/slot-contrib/ui/panel.mjs",
+        "export": "Panel"
+      }
+    ],
+    "platform": {
+      "status": 200,
+      "body": {
+        "warnings": [
+          "surfaces[0].slug: \"m.kf-3d.studio.inspector.v1\" is not a slot the installed version of its owner declares; the contribution is stored inactive and is not served until the owner declares it"
+        ]
+      }
+    }
+  },
+  "expect": {
+    "surfaces": [
+      {
+        "slug": "m.kf-3d.studio.inspector.v1",
+        "kind": "react",
+        "entry": "/m/slot-contrib/ui/panel.mjs",
+        "export": "Panel"
+      }
+    ],
+    "warnings": [
+      "surfaces[0].slug: \"m.kf-3d.studio.inspector.v1\" is not a slot the installed version of its owner declares; the contribution is stored inactive and is not served until the owner declares it"
+    ]
+  }
+}

@@ -1,0 +1,69 @@
+{
+  "id": "reads/tenant-v1-list-platform",
+  "area": "reads",
+  "description": "The platform's own context (system via platform) lists tenant.v1 without ids (protocol 1.3): the one list a system context may read; every tenant with deletedAt.",
+  "source": "sdk-protocol.md §15.1",
+  "input": {
+    "slug": "reads-mod",
+    "context": {
+      "v": 1,
+      "tenant": "00000000-0000-0000-0000-00000000000a",
+      "user": null,
+      "actor": {
+        "type": "system",
+        "via": "platform",
+        "hookId": null
+      },
+      "locale": "en",
+      "rights": [],
+      "method": "GET",
+      "path": "/admin/export",
+      "query": null,
+      "ts": "$now",
+      "requestId": "req-reads-222"
+    },
+    "proof": "3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f",
+    "call": "list",
+    "args": {
+      "port": "tenant.v1",
+      "filters": {},
+      "page": 0,
+      "size": 200
+    },
+    "platform": {
+      "status": 200,
+      "body": "{\"items\":[{\"id\":\"00000000-0000-0000-0000-00000000000a\",\"name\":\"KF Dev\",\"deletedAt\":null},{\"id\":\"00000000-0000-0000-0000-00000000000b\",\"name\":\"ALADIN\",\"deletedAt\":\"2026-10-30T12:00:00Z\"}],\"page\":0,\"size\":200,\"total\":2}"
+    }
+  },
+  "expect": {
+    "outcome": "ok",
+    "request": {
+      "method": "GET",
+      "path": "/api/v1/platform/modules/reads-mod/reads/tenant.v1",
+      "query": "page=0&size=200",
+      "headers": {
+        "Authorization": "Bearer kfm_conformance-token-never-logged",
+        "X-KF-Context": "$context",
+        "X-KF-Context-Proof": "3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f"
+      },
+      "body": null
+    },
+    "result": {
+      "items": [
+        {
+          "id": "00000000-0000-0000-0000-00000000000a",
+          "name": "KF Dev",
+          "deletedAt": null
+        },
+        {
+          "id": "00000000-0000-0000-0000-00000000000b",
+          "name": "ALADIN",
+          "deletedAt": "2026-10-30T12:00:00Z"
+        }
+      ],
+      "page": 0,
+      "size": 200,
+      "total": 2
+    }
+  }
+}

@@ -1,0 +1,61 @@
+{
+  "id": "registration/surfaces-with-label-keys",
+  "area": "registration",
+  "description": "UI contributions send the label as a translation KEY, with the protocol's own key names.",
+  "source": "the platform RegistrationDtos.RegistrationRequest/HookSpec/FieldSpec/SurfaceSpec",
+  "input": {
+    "slug": "reg-ui",
+    "callbackBase": null,
+    "surfaces": [
+      {
+        "slug": "models.detail.tabs",
+        "kind": "react",
+        "entry": "/m/reg-ui/ui/surfaces.mjs",
+        "export": "AuthorTab",
+        "css": "/m/reg-ui/ui/surfaces.css",
+        "order": 10,
+        "labelKey": "surface.author.tab",
+        "key": "author",
+        "flag": "author-tab",
+        "peer": {
+          "react": "^19.2"
+        }
+      },
+      {
+        "slug": "models.list.columns",
+        "kind": "wc",
+        "entry": "/m/reg-ui/ui/cell.mjs",
+        "tag": "kf-reg-ui-cell"
+      }
+    ]
+  },
+  "expect": {
+    "body": {
+      "callbackUrl": null,
+      "hooks": [],
+      "fields": [],
+      "surfaces": [
+        {
+          "slug": "models.detail.tabs",
+          "kind": "react",
+          "entry": "/m/reg-ui/ui/surfaces.mjs",
+          "export": "AuthorTab",
+          "css": "/m/reg-ui/ui/surfaces.css",
+          "order": 10,
+          "label": "surface.author.tab",
+          "flag": "author-tab",
+          "key": "author",
+          "peer": {
+            "react": "^19.2"
+          }
+        },
+        {
+          "slug": "models.list.columns",
+          "kind": "wc",
+          "entry": "/m/reg-ui/ui/cell.mjs",
+          "tag": "kf-reg-ui-cell"
+        }
+      ]
+    }
+  }
+}

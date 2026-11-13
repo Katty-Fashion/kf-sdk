@@ -1,0 +1,22 @@
+{
+  "id": "context/actor-system-platform-with-hookid-refused",
+  "area": "context",
+  "description": "actor system via platform with a hookId is incoherent: refused. 401, class permanent.",
+  "source": "sdk-protocol.md §9.2",
+  "input": {
+    "secret": "kf-hook-secret-conformance",
+    "now": 1760000000,
+    "headers": {
+      "X-KF-Context": "eyJ2IjoxLCJ0ZW5hbnQiOiIwZjFlMmQzYy00YjVhLTQ5NjgtODc3Ni02NTU0NDMzMjIxMTAiLCJ1c2VyIjpudWxsLCJhY3RvciI6eyJ0eXBlIjoic3lzdGVtIiwidmlhIjoicGxhdGZvcm0iLCJob29rSWQiOiIzYzJiMWEwOS04ZjdlLTRkNmMtOWI1YS00ZjNlMmQxYzBiMGEifSwibG9jYWxlIjoicm8iLCJyaWdodHMiOltdLCJtZXRob2QiOiJHRVQiLCJwYXRoIjoiL3N0YXRpb25zIiwicXVlcnkiOm51bGwsInRzIjoxNzYwMDAwMDAwLCJyZXF1ZXN0SWQiOiJyZXEtMDEwMSJ9",
+      "X-KF-Timestamp": "1760000000",
+      "X-KF-Signature": "ed66c80c91633e42ce5b5a1fbbd4d5496595bec64cdc194ab90a19d2b6d95fec"
+    },
+    "body": ""
+  },
+  "expect": {
+    "valid": false,
+    "status": 401,
+    "class": "permanent",
+    "reasonContains": "actor system via platform has no hookId"
+  }
+}

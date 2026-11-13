@@ -1,0 +1,44 @@
+{
+  "id": "envelope/tenant-after-delete-wrong-entity-refused",
+  "area": "envelope",
+  "description": "tenant.after.delete whose data.entity is not tenant is refused 400 invalid-envelope, permanent; the handler is not called.",
+  "source": "the platform TenantDeletedHookRecorder",
+  "input": {
+    "envelope": {
+      "specversion": "1.0",
+      "id": "d1e2f3a4-b5c6-4d7e-8f90-a1b2c3d4e5f6",
+      "kfeventid": "0a1b2c3d-4e5f-4a6b-8c7d-9e0f1a2b3c4d",
+      "type": "kf.tenant.after.delete",
+      "source": "/tenant/7f3c0a1b-2c3d-4e5f-8a9b-0c1d2e3f4a5b",
+      "subject": "7f3c0a1b-2c3d-4e5f-8a9b-0c1d2e3f4a5b",
+      "time": "2026-10-29T00:55:01.123456Z",
+      "datacontenttype": "application/json",
+      "kfmodule": "conformance",
+      "kfflags": {},
+      "kftenant": "7f3c0a1b-2c3d-4e5f-8a9b-0c1d2e3f4a5b",
+      "kflocale": "ro",
+      "kfactor": null,
+      "kfaggregatetype": "tenant",
+      "kfenvelopeversion": "1",
+      "data": {
+        "entity": "model",
+        "id": "7f3c0a1b-2c3d-4e5f-8a9b-0c1d2e3f4a5b",
+        "before": {
+          "id": "7f3c0a1b-2c3d-4e5f-8a9b-0c1d2e3f4a5b"
+        },
+        "after": null,
+        "changed": []
+      }
+    }
+  },
+  "expect": {
+    "status": 400,
+    "handlerCalled": false,
+    "bodyContains": {
+      "type": "https://kf.ro/problems/invalid-envelope",
+      "status": 400,
+      "class": "permanent"
+    },
+    "contentType": "application/problem+json"
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "$comment": "Pinned copies of the platform catalogs. Written by sdk/tools/catalog-sync.mjs; never edit a copy by hand. sha = the commit of the source repo, sha256 = of the LF text.",
+  "generator": "sdk/tools/catalog-sync.mjs",
+  "files": [
+    {
+      "target": "sdk/catalog/surfaces.public.json",
+      "repo": "host-ui",
+      "path": "surfaces/surfaces.public.json",
+      "sha": "b462d10414e2ac4d9016fd260e30b436b1d414f7",
+      "sha256": "7e3503d789dd594dd7d29c236e85fb8473391e53d2fae699fe690c4bfb042e30"
+    },
+    {
+      "target": "sdk/ui/kf-host.d.ts",
+      "repo": "host-ui",
+      "path": "surfaces/kf-host.d.ts",
+      "sha": "b462d10414e2ac4d9016fd260e30b436b1d414f7",
+      "sha256": "2f8e2a2670432ad4c4dbc163ce7f8f122fd0bb20d29d61a9041e28a33e3a788f"
+    },
+    {
+      "target": "sdk/catalog/hook-points.schema.json",
+      "repo": "the platform",
+      "path": "src/main/resources/hooks/hook-points.catalog.schema.json",
+      "sha": "7ceb45f77946e92722f77c63e83d3c063cc647f9",
+      "sha256": "d5620b814e5f41d8956f281aeb4e67a1259073359cef9ed197475281b263ca60"
+    }
+  ]
+}

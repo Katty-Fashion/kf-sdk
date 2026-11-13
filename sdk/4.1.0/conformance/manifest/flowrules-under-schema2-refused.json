@@ -1,0 +1,48 @@
+{
+  "id": "manifest/flowrules-under-schema2-refused",
+  "area": "manifest",
+  "description": "capabilities.flowRules under schemaVersion 2 is refused, named.",
+  "source": "sdk-protocol.md §3.2, §16",
+  "input": {
+    "manifest": {
+      "schemaVersion": 2,
+      "slug": "kf-step",
+      "name": "module.name",
+      "version": "1.0.0",
+      "platform": ">=4.1",
+      "i18n": {
+        "en": {
+          "module.name": "Step",
+          "step.label": "Item check"
+        }
+      },
+      "capabilities": {
+        "routes": [
+          {
+            "method": "GET",
+            "path": "/m/kf-step/rules/item-ready",
+            "right": "api.v1.m.kf-step.rules.item-ready.get"
+          },
+          {
+            "method": "POST",
+            "path": "/m/kf-step/items",
+            "right": "api.v1.m.kf-step.items.post"
+          }
+        ],
+        "flowRules": [
+          {
+            "key": "item-ready",
+            "path": "/m/kf-step/rules/item-ready",
+            "projection": "order.flow-rule.v1"
+          }
+        ]
+      }
+    }
+  },
+  "expect": {
+    "valid": false,
+    "errorsContain": [
+      "capabilities.flowRules requires \"schemaVersion\": 3 (this manifest is schemaVersion 2)"
+    ]
+  }
+}
