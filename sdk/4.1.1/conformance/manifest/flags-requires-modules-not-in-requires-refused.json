@@ -1,0 +1,42 @@
+{
+  "id": "manifest/flags-requires-modules-not-in-requires-refused",
+  "area": "manifest",
+  "description": "A module named by requiresModules must be declared in requires.",
+  "source": "sdk-protocol.md §3.2, §3.5",
+  "input": {
+    "manifest": {
+      "schemaVersion": 3,
+      "slug": "req-mod",
+      "name": "module.name",
+      "version": "1.0.0",
+      "platform": ">=4.1",
+      "i18n": {
+        "en": {
+          "module.name": "Requires",
+          "flag.l": "Flag"
+        }
+      },
+      "requires": [
+        {
+          "slug": "base-mod",
+          "versionRange": ">=1.0.0 <2.0.0"
+        }
+      ],
+      "featureFlags": [
+        {
+          "key": "needs",
+          "label": "flag.l",
+          "requiresModules": [
+            "extra-mod"
+          ]
+        }
+      ]
+    }
+  },
+  "expect": {
+    "valid": false,
+    "errorsContain": [
+      "\"featureFlags[0].requiresModules\": \"extra-mod\" is not in requires"
+    ]
+  }
+}

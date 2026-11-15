@@ -1,0 +1,17 @@
+{
+  "id": "signature/verify-skew-301-past",
+  "area": "signature",
+  "description": "A timestamp 301 s in the past is refused.",
+  "source": "the platform HookSignatureSigner.sign",
+  "input": {
+    "secret": "kf-hook-secret-conformance",
+    "timestamp": "1760000000",
+    "body": "{\"data\":{\"name\":\"Rochie „Ana” — ăîșțâ €\"}}",
+    "now": 1760000301,
+    "signature": "165ec842eadae3c94ac6b0eb32209a693e95b75846a99e19e0c2aacaa9439cb5"
+  },
+  "expect": {
+    "valid": false,
+    "reasonContains": "outside the allowed window"
+  }
+}

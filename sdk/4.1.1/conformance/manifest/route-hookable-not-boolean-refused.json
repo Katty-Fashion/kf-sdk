@@ -1,0 +1,39 @@
+{
+  "id": "manifest/route-hookable-not-boolean-refused",
+  "area": "manifest",
+  "description": "A hookable value that is not a boolean (\"yes\") is refused locally.",
+  "source": "a rule of the SDK itself",
+  "input": {
+    "manifest": {
+      "schemaVersion": 2,
+      "slug": "man-mod",
+      "name": "module.name",
+      "version": "1.0.0",
+      "platform": ">=4.1",
+      "i18n": {
+        "en": {
+          "module.name": "Manifest module",
+          "field.priority": "Priority",
+          "tab.label": "Tab"
+        }
+      },
+      "capabilities": {
+        "routes": [
+          {
+            "method": "POST",
+            "path": "/m/man-mod/notes",
+            "right": "api.v1.m.man-mod.notes.post",
+            "hookable": "yes"
+          }
+        ]
+      }
+    }
+  },
+  "expect": {
+    "valid": false,
+    "errorsContain": [
+      "POST /m/man-mod/notes",
+      "hookable must be a boolean"
+    ]
+  }
+}

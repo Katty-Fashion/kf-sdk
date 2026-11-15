@@ -1,0 +1,38 @@
+{
+  "id": "context/person-absent-valid",
+  "area": "context",
+  "description": "A user context without person (every route but member, a platform before 1.2): accepted, as before; no person in the read context.",
+  "source": "sdk-protocol.md §9.2",
+  "input": {
+    "secret": "kf-hook-secret-conformance",
+    "now": 1760000000,
+    "headers": {
+      "X-KF-Context": "eyJ2IjoxLCJ0ZW5hbnQiOiIwZjFlMmQzYy00YjVhLTQ5NjgtODc3Ni02NTU0NDMzMjIxMTAiLCJ1c2VyIjoib2lkYy1zdWItMSIsImFjdG9yIjp7InR5cGUiOiJ1c2VyIiwidmlhIjpudWxsLCJob29rSWQiOm51bGx9LCJsb2NhbGUiOiJybyIsInJpZ2h0cyI6WyJhcGkudjEubS5jb25mb3JtYW5jZS5ub3Rlcy5wb3N0Il0sIm1ldGhvZCI6IlBPU1QiLCJwYXRoIjoiL3RpY2tldHMiLCJxdWVyeSI6bnVsbCwidHMiOjE3NjAwMDAwMDAsInJlcXVlc3RJZCI6InJlcS0wMjAzIn0",
+      "X-KF-Timestamp": "1760000000",
+      "X-KF-Signature": "c7c3ff7f35d2d807ba2e41c125d53bdc538a6e24bf359b922ff5b65d0a2229c0"
+    },
+    "body": ""
+  },
+  "expect": {
+    "valid": true,
+    "context": {
+      "v": 1,
+      "tenant": "0f1e2d3c-4b5a-4968-8776-655443322110",
+      "user": "oidc-sub-1",
+      "actor": {
+        "type": "user",
+        "via": null,
+        "hookId": null
+      },
+      "locale": "ro",
+      "rights": [
+        "api.v1.m.conformance.notes.post"
+      ],
+      "method": "POST",
+      "path": "/tickets",
+      "query": null,
+      "ts": 1760000000,
+      "requestId": "req-0203"
+    }
+  }
+}

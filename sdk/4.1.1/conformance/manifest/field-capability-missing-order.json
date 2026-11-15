@@ -1,0 +1,52 @@
+{
+  "id": "manifest/field-capability-missing-order",
+  "area": "manifest",
+  "description": "A registration that asks for a field on order the manifest does not declare is refused locally, naming the field and capabilities.fields.",
+  "source": "the platform ManifestCapabilityGuard",
+  "input": {
+    "manifest": {
+      "schemaVersion": 2,
+      "slug": "man-mod",
+      "name": "module.name",
+      "version": "1.0.0",
+      "platform": ">=4.1",
+      "i18n": {
+        "en": {
+          "module.name": "Manifest module",
+          "field.priority": "Priority",
+          "tab.label": "Tab"
+        }
+      },
+      "capabilities": {
+        "fields": [
+          {
+            "entity": "model",
+            "name": "author",
+            "type": "STRING",
+            "table": "models_extra",
+            "label": "field.priority"
+          }
+        ]
+      }
+    },
+    "registration": {
+      "slug": "man-mod",
+      "fields": [
+        {
+          "entity": "order",
+          "name": "priority_code",
+          "type": "STRING",
+          "table": "orders_extra",
+          "labelKey": "field.priority"
+        }
+      ]
+    }
+  },
+  "expect": {
+    "valid": false,
+    "errorsContain": [
+      "field \"order.priority_code\"",
+      "is not declared in kf-module-conf.json capabilities.fields"
+    ]
+  }
+}

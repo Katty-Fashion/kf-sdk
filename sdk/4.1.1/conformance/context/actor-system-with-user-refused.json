@@ -1,0 +1,22 @@
+{
+  "id": "context/actor-system-with-user-refused",
+  "area": "context",
+  "description": "actor system with a user is incoherent: refused like an altered context. 401, class permanent.",
+  "source": "a rule of the SDK itself",
+  "input": {
+    "secret": "kf-hook-secret-conformance",
+    "now": 1760000000,
+    "headers": {
+      "X-KF-Context": "eyJ2IjoxLCJ0ZW5hbnQiOiIwZjFlMmQzYy00YjVhLTQ5NjgtODc3Ni02NTU0NDMzMjIxMTAiLCJ1c2VyIjoib2lkYy1zdWItMSIsImFjdG9yIjp7InR5cGUiOiJzeXN0ZW0iLCJ2aWEiOiJob29rIiwiaG9va0lkIjoiM2MyYjFhMDktOGY3ZS00ZDZjLTliNWEtNGYzZTJkMWMwYjBhIn0sImxvY2FsZSI6InJvIiwicmlnaHRzIjpbImFwaS52MS5tLmNvbmZvcm1hbmNlLm5vdGVzLnBvc3QiXSwibWV0aG9kIjoiUE9TVCIsInBhdGgiOiIvbm90ZXMiLCJxdWVyeSI6bnVsbCwidHMiOjE3NjAwMDAwMDAsInJlcXVlc3RJZCI6InJlcS0wMDA1In0",
+      "X-KF-Timestamp": "1760000000",
+      "X-KF-Signature": "cf624fd1118c1b7da8a83246179c4eb52fa2fdd17579ad166d755c6f23ba5441"
+    },
+    "body": "{}"
+  },
+  "expect": {
+    "valid": false,
+    "status": 401,
+    "class": "permanent",
+    "reasonContains": "actor system has no user"
+  }
+}

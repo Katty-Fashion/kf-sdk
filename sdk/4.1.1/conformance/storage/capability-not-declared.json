@@ -1,0 +1,62 @@
+{
+  "id": "storage/capability-not-declared",
+  "area": "storage",
+  "description": "403 capability-not-declared (the installed version does not declare storage) is a forbidden refusal, permanent.",
+  "source": "sdk-protocol.md §3.5/§15",
+  "input": {
+    "slug": "fb-mod",
+    "context": {
+      "v": 1,
+      "tenant": "00000000-0000-0000-0000-00000000000a",
+      "user": "subject-1",
+      "actor": {
+        "type": "user",
+        "via": null,
+        "hookId": null
+      },
+      "locale": "en",
+      "rights": [],
+      "method": "POST",
+      "path": "/feedback",
+      "query": null,
+      "ts": "$now",
+      "requestId": "req-st-5"
+    },
+    "proof": "3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f",
+    "call": "uploadUrl",
+    "args": {
+      "contentType": "image/png",
+      "size": 10
+    },
+    "platform": {
+      "status": 403,
+      "body": "{\"type\":\"https://kf.ro/problems/capability-not-declared\",\"title\":\"capability-not-declared\",\"status\":403,\"detail\":\"the module does not declare capabilities.storage\",\"class\":\"permanent\"}"
+    }
+  },
+  "expect": {
+    "outcome": "error",
+    "request": {
+      "method": "POST",
+      "path": "/api/v1/platform/modules/fb-mod/storage/upload-url",
+      "query": null,
+      "headers": {
+        "Authorization": "Bearer kfm_conformance-token-never-logged",
+        "X-KF-Context": "$context",
+        "X-KF-Context-Proof": "3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f"
+      },
+      "body": {
+        "contentType": "image/png",
+        "size": 10
+      }
+    },
+    "error": {
+      "status": 403,
+      "class": "permanent",
+      "kind": "forbidden",
+      "reason": "capability-not-declared",
+      "messageContains": [
+        "capabilities.storage"
+      ]
+    }
+  }
+}

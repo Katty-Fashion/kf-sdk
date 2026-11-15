@@ -1,0 +1,44 @@
+{
+  "id": "manifest/storage-max-bytes-zero-refused",
+  "area": "manifest",
+  "description": "maxBytes 0 is refused.",
+  "source": "sdk-protocol.md §3.2, §15.7",
+  "input": {
+    "manifest": {
+      "schemaVersion": 2,
+      "slug": "man-mod",
+      "name": "module.name",
+      "version": "1.0.0",
+      "platform": ">=4.1",
+      "i18n": {
+        "en": {
+          "module.name": "Manifest module",
+          "widget.label": "Feedback"
+        }
+      },
+      "capabilities": {
+        "routes": [
+          {
+            "method": "POST",
+            "path": "/m/man-mod/tickets",
+            "right": "api.v1.m.man-mod.tickets.post"
+          }
+        ],
+        "storage": [
+          {
+            "contentTypes": [
+              "image/png"
+            ],
+            "maxBytes": 0
+          }
+        ]
+      }
+    }
+  },
+  "expect": {
+    "valid": false,
+    "errorsContain": [
+      "capabilities.storage[0].maxBytes must be a whole number of bytes between 1 and 10485760 (got 0)"
+    ]
+  }
+}

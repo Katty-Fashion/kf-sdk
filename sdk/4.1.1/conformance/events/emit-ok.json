@@ -1,0 +1,63 @@
+{
+  "id": "events/emit-ok",
+  "area": "events",
+  "description": "emit(context, name, data): POST …/modules/{owner}/events {name, data} with the token, the context and the proof; 202 {eventId, type} is the result.",
+  "source": "sdk-protocol.md §6.3",
+  "input": {
+    "slug": "kf-stock",
+    "context": {
+      "v": 1,
+      "tenant": "00000000-0000-0000-0000-00000000000a",
+      "user": "subject-1",
+      "actor": {
+        "type": "user",
+        "via": null,
+        "hookId": null
+      },
+      "locale": "en",
+      "rights": [],
+      "method": "GET",
+      "path": "/x",
+      "query": null,
+      "ts": "$now",
+      "requestId": "req-events-1"
+    },
+    "proof": "4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f",
+    "call": "emit",
+    "args": {
+      "name": "level-changed",
+      "data": {
+        "sku": "KF-42",
+        "level": 7
+      }
+    },
+    "platform": {
+      "status": 202,
+      "body": "{\"eventId\":\"6f1c2d3e-0000-4000-8000-000000000001\",\"type\":\"m.kf-stock.after.level-changed\"}"
+    }
+  },
+  "expect": {
+    "outcome": "ok",
+    "request": {
+      "method": "POST",
+      "path": "/api/v1/platform/modules/kf-stock/events",
+      "query": null,
+      "headers": {
+        "Authorization": "Bearer kfm_conformance-token-never-logged",
+        "X-KF-Context": "$context",
+        "X-KF-Context-Proof": "4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f"
+      },
+      "body": {
+        "name": "level-changed",
+        "data": {
+          "sku": "KF-42",
+          "level": 7
+        }
+      }
+    },
+    "result": {
+      "eventId": "6f1c2d3e-0000-4000-8000-000000000001",
+      "type": "m.kf-stock.after.level-changed"
+    }
+  }
+}

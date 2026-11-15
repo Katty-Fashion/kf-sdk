@@ -1,0 +1,14 @@
+{
+  "id": "signature/sign-ascii-body",
+  "area": "signature",
+  "description": "HMAC-SHA256(secret, ts + \".\" + body), lowercase hex, over an ASCII body: the SDK signs exactly as the platform.",
+  "source": "the platform HookSignatureSigner.sign",
+  "input": {
+    "secret": "kf-hook-secret-conformance",
+    "timestamp": "1760000000",
+    "body": "{\"specversion\":\"1.0\",\"type\":\"kf.model.after.create\",\"data\":{\"id\":42}}"
+  },
+  "expect": {
+    "signature": "952c40ebda8d2515696acc3eb4774b4615b223160eadde93fa823b497fa054f2"
+  }
+}

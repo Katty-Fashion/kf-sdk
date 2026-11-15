@@ -1,0 +1,29 @@
+{
+  "id": "manifest/rollback-floor-accepted",
+  "area": "manifest",
+  "description": "The optional top-level rollbackFloor is a semver at or below version: no error, no warning; the typed Manifest reads it.",
+  "source": "sdk-protocol.md §3.1, §12",
+  "input": {
+    "manifest": {
+      "schemaVersion": 2,
+      "slug": "man-mod",
+      "name": "module.name",
+      "version": "1.2.0",
+      "rollbackFloor": "1.1.0",
+      "platform": ">=4.1",
+      "i18n": {
+        "en": {
+          "module.name": "Manifest module"
+        }
+      }
+    }
+  },
+  "expect": {
+    "valid": true,
+    "warningsContain": [],
+    "read": {
+      "/version": "1.2.0",
+      "/rollbackFloor": "1.1.0"
+    }
+  }
+}

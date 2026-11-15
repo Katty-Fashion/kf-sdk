@@ -1,0 +1,151 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://kf.ro/schemas/hook-points.catalog.schema.json",
+  "title": "KF hook-point catalog",
+  "description": "The shape of the hook-point catalog. generates two catalogs from the @HookPoint declarations: the complete one (every point) and the release one (public points only); the SDKs and the validation of public modules read only the release one. This schema holds no point: the catalogs do. The attributes of $defs.point are, name for name, the attributes of the @HookPoint annotation (HookPointSchemaParityTest). Uniqueness of an id inside a catalog is enforced by the generator and its drift test, which JSON Schema cannot express.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["catalogVersion", "platformVersion", "variant", "points"],
+  "properties": {
+    "catalogVersion": {
+      "description": "The version of the catalog format; 1 for the form fixed.",
+      "type": "integer",
+      "minimum": 1
+    },
+    "platformVersion": {
+      "description": "The semver of the platform the catalog was generated from.",
+      "type": "string",
+      "pattern": "^(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)(?:-[0-9A-Za-z.-]+)?(?:\\+[0-9A-Za-z.-]+)?$"
+    },
+    "variant": {
+      "description": "complete: every point, internal and public; release: only the public points.",
+      "enum": ["complete", "release"]
+    },
+    "points": {
+      "description": "The points, one per declaration.",
+      "type": "array",
+      "items": { "$ref": "#/$defs/point" }
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": { "variant": { "const": "release" } },
+        "required": ["variant"]
+      },
+      "then": {
+        "properties": {
+          "points": {
+            "items": {
+              "properties": { "visibility": { "const": "public" } }
+            }
+          }
+        }
+      }
+    }
+  ],
+  "$defs": {
+    "point": {
+      "description": "One hook point, as declared by @HookPoint.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "phase", "entity", "envelope", "envelopeVersion", "visibility", "timeoutMs"],
+      "properties": {
+        "id": {
+          "description": "{entity}.{before|after|field}.{action}; a point type of the registry.",
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9_]*\\.(?:before|after|field)\\.[a-z][a-z0-9]*(?:-[a-z0-9]+)*$"
+        },
+        "phase": {
+          "description": "before: synchronous, in the transaction; after-commit: asynchronous, at least once.",
+          "enum": ["before", "after-commit"]
+        },
+        "entity": {
+          "description": "The logical name of the @ExtensibleEntity; the first segment of id.",
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9_]*$"
+        },
+        "envelope": {
+          "description": "The shape of data: kf.change (entity, id, before, after, changed) or kf.field-change (plus field, oldValue, newValue).",
+          "enum": ["kf.change", "kf.field-change"]
+        },
+        "envelopeVersion": {
+          "description": "The version of the envelope (kfenvelopeversion).",
+          "type": "integer",
+          "minimum": 1
+        },
+        "visibility": {
+          "description": "internal: platform modules only; public: in the release catalog and the SDK constants.",
+          "enum": ["internal", "public"]
+        },
+        "veto": {
+          "description": "Whether a module may reject the mutation; before points only.",
+          "type": "boolean",
+          "default": false
+        },
+        "patch": {
+          "description": "The entity's own fields a module may patch; before points only.",
+          "type": "array",
+          "items": { "type": "string", "pattern": "^[a-z][A-Za-z0-9]*$" },
+          "uniqueItems": true,
+          "default": []
+        },
+        "timeoutMs": {
+          "description": "The callback timeout of this point, in milliseconds.",
+          "type": "integer",
+          "minimum": 100,
+          "maximum": 30000
+        },
+        "defaultOnFailure": {
+          "description": "The policy when a callback fails and the module chose none; block on before points only, and a module asking for block needs the capability.",
+          "enum": ["allow", "block"],
+          "default": "allow"
+        },
+        "capability": {
+          "description": "The manifest list the id must appear in as point (capabilities.hooks[].point).",
+          "enum": ["hooks"],
+          "default": "hooks"
+        },
+        "fieldFilter": {
+          "description": "Whether a subscription may filter on field paths; field points only.",
+          "type": "boolean",
+          "default": false
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": { "phase": { "const": "before" } },
+            "required": ["phase"]
+          },
+          "then": {
+            "properties": { "id": { "pattern": "^[^.]+\\.before\\." } }
+          },
+          "else": {
+            "properties": {
+              "id": { "pattern": "^[^.]+\\.(?:after|field)\\." },
+              "veto": { "const": false },
+              "patch": { "maxItems": 0 },
+              "defaultOnFailure": { "const": "allow" }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": { "id": { "pattern": "^[^.]+\\.field\\." } },
+            "required": ["id"]
+          },
+          "then": {
+            "properties": { "envelope": { "const": "kf.field-change" } }
+          },
+          "else": {
+            "properties": {
+              "envelope": { "const": "kf.change" },
+              "fieldFilter": { "const": false }
+            }
+          }
+        }
+      ]
+    }
+  }
+}

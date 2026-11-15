@@ -1,0 +1,101 @@
+{
+  "id": "manifest/settings-valid",
+  "area": "manifest",
+  "description": "BOOLEAN, NUMBER (with min..max) and ENUM settings with defaults coherent with their type are valid; the typed manifest reads every key (default as defaultValue; values [] and min/max null when absent).",
+  "source": "sdk-protocol.md §3.2, §15",
+  "input": {
+    "manifest": {
+      "schemaVersion": 2,
+      "slug": "man-mod",
+      "name": "module.name",
+      "version": "1.0.0",
+      "platform": ">=4.1",
+      "i18n": {
+        "en": {
+          "module.name": "Manifest module",
+          "setting.push": "Push on save",
+          "setting.timeout": "Timeout",
+          "setting.mode": "Mode",
+          "setting.mode.help": "How the module pushes",
+          "tab.label": "AAS"
+        }
+      },
+      "capabilities": {
+        "routes": [
+          {
+            "method": "GET",
+            "path": "/m/man-mod/stations",
+            "right": "api.v1.m.man-mod.stations.get"
+          },
+          {
+            "method": "GET",
+            "path": "/m/man-mod/admin/config",
+            "right": "api.v1.m.man-mod.admin.config.get",
+            "admin": "tenant"
+          },
+          {
+            "method": "PUT",
+            "path": "/m/man-mod/admin/keys",
+            "right": "api.v1.m.man-mod.admin.keys.put",
+            "admin": "platform"
+          },
+          {
+            "method": "PUT",
+            "path": "/m/man-mod/admin/tenant-keys",
+            "right": "api.v1.m.man-mod.admin.tenant-keys.put",
+            "admin": "tenant"
+          }
+        ],
+        "settings": [
+          {
+            "key": "push-on-save",
+            "type": "BOOLEAN",
+            "default": false,
+            "label": "setting.push"
+          },
+          {
+            "key": "timeout-seconds",
+            "type": "NUMBER",
+            "default": 30,
+            "min": 5,
+            "max": 600,
+            "label": "setting.timeout"
+          },
+          {
+            "key": "mode",
+            "type": "ENUM",
+            "default": "auto",
+            "values": [
+              "auto",
+              "manual"
+            ],
+            "label": "setting.mode",
+            "description": "setting.mode.help"
+          }
+        ]
+      }
+    }
+  },
+  "expect": {
+    "valid": true,
+    "warningsContain": [],
+    "read": {
+      "/capabilities/settings/0/key": "push-on-save",
+      "/capabilities/settings/0/type": "BOOLEAN",
+      "/capabilities/settings/0/defaultValue": false,
+      "/capabilities/settings/0/values": [],
+      "/capabilities/settings/0/min": null,
+      "/capabilities/settings/0/description": null,
+      "/capabilities/settings/1/defaultValue": 30,
+      "/capabilities/settings/1/min": 5,
+      "/capabilities/settings/1/max": 600,
+      "/capabilities/settings/2/defaultValue": "auto",
+      "/capabilities/settings/2/values": [
+        "auto",
+        "manual"
+      ],
+      "/capabilities/settings/2/label": "setting.mode",
+      "/capabilities/settings/2/description": "setting.mode.help"
+    }
+  }
+}

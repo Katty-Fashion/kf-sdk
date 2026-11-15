@@ -1,0 +1,77 @@
+{
+  "id": "manifest/help-key-duplicate-refused",
+  "area": "manifest",
+  "description": "A key declared twice is refused, and a key outside the grammar (upper case) too.",
+  "source": "sdk-protocol.md §3.2, §7.13",
+  "input": {
+    "manifest": {
+      "schemaVersion": 3,
+      "slug": "kf-aas-r3",
+      "name": "module.name",
+      "version": "1.0.0",
+      "platform": ">=4.1",
+      "i18n": {
+        "en": {
+          "module.name": "AAS",
+          "page.utils-help": "AAS help",
+          "help.aas-overview.summary": "What the AAS pages do and how they connect"
+        }
+      },
+      "capabilities": {
+        "routes": [
+          {
+            "method": "GET",
+            "path": "/m/kf-aas-r3/shells",
+            "right": "api.v1.m.kf-aas-r3.shells.get"
+          }
+        ],
+        "surfaces": [
+          {
+            "slug": "module.pages",
+            "kind": "react",
+            "page": "utils-help"
+          },
+          {
+            "slug": "module.pages",
+            "kind": "react",
+            "page": "utils-shells"
+          },
+          {
+            "slug": "module.pages",
+            "kind": "react",
+            "page": "mapping"
+          },
+          {
+            "slug": "setup.sections",
+            "kind": "react",
+            "page": "platforms"
+          }
+        ],
+        "help": [
+          {
+            "key": "aas-overview",
+            "title": "page.utils-help",
+            "page": "utils-help"
+          },
+          {
+            "key": "aas-overview",
+            "title": "page.utils-help",
+            "page": "utils-help"
+          },
+          {
+            "key": "AasOverview",
+            "title": "page.utils-help",
+            "page": "utils-help"
+          }
+        ]
+      }
+    }
+  },
+  "expect": {
+    "valid": false,
+    "errorsContain": [
+      "kf-module-conf.json: capabilities.help[1].key \"aas-overview\" is declared twice",
+      "kf-module-conf.json: capabilities.help[2].key must match ^[a-z][a-z0-9-]{0,40}$ (got \"AasOverview\")"
+    ]
+  }
+}

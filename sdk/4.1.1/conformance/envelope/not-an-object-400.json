@@ -1,0 +1,18 @@
+{
+  "id": "envelope/not-an-object-400",
+  "area": "envelope",
+  "description": "A signed body that is not a CloudEvent JSON object gets 400 before the version is read.",
+  "source": "a rule of the SDK itself",
+  "input": {
+    "rawBody": "[1,2,3]"
+  },
+  "expect": {
+    "status": 400,
+    "handlerCalled": false,
+    "bodyContains": {
+      "type": "https://kf.ro/problems/invalid-envelope",
+      "status": 400,
+      "class": "permanent"
+    }
+  }
+}

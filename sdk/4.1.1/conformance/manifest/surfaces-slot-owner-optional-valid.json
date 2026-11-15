@@ -1,0 +1,39 @@
+{
+  "id": "manifest/surfaces-slot-owner-optional-valid",
+  "area": "manifest",
+  "description": "A contribution to m.{owner}.{key} with the owner required as optional is valid; a slot is not a host surface, so no catalogue warning.",
+  "source": "sdk-protocol.md §3.2, §7.12",
+  "input": {
+    "manifest": {
+      "schemaVersion": 3,
+      "slug": "slot-contrib",
+      "name": "module.name",
+      "version": "1.0.0",
+      "platform": ">=4.1",
+      "i18n": {
+        "en": {
+          "module.name": "Slot contributor"
+        }
+      },
+      "capabilities": {
+        "surfaces": [
+          {
+            "slug": "m.kf-3d.viewport.layers.v1",
+            "kind": "layer"
+          }
+        ]
+      },
+      "requires": [
+        {
+          "slug": "kf-3d",
+          "versionRange": ">=1.0.0",
+          "optional": true
+        }
+      ]
+    }
+  },
+  "expect": {
+    "valid": true,
+    "warningsContain": []
+  }
+}

@@ -1,0 +1,82 @@
+{
+  "id": "extensions/write-undeclared-field-refused-locally",
+  "area": "extensions",
+  "description": "With the manifest known, a field the module does not declare for the entity is refused locally, no request.",
+  "source": "sdk-protocol.md §15.4",
+  "input": {
+    "slug": "ext-mod",
+    "context": {
+      "v": 1,
+      "tenant": "00000000-0000-0000-0000-00000000000a",
+      "user": "subject-1",
+      "actor": {
+        "type": "user",
+        "via": null,
+        "hookId": null
+      },
+      "locale": "en",
+      "rights": [],
+      "method": "GET",
+      "path": "/x",
+      "query": null,
+      "ts": "$now",
+      "requestId": "req-ext-4"
+    },
+    "proof": "3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f",
+    "manifest": {
+      "schemaVersion": 2,
+      "slug": "ext-mod",
+      "name": "n",
+      "version": "1.0.0",
+      "i18n": {
+        "en": {
+          "n": "Ext",
+          "f": "Field"
+        }
+      },
+      "capabilities": {
+        "fields": [
+          {
+            "entity": "model_version",
+            "name": "aas_shell",
+            "type": "STRING",
+            "table": "version_aas",
+            "label": "f"
+          },
+          {
+            "entity": "model_version",
+            "name": "aas_last_push",
+            "type": "STRING",
+            "table": "version_aas",
+            "label": "f"
+          }
+        ]
+      }
+    },
+    "call": "write",
+    "args": {
+      "entity": "model_version",
+      "id": "17",
+      "values": {
+        "aas_shell": "X",
+        "colour": "red"
+      }
+    },
+    "platform": {
+      "status": 200,
+      "body": "{}"
+    }
+  },
+  "expect": {
+    "outcome": "error",
+    "request": null,
+    "error": {
+      "status": 0,
+      "class": "permanent",
+      "kind": "other",
+      "messageContains": [
+        "colour is not declared in capabilities.fields for model_version"
+      ]
+    }
+  }
+}

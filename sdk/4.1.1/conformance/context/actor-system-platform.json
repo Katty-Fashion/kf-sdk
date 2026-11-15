@@ -1,0 +1,36 @@
+{
+  "id": "context/actor-system-platform",
+  "area": "context",
+  "description": "actor {type: system, via: platform, hookId: null} with user null and rights []: the platform calls a provided read as the system; no user is deduced.",
+  "source": "sdk-protocol.md §9.2",
+  "input": {
+    "secret": "kf-hook-secret-conformance",
+    "now": 1760000000,
+    "headers": {
+      "X-KF-Context": "eyJ2IjoxLCJ0ZW5hbnQiOiIwZjFlMmQzYy00YjVhLTQ5NjgtODc3Ni02NTU0NDMzMjIxMTAiLCJ1c2VyIjpudWxsLCJhY3RvciI6eyJ0eXBlIjoic3lzdGVtIiwidmlhIjoicGxhdGZvcm0iLCJob29rSWQiOm51bGx9LCJsb2NhbGUiOiJybyIsInJpZ2h0cyI6W10sIm1ldGhvZCI6IkdFVCIsInBhdGgiOiIvc3RhdGlvbnMiLCJxdWVyeSI6bnVsbCwidHMiOjE3NjAwMDAwMDAsInJlcXVlc3RJZCI6InJlcS0wMTAxIn0",
+      "X-KF-Timestamp": "1760000000",
+      "X-KF-Signature": "8b1f426bc4b001d375eaea18dd892853030b2c9ad101da912e3adcaea6e963ba"
+    },
+    "body": ""
+  },
+  "expect": {
+    "valid": true,
+    "context": {
+      "v": 1,
+      "tenant": "0f1e2d3c-4b5a-4968-8776-655443322110",
+      "user": null,
+      "actor": {
+        "type": "system",
+        "via": "platform",
+        "hookId": null
+      },
+      "locale": "ro",
+      "rights": [],
+      "method": "GET",
+      "path": "/stations",
+      "query": null,
+      "ts": 1760000000,
+      "requestId": "req-0101"
+    }
+  }
+}

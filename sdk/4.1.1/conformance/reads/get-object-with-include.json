@@ -1,0 +1,61 @@
+{
+  "id": "reads/get-object-with-include",
+  "area": "reads",
+  "description": "get(context, port, id, include): the heavy sub-collections are asked by name, comma-separated, in the given order.",
+  "source": "sdk-protocol.md §15.1",
+  "input": {
+    "slug": "reads-mod",
+    "context": {
+      "v": 1,
+      "tenant": "00000000-0000-0000-0000-00000000000a",
+      "user": "subject-1",
+      "actor": {
+        "type": "user",
+        "via": null,
+        "hookId": null
+      },
+      "locale": "en",
+      "rights": [],
+      "method": "GET",
+      "path": "/x",
+      "query": null,
+      "ts": "$now",
+      "requestId": "req-reads-4"
+    },
+    "proof": "3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f",
+    "call": "get",
+    "args": {
+      "port": "model-version.v1",
+      "id": "7",
+      "include": [
+        "grading",
+        "consumption"
+      ]
+    },
+    "platform": {
+      "status": 200,
+      "body": "{\"id\":\"7\",\"grading\":{\"baselineSize\":\"M\"},\"consumption\":[]}"
+    }
+  },
+  "expect": {
+    "outcome": "ok",
+    "request": {
+      "method": "GET",
+      "path": "/api/v1/platform/modules/reads-mod/reads/model-version.v1/7",
+      "query": "include=grading,consumption",
+      "headers": {
+        "Authorization": "Bearer kfm_conformance-token-never-logged",
+        "X-KF-Context": "$context",
+        "X-KF-Context-Proof": "3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f"
+      },
+      "body": null
+    },
+    "result": {
+      "id": "7",
+      "grading": {
+        "baselineSize": "M"
+      },
+      "consumption": []
+    }
+  }
+}

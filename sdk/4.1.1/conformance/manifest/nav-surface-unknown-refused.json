@@ -1,0 +1,45 @@
+{
+  "id": "manifest/nav-surface-unknown-refused",
+  "area": "manifest",
+  "description": "A nav entry on a surface other than staff, customer or platform is refused, naming the three.",
+  "source": "sdk-protocol.md §3.2, §7.11",
+  "input": {
+    "manifest": {
+      "schemaVersion": 2,
+      "slug": "man-mod",
+      "name": "module.name",
+      "version": "1.0.0",
+      "platform": ">=4.1",
+      "i18n": {
+        "en": {
+          "module.name": "Manifest module",
+          "nav.events": "Events"
+        }
+      },
+      "capabilities": {
+        "routes": [
+          {
+            "method": "GET",
+            "path": "/m/man-mod/events",
+            "right": "api.v1.m.man-mod.events.get"
+          }
+        ],
+        "nav": [
+          {
+            "surface": "sidebar",
+            "group": "admin-utils",
+            "key": "events",
+            "label": "nav.events",
+            "url": "/modules"
+          }
+        ]
+      }
+    }
+  },
+  "expect": {
+    "valid": false,
+    "errorsContain": [
+      "capabilities.nav[0].surface must be one of staff, customer, platform (got \"sidebar\")"
+    ]
+  }
+}

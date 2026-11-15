@@ -1,0 +1,65 @@
+{
+  "id": "peers/command-replay-same-body",
+  "area": "peers",
+  "description": "command(context, owner, name, key, body): POST …/commands/{name} with Idempotency-Key and the JSON body; the platform replays the stored answer for the same key and body (the owner is not called again) and the SDK returns it unchanged, its status included.",
+  "source": "sdk-protocol.md §15.9",
+  "input": {
+    "slug": "peers-caller",
+    "context": {
+      "v": 1,
+      "tenant": "00000000-0000-0000-0000-00000000000a",
+      "user": "subject-1",
+      "actor": {
+        "type": "user",
+        "via": null,
+        "hookId": null
+      },
+      "locale": "en",
+      "rights": [],
+      "method": "GET",
+      "path": "/x",
+      "query": null,
+      "ts": "$now",
+      "requestId": "req-peers-5"
+    },
+    "proof": "4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f",
+    "call": "command",
+    "args": {
+      "owner": "kf-stock",
+      "name": "reserve",
+      "idempotencyKey": "order-17-reserve-1",
+      "body": {
+        "sku": "KF-42",
+        "qty": 3
+      }
+    },
+    "platform": {
+      "status": 201,
+      "body": "{\"reservationId\":\"r-1\"}"
+    }
+  },
+  "expect": {
+    "outcome": "ok",
+    "request": {
+      "method": "POST",
+      "path": "/api/v1/platform/modules/peers-caller/peers/kf-stock/commands/reserve",
+      "query": null,
+      "headers": {
+        "Authorization": "Bearer kfm_conformance-token-never-logged",
+        "X-KF-Context": "$context",
+        "X-KF-Context-Proof": "4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f",
+        "Idempotency-Key": "order-17-reserve-1"
+      },
+      "body": {
+        "sku": "KF-42",
+        "qty": 3
+      }
+    },
+    "result": {
+      "status": 201,
+      "body": {
+        "reservationId": "r-1"
+      }
+    }
+  }
+}

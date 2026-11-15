@@ -1,0 +1,51 @@
+{
+  "id": "extensions/write-unknown-entity-refused-locally",
+  "area": "extensions",
+  "description": "The entity is model, order, customer or model_version; another one is refused locally, no request.",
+  "source": "sdk-protocol.md §15.4",
+  "input": {
+    "slug": "ext-mod",
+    "context": {
+      "v": 1,
+      "tenant": "00000000-0000-0000-0000-00000000000a",
+      "user": "subject-1",
+      "actor": {
+        "type": "user",
+        "via": null,
+        "hookId": null
+      },
+      "locale": "en",
+      "rights": [],
+      "method": "GET",
+      "path": "/x",
+      "query": null,
+      "ts": "$now",
+      "requestId": "req-ext-5"
+    },
+    "proof": "3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f",
+    "call": "write",
+    "args": {
+      "entity": "supplier",
+      "id": "1",
+      "values": {
+        "a": "b"
+      }
+    },
+    "platform": {
+      "status": 200,
+      "body": "{}"
+    }
+  },
+  "expect": {
+    "outcome": "error",
+    "request": null,
+    "error": {
+      "status": 0,
+      "class": "permanent",
+      "kind": "other",
+      "messageContains": [
+        "entity must be one of model, order, customer, model_version"
+      ]
+    }
+  }
+}

@@ -1,0 +1,73 @@
+{
+  "id": "manifest/help-valid",
+  "area": "manifest",
+  "description": "A help note with a key, a title and a summary defined in i18n.en, a page the module declares on module.pages and a context of declared pages is valid under schemaVersion 3 and read typed, in the declared order; a note on a declared setup.sections section reads order 100 by default.",
+  "source": "sdk-protocol.md §3.2, §7.13",
+  "input": {
+    "manifest": {
+      "schemaVersion": 3,
+      "slug": "kf-aas-r3",
+      "name": "module.name",
+      "version": "1.0.0",
+      "platform": ">=4.1",
+      "i18n": {
+        "en": {
+          "module.name": "AAS",
+          "page.utils-help": "AAS help",
+          "help.aas-overview.summary": "What the AAS pages do and how they connect",
+          "help.platforms": "Connected platforms"
+        }
+      },
+      "capabilities": {
+        "routes": [
+          {
+            "method": "GET",
+            "path": "/m/kf-aas-r3/shells",
+            "right": "api.v1.m.kf-aas-r3.shells.get"
+          }
+        ],
+        "surfaces": [
+          { "slug": "module.pages", "kind": "react", "page": "utils-help" },
+          { "slug": "module.pages", "kind": "react", "page": "utils-shells" },
+          { "slug": "module.pages", "kind": "react", "page": "mapping" },
+          { "slug": "setup.sections", "kind": "react", "page": "platforms" }
+        ],
+        "help": [
+          {
+            "key": "aas-overview",
+            "title": "page.utils-help",
+            "summary": "help.aas-overview.summary",
+            "page": "utils-help",
+            "context": ["utils-shells", "mapping"],
+            "right": "api.v1.m.kf-aas-r3.shells.get",
+            "order": 10
+          },
+          {
+            "key": "platforms",
+            "title": "help.platforms",
+            "section": "platforms"
+          }
+        ]
+      }
+    }
+  },
+  "expect": {
+    "valid": true,
+    "warningsContain": [],
+    "read": {
+      "/capabilities/help/0/key": "aas-overview",
+      "/capabilities/help/0/title": "page.utils-help",
+      "/capabilities/help/0/summary": "help.aas-overview.summary",
+      "/capabilities/help/0/page": "utils-help",
+      "/capabilities/help/0/section": null,
+      "/capabilities/help/0/context": ["utils-shells", "mapping"],
+      "/capabilities/help/0/right": "api.v1.m.kf-aas-r3.shells.get",
+      "/capabilities/help/0/order": 10,
+      "/capabilities/help/1/key": "platforms",
+      "/capabilities/help/1/section": "platforms",
+      "/capabilities/help/1/page": null,
+      "/capabilities/help/1/context": [],
+      "/capabilities/help/1/order": 100
+    }
+  }
+}

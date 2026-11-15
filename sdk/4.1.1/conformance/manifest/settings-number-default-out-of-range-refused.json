@@ -1,0 +1,68 @@
+{
+  "id": "manifest/settings-number-default-out-of-range-refused",
+  "area": "manifest",
+  "description": "A NUMBER default outside min..max is refused.",
+  "source": "sdk-protocol.md §3.2, §15",
+  "input": {
+    "manifest": {
+      "schemaVersion": 2,
+      "slug": "man-mod",
+      "name": "module.name",
+      "version": "1.0.0",
+      "platform": ">=4.1",
+      "i18n": {
+        "en": {
+          "module.name": "Manifest module",
+          "setting.push": "Push on save",
+          "setting.timeout": "Timeout",
+          "setting.mode": "Mode",
+          "setting.mode.help": "How the module pushes",
+          "tab.label": "AAS"
+        }
+      },
+      "capabilities": {
+        "routes": [
+          {
+            "method": "GET",
+            "path": "/m/man-mod/stations",
+            "right": "api.v1.m.man-mod.stations.get"
+          },
+          {
+            "method": "GET",
+            "path": "/m/man-mod/admin/config",
+            "right": "api.v1.m.man-mod.admin.config.get",
+            "admin": "tenant"
+          },
+          {
+            "method": "PUT",
+            "path": "/m/man-mod/admin/keys",
+            "right": "api.v1.m.man-mod.admin.keys.put",
+            "admin": "platform"
+          },
+          {
+            "method": "PUT",
+            "path": "/m/man-mod/admin/tenant-keys",
+            "right": "api.v1.m.man-mod.admin.tenant-keys.put",
+            "admin": "tenant"
+          }
+        ],
+        "settings": [
+          {
+            "key": "timeout",
+            "type": "NUMBER",
+            "default": 1,
+            "min": 5,
+            "max": 10,
+            "label": "setting.timeout"
+          }
+        ]
+      }
+    }
+  },
+  "expect": {
+    "valid": false,
+    "errorsContain": [
+      "capabilities.settings[0].default must be between min and max"
+    ]
+  }
+}

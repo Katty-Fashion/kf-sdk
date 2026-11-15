@@ -1,0 +1,72 @@
+{
+  "id": "services/upsert-bad-cost-refused-locally",
+  "area": "services",
+  "description": "A negative amount and a currency outside ISO 4217 are refused locally, nothing sent.",
+  "source": "sdk-protocol.md §16.6",
+  "input": {
+    "slug": "services-mod",
+    "context": {
+      "v": 1,
+      "tenant": "00000000-0000-0000-0000-00000000000a",
+      "user": "subject-1",
+      "actor": {
+        "type": "user",
+        "via": null,
+        "hookId": null
+      },
+      "locale": "en",
+      "rights": [],
+      "method": "POST",
+      "path": "/m/services-mod/lines",
+      "query": null,
+      "ts": "$now",
+      "requestId": "req-services-3"
+    },
+    "proof": "5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e",
+    "manifest": {
+      "schemaVersion": 3,
+      "slug": "services-mod",
+      "name": "module.name",
+      "version": "1.0.0",
+      "platform": ">=4.1",
+      "i18n": {
+        "en": {
+          "module.name": "Services"
+        }
+      },
+      "capabilities": {
+        "services": [
+          {
+            "port": "order.services.v1"
+          }
+        ]
+      }
+    },
+    "call": "upsert",
+    "args": {
+      "orderId": "812",
+      "entryId": "4401",
+      "name": "Embroidery",
+      "amount": "-1",
+      "currency": "eur",
+      "externalRef": "embroidery:4401"
+    },
+    "platform": {
+      "status": 204,
+      "body": ""
+    }
+  },
+  "expect": {
+    "outcome": "error",
+    "request": null,
+    "error": {
+      "status": 0,
+      "class": "permanent",
+      "kind": "other",
+      "messageContains": [
+        "cost.amount must be a number >= 0",
+        "cost.currency must be an ISO 4217 code"
+      ]
+    }
+  }
+}

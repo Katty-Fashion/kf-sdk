@@ -1,0 +1,58 @@
+{
+  "id": "audit/capability-403-forbidden",
+  "area": "audit",
+  "description": "403 with class permanent (capability not declared, or the module not live for the tenant) is the SDK's Forbidden error; the SDK does not retry.",
+  "source": "the platform ModuleAuditController / ModuleAuditService / ModuleAuditPortIT",
+  "input": {
+    "slug": "audit-mod",
+    "context": {
+      "v": 1,
+      "tenant": "00000000-0000-0000-0000-00000000000a",
+      "user": "subject-1",
+      "locale": "en",
+      "rights": [],
+      "method": "POST",
+      "path": "/notes",
+      "query": null,
+      "ts": "$now",
+      "requestId": "req-audit-1"
+    },
+    "proof": "3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f",
+    "call": "record",
+    "record": {
+      "action": "NOTE_CREATED",
+      "aggregateType": "Note",
+      "aggregateRef": "42"
+    },
+    "platform": {
+      "status": 403,
+      "body": "{\"type\":\"https://kf.ro/problems/capability-not-declared\",\"title\":\"Capability not declared\",\"status\":403,\"detail\":\"The active version of audit-mod does not declare capabilities.audit [{\\\"access\\\": \\\"write\\\"}].\",\"class\":\"permanent\"}"
+    }
+  },
+  "expect": {
+    "outcome": "error",
+    "request": {
+      "method": "POST",
+      "path": "/api/v1/platform/modules/audit-mod/audit",
+      "query": null,
+      "headers": {
+        "Authorization": "Bearer kfm_conformance-token-never-logged",
+        "X-KF-Context": "$context",
+        "X-KF-Context-Proof": "3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f"
+      },
+      "body": {
+        "action": "NOTE_CREATED",
+        "aggregateType": "Note",
+        "aggregateRef": "42"
+      }
+    },
+    "error": {
+      "status": 403,
+      "class": "permanent",
+      "kind": "forbidden",
+      "messageContains": [
+        "does not declare capabilities.audit"
+      ]
+    }
+  }
+}

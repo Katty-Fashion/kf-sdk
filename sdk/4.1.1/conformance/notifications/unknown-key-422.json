@@ -1,0 +1,56 @@
+{
+  "id": "notifications/unknown-key-422",
+  "area": "notifications",
+  "description": "422 with class permanent and reason unknown-key is the SDK's Rejected error with that reason; the SDK does not retry.",
+  "source": "the platform ModuleNotificationController / SendModuleNotificationUseCase / ModuleNotificationIT",
+  "input": {
+    "slug": "notif-mod",
+    "call": "send",
+    "tenantId": "00000000-0000-0000-0000-00000000000a",
+    "key": "nedeclarata",
+    "recipients": [
+      "subject-1",
+      "subject-2"
+    ],
+    "variables": {},
+    "options": {
+      "idempotencyKey": "7a07a07a-0000-4000-8000-000000000207"
+    },
+    "platform": [
+      {
+        "status": 422,
+        "body": "{\"type\": \"https://kf.ro/problems/notification-rejected\", \"title\": \"Unprocessable Entity\", \"status\": 422, \"detail\": \"The active version of notif-mod does not declare the notification 'nedeclarata'.\", \"instance\": \"/api/v1/platform/modules/notif-mod/notifications\", \"reason\": \"unknown-key\", \"class\": \"permanent\"}"
+      }
+    ]
+  },
+  "expect": {
+    "outcome": "error",
+    "requests": 1,
+    "request": {
+      "method": "POST",
+      "path": "/api/v1/platform/modules/notif-mod/notifications",
+      "headers": {
+        "Authorization": "Bearer kfm_conformance-token-never-logged"
+      },
+      "body": {
+        "tenantId": "00000000-0000-0000-0000-00000000000a",
+        "key": "nedeclarata",
+        "recipients": [
+          "subject-1",
+          "subject-2"
+        ],
+        "variables": {},
+        "idempotencyKey": "7a07a07a-0000-4000-8000-000000000207"
+      }
+    },
+    "error": {
+      "status": 422,
+      "class": "permanent",
+      "kind": "rejected",
+      "reason": "unknown-key",
+      "messageContains": [
+        "The active version of notif-mod does not"
+      ]
+    }
+  }
+}

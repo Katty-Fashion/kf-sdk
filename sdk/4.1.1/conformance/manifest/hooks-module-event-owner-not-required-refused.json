@@ -1,0 +1,34 @@
+{
+  "id": "manifest/hooks-module-event-owner-not-required-refused",
+  "area": "manifest",
+  "description": "The owner of the event must be in requires (mandatory or optional).",
+  "source": "sdk-protocol.md §6.1, §6.3",
+  "input": {
+    "manifest": {
+      "schemaVersion": 3,
+      "slug": "kf-3d",
+      "name": "module.name",
+      "version": "1.0.0",
+      "platform": ">=4.1",
+      "i18n": {
+        "en": {
+          "module.name": "3D"
+        }
+      },
+      "requires": [],
+      "capabilities": {
+        "hooks": [
+          {
+            "point": "m.kf-stock.after.level-changed"
+          }
+        ]
+      }
+    }
+  },
+  "expect": {
+    "valid": false,
+    "errorsContain": [
+      "capabilities.hooks[0].point \"m.kf-stock.after.level-changed\" is an event of kf-stock, which this manifest does not require (requires, mandatory or optional)"
+    ]
+  }
+}

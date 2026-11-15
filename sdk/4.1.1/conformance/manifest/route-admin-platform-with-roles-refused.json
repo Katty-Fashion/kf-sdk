@@ -1,0 +1,44 @@
+{
+  "id": "manifest/route-admin-platform-with-roles-refused",
+  "area": "manifest",
+  "description": "A route with admin platform that declares roles is refused: only the platform administrator holds its right.",
+  "source": "sdk-protocol.md §3.2, §15",
+  "input": {
+    "manifest": {
+      "schemaVersion": 2,
+      "slug": "man-mod",
+      "name": "module.name",
+      "version": "1.0.0",
+      "platform": ">=4.1",
+      "i18n": {
+        "en": {
+          "module.name": "Manifest module",
+          "setting.push": "Push on save",
+          "setting.timeout": "Timeout",
+          "setting.mode": "Mode",
+          "setting.mode.help": "How the module pushes",
+          "tab.label": "AAS"
+        }
+      },
+      "capabilities": {
+        "routes": [
+          {
+            "method": "PUT",
+            "path": "/m/man-mod/admin/keys",
+            "right": "api.v1.m.man-mod.admin.keys.put",
+            "admin": "platform",
+            "roles": [
+              "QC"
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "expect": {
+    "valid": false,
+    "errorsContain": [
+      ".admin \"platform\" declares no roles"
+    ]
+  }
+}

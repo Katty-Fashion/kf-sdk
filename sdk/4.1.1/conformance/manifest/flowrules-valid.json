@@ -1,0 +1,52 @@
+{
+  "id": "manifest/flowrules-valid",
+  "area": "manifest",
+  "description": "A flow rule on a declared GET route, with the projection order.flow-rule.v1, is valid and read typed (timeoutSeconds absent = null, the default 2 s).",
+  "source": "sdk-protocol.md §3.2, §16",
+  "input": {
+    "manifest": {
+      "schemaVersion": 3,
+      "slug": "kf-step",
+      "name": "module.name",
+      "version": "1.0.0",
+      "platform": ">=4.1",
+      "i18n": {
+        "en": {
+          "module.name": "Step",
+          "step.label": "Item check"
+        }
+      },
+      "capabilities": {
+        "routes": [
+          {
+            "method": "GET",
+            "path": "/m/kf-step/rules/item-ready",
+            "right": "api.v1.m.kf-step.rules.item-ready.get"
+          },
+          {
+            "method": "POST",
+            "path": "/m/kf-step/items",
+            "right": "api.v1.m.kf-step.items.post"
+          }
+        ],
+        "flowRules": [
+          {
+            "key": "item-ready",
+            "path": "/m/kf-step/rules/item-ready",
+            "projection": "order.flow-rule.v1"
+          }
+        ]
+      }
+    }
+  },
+  "expect": {
+    "valid": true,
+    "warningsContain": [],
+    "read": {
+      "/capabilities/flowRules/0/key": "item-ready",
+      "/capabilities/flowRules/0/path": "/m/kf-step/rules/item-ready",
+      "/capabilities/flowRules/0/timeoutSeconds": null,
+      "/capabilities/flowRules/0/projection": "order.flow-rule.v1"
+    }
+  }
+}

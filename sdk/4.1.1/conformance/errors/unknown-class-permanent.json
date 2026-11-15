@@ -1,0 +1,14 @@
+{
+  "id": "errors/unknown-class-permanent",
+  "area": "errors",
+  "description": "A class the SDK does not know is permanent, even on a 503: silence about the class never becomes an endless retry.",
+  "source": "a rule of the SDK itself",
+  "input": {
+    "response": {
+      "status": 503,
+      "headers": {"Content-Type": "application/problem+json"},
+      "body": {"type": "about:blank", "title": "Service Unavailable", "status": 503, "detail": "maybe later", "class": "sometimes"}
+    }
+  },
+  "expect": {"retry": false, "class": "permanent", "messageContains": ["503", "maybe later"]}
+}

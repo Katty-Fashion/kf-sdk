@@ -1,0 +1,46 @@
+{
+  "id": "audit/invalid-record-refused-locally",
+  "area": "audit",
+  "description": "The platform's rules are checked before any request: action [A-Z][A-Z0-9_]{1,63}, type [A-Za-z][A-Za-z0-9_.-]{0,49}, a non-blank reference; every problem in one permanent local refusal, nothing sent.",
+  "source": "the platform ModuleAuditController / ModuleAuditService / ModuleAuditPortIT",
+  "input": {
+    "slug": "audit-mod",
+    "context": {
+      "v": 1,
+      "tenant": "00000000-0000-0000-0000-00000000000a",
+      "user": "subject-1",
+      "locale": "en",
+      "rights": [],
+      "method": "POST",
+      "path": "/notes",
+      "query": null,
+      "ts": "$now",
+      "requestId": "req-audit-1"
+    },
+    "proof": "3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f",
+    "call": "record",
+    "record": {
+      "action": "note.created",
+      "aggregateType": "m/x",
+      "aggregateRef": " "
+    },
+    "platform": {
+      "status": 201,
+      "body": "{}"
+    }
+  },
+  "expect": {
+    "outcome": "error",
+    "request": null,
+    "error": {
+      "status": 0,
+      "class": "permanent",
+      "kind": "other",
+      "messageContains": [
+        "action must match",
+        "aggregateType must match",
+        "aggregateRef is required"
+      ]
+    }
+  }
+}

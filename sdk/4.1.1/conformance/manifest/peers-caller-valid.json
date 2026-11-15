@@ -1,0 +1,53 @@
+{
+  "id": "manifest/peers-caller-valid",
+  "area": "manifest",
+  "description": "A caller using an owner it requires (optional), with a read and a command: valid.",
+  "source": "sdk-protocol.md §3.2, §15.9, §6.3",
+  "input": {
+    "manifest": {
+      "schemaVersion": 3,
+      "slug": "kf-3d",
+      "name": "module.name",
+      "version": "1.0.0",
+      "platform": ">=4.1",
+      "i18n": {
+        "en": {
+          "module.name": "3D"
+        }
+      },
+      "requires": [
+        {
+          "slug": "kf-qc",
+          "versionRange": ">=1.0.0",
+          "optional": true
+        }
+      ],
+      "capabilities": {
+        "peers": [
+          {
+            "owner": "kf-qc",
+            "reads": [
+              "m.kf-qc.checks.v1"
+            ],
+            "commands": [
+              "open-check"
+            ]
+          }
+        ],
+        "hooks": [
+          {
+            "point": "m.kf-qc.after.check-closed"
+          }
+        ]
+      }
+    }
+  },
+  "expect": {
+    "valid": true,
+    "warningsContain": [],
+    "read": {
+      "/capabilities/peers/0/owner": "kf-qc",
+      "/capabilities/peers/0/reads/0": "m.kf-qc.checks.v1"
+    }
+  }
+}

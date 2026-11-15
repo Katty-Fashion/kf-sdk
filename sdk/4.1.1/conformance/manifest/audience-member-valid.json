@@ -1,0 +1,48 @@
+{
+  "id": "manifest/audience-member-valid",
+  "area": "manifest",
+  "description": "A route with audience member (any member of the active tenant calls it) and portal true is valid and read; a route without audience reads audience null and portal false.",
+  "source": "sdk-protocol.md §3.2, §9.1",
+  "input": {
+    "manifest": {
+      "schemaVersion": 2,
+      "slug": "man-mod",
+      "name": "module.name",
+      "version": "1.0.0",
+      "platform": ">=4.1",
+      "i18n": {
+        "en": {
+          "module.name": "Manifest module",
+          "widget.label": "Feedback"
+        }
+      },
+      "capabilities": {
+        "routes": [
+          {
+            "method": "POST",
+            "path": "/m/man-mod/tickets",
+            "right": "api.v1.m.man-mod.tickets.post",
+            "audience": "member",
+            "portal": true
+          },
+          {
+            "method": "GET",
+            "path": "/m/man-mod/admin/tickets",
+            "right": "api.v1.m.man-mod.admin.tickets.get",
+            "admin": "platform"
+          }
+        ]
+      }
+    }
+  },
+  "expect": {
+    "valid": true,
+    "warningsContain": [],
+    "read": {
+      "/capabilities/routes/0/audience": "member",
+      "/capabilities/routes/0/portal": true,
+      "/capabilities/routes/1/audience": null,
+      "/capabilities/routes/1/portal": false
+    }
+  }
+}

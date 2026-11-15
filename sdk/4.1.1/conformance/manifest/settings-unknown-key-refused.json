@@ -1,0 +1,69 @@
+{
+  "id": "manifest/settings-unknown-key-refused",
+  "area": "manifest",
+  "description": "A setting is a closed object: a key outside it (e.g. a list of items) is refused.",
+  "source": "sdk-protocol.md §3.2, §15",
+  "input": {
+    "manifest": {
+      "schemaVersion": 2,
+      "slug": "man-mod",
+      "name": "module.name",
+      "version": "1.0.0",
+      "platform": ">=4.1",
+      "i18n": {
+        "en": {
+          "module.name": "Manifest module",
+          "setting.push": "Push on save",
+          "setting.timeout": "Timeout",
+          "setting.mode": "Mode",
+          "setting.mode.help": "How the module pushes",
+          "tab.label": "AAS"
+        }
+      },
+      "capabilities": {
+        "routes": [
+          {
+            "method": "GET",
+            "path": "/m/man-mod/stations",
+            "right": "api.v1.m.man-mod.stations.get"
+          },
+          {
+            "method": "GET",
+            "path": "/m/man-mod/admin/config",
+            "right": "api.v1.m.man-mod.admin.config.get",
+            "admin": "tenant"
+          },
+          {
+            "method": "PUT",
+            "path": "/m/man-mod/admin/keys",
+            "right": "api.v1.m.man-mod.admin.keys.put",
+            "admin": "platform"
+          },
+          {
+            "method": "PUT",
+            "path": "/m/man-mod/admin/tenant-keys",
+            "right": "api.v1.m.man-mod.admin.tenant-keys.put",
+            "admin": "tenant"
+          }
+        ],
+        "settings": [
+          {
+            "key": "push",
+            "type": "BOOLEAN",
+            "default": true,
+            "label": "setting.push",
+            "items": [
+              1
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "expect": {
+    "valid": false,
+    "errorsContain": [
+      "capabilities.settings[0]: \"items\" is not a key of a setting"
+    ]
+  }
+}

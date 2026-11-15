@@ -1,0 +1,42 @@
+{
+  "id": "manifest/slots-under-schema2-refused",
+  "area": "manifest",
+  "description": "capabilities.slots under schemaVersion 2 is refused: the key belongs to schemaVersion 3.",
+  "source": "sdk-protocol.md §1, §1.A, §3.2, §7.12",
+  "input": {
+    "manifest": {
+      "schemaVersion": 2,
+      "slug": "slot-owner",
+      "name": "module.name",
+      "version": "1.0.0",
+      "platform": ">=4.1",
+      "i18n": {
+        "en": {
+          "module.name": "Slot owner",
+          "slot.layers": "Viewport layers"
+        }
+      },
+      "capabilities": {
+        "slots": [
+          {
+            "key": "viewport.layers.v1",
+            "kind": "B",
+            "type": "layer",
+            "visibility": "public",
+            "label": "slot.layers",
+            "layerKinds": [
+              "pin",
+              "highlight"
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "expect": {
+    "valid": false,
+    "errorsContain": [
+      "capabilities.slots requires \"schemaVersion\": 3"
+    ]
+  }
+}

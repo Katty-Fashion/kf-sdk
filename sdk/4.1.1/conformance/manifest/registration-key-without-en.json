@@ -1,0 +1,48 @@
+{
+  "id": "manifest/registration-key-without-en",
+  "area": "manifest",
+  "description": "A label key used at registration with no en text in the manifest is reported (en is mandatory).",
+  "source": "the platform RegistrationValidator.LabelKeys",
+  "input": {
+    "manifest": {
+      "schemaVersion": 2,
+      "slug": "man-mod",
+      "name": "module.name",
+      "version": "1.0.0",
+      "platform": ">=4.1",
+      "i18n": {
+        "en": {
+          "module.name": "Manifest module",
+          "field.priority": "Priority",
+          "tab.label": "Tab"
+        }
+      },
+      "capabilities": {
+        "surfaces": [
+          {
+            "slug": "models.detail.tabs",
+            "kind": "react"
+          }
+        ]
+      }
+    },
+    "registration": {
+      "slug": "man-mod",
+      "surfaces": [
+        {
+          "slug": "models.detail.tabs",
+          "kind": "react",
+          "entry": "/m/man-mod/ui/s.mjs",
+          "export": "Tab",
+          "labelKey": "tab.missing"
+        }
+      ]
+    }
+  },
+  "expect": {
+    "valid": false,
+    "errorsContain": [
+      "label \"tab.missing\" is not a key of the manifest i18n block"
+    ]
+  }
+}

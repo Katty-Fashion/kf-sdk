@@ -1,0 +1,22 @@
+{
+  "id": "context/person-on-system-refused",
+  "area": "context",
+  "description": "A system context (a hook) that carries person is refused: no person is ever deduced from a system context. 401, class permanent.",
+  "source": "sdk-protocol.md §9.2",
+  "input": {
+    "secret": "kf-hook-secret-conformance",
+    "now": 1760000000,
+    "headers": {
+      "X-KF-Context": "eyJ2IjoxLCJ0ZW5hbnQiOiIwZjFlMmQzYy00YjVhLTQ5NjgtODc3Ni02NTU0NDMzMjIxMTAiLCJ1c2VyIjpudWxsLCJhY3RvciI6eyJ0eXBlIjoic3lzdGVtIiwidmlhIjoiaG9vayIsImhvb2tJZCI6IjNjMmIxYTA5LThmN2UtNGQ2Yy05YjVhLTRmM2UyZDFjMGIwYSJ9LCJsb2NhbGUiOiJybyIsInJpZ2h0cyI6W10sIm1ldGhvZCI6IlBPU1QiLCJwYXRoIjoiL3RpY2tldHMiLCJxdWVyeSI6bnVsbCwidHMiOjE3NjAwMDAwMDAsInJlcXVlc3RJZCI6InJlcS0wMjA1IiwicGVyc29uIjp7ImVtYWlsIjoiYW5hLnBvcEBrZi5ybyIsImRpc3BsYXlOYW1lIjoiQW5hIFBvcCJ9fQ",
+      "X-KF-Timestamp": "1760000000",
+      "X-KF-Signature": "126112b6f3a6ea919d5f5bae3326af7bff73d50c342e6acb4a991f41eed04691"
+    },
+    "body": ""
+  },
+  "expect": {
+    "valid": false,
+    "status": 401,
+    "class": "permanent",
+    "reasonContains": "a system context carries no person"
+  }
+}

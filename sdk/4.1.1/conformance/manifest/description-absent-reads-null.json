@@ -1,0 +1,28 @@
+{
+  "id": "manifest/description-absent-reads-null",
+  "area": "manifest",
+  "description": "A manifest without description (or with description null) is valid; the typed Manifest reads null and the platform shows nothing.",
+  "source": "sdk-protocol.md §3.1",
+  "input": {
+    "manifest": {
+      "schemaVersion": 2,
+      "slug": "man-mod",
+      "name": "module.name",
+      "description": null,
+      "version": "1.0.0",
+      "platform": ">=4.1",
+      "i18n": {
+        "en": {
+          "module.name": "Manifest module"
+        }
+      }
+    }
+  },
+  "expect": {
+    "valid": true,
+    "warningsContain": [],
+    "read": {
+      "/description": null
+    }
+  }
+}

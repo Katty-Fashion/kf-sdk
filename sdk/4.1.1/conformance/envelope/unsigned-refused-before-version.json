@@ -1,0 +1,65 @@
+{
+  "id": "envelope/unsigned-refused-before-version",
+  "area": "envelope",
+  "description": "The signature is checked first: an envelope of an unsupported version with a wrong signature gets 401, not 422.",
+  "source": "a rule of the SDK itself",
+  "input": {
+    "envelope": {
+      "specversion": "1.0",
+      "id": "b9f43a5e-87fe-334e-a088-bfbdb5c39004",
+      "kfeventid": "7a8b9c0d-1e2f-4a3b-8c4d-5e6f7a8b9c0d",
+      "type": "kf.model.before.update",
+      "source": "/api/v1/models/42",
+      "subject": "42",
+      "time": "2026-10-19T10:15:30.123Z",
+      "datacontenttype": "application/json",
+      "kfmodule": "conformance",
+      "kfflags": {
+        "author-form": true,
+        "author-tab": false
+      },
+      "kftenant": "0f1e2d3c-4b5a-4968-8776-655443322110",
+      "kflocale": "ro",
+      "kfactor": "oidc-sub-1",
+      "kfaggregatetype": "model",
+      "kfenvelopeversion": "2",
+      "data": {
+        "entity": "model",
+        "id": "42",
+        "before": {
+          "id": 42,
+          "name": "Rochie Ana",
+          "materialList": [],
+          "extensions": {
+            "conformance": {
+              "author": "Ana"
+            }
+          }
+        },
+        "after": {
+          "id": 42,
+          "name": "Rochie Ana 2",
+          "materialList": [],
+          "extensions": {
+            "conformance": {
+              "author": "Ana"
+            }
+          }
+        },
+        "changed": [
+          "name"
+        ]
+      }
+    },
+    "signature": "wrong"
+  },
+  "expect": {
+    "status": 401,
+    "handlerCalled": false,
+    "bodyContains": {
+      "type": "https://kf.ro/problems/invalid-signature",
+      "status": 401,
+      "class": "permanent"
+    }
+  }
+}

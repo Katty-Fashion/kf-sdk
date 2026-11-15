@@ -1,0 +1,20 @@
+{
+  "id": "flow/projection-internal-order-without-line",
+  "area": "flow",
+  "description": "An internal order (order.internal=true) has no customer, no stage and no line; COMPLETED is a status like the others.",
+  "source": "sdk-protocol.md §16.4",
+  "input": {
+    "query": "projection=order.flow-rule.v1&rule.key=item-ready&order.id=9&order.status=COMPLETED&flow.key=f&flow.version=1&instance.id=2&step.key=a&step.to=b&order.internal=true"
+  },
+  "expect": {
+    "valid": true,
+    "projection": {
+      "orderStatus": "COMPLETED",
+      "orderInternal": true,
+      "orderCustomerId": null,
+      "orderStages": [],
+      "lineId": null,
+      "onLine": false
+    }
+  }
+}

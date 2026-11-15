@@ -1,0 +1,27 @@
+{
+  "id": "manifest/rollback-floor-not-semver-refused",
+  "area": "manifest",
+  "description": "A rollbackFloor that is not a semver 2.0 version is an error naming the key and the value received.",
+  "source": "sdk-protocol.md §3.1, §12",
+  "input": {
+    "manifest": {
+      "schemaVersion": 2,
+      "slug": "man-mod",
+      "name": "module.name",
+      "version": "1.2.0",
+      "rollbackFloor": "one",
+      "platform": ">=4.1",
+      "i18n": {
+        "en": {
+          "module.name": "Manifest module"
+        }
+      }
+    }
+  },
+  "expect": {
+    "valid": false,
+    "errorsContain": [
+      "\"rollbackFloor\" must be a semver 2.0 version, e.g. \"1.1.0\" (got \"one\")"
+    ]
+  }
+}

@@ -1,6 +1,7 @@
 # The public module SDK
 
-The current version is **4.1.0** (`sdk/4.1.0/`, the first public one): protocol 2.1, manifest `schemaVersion` 3. From
+The current version is **4.1.1** (`sdk/4.1.1/`): protocol 2.2 (module help notes), manifest `schemaVersion` 3; `sdk/4.1.0/`
+(protocol 2.1) was the first public one. From
 4.1 on, the platform, the SDK and the release milestone share the same major.minor, and an SDK X.Y.z needs a platform
 >= X.Y. Each published version appears as `sdk/<version>/` and is never rewritten: a correction is a new version.
 

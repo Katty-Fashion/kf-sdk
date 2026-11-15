@@ -1,0 +1,40 @@
+{
+  "id": "slots/register-before-owner-warning",
+  "area": "slots",
+  "description": "A contribution to a slot whose owner is not installed yet is accepted (200) with the platform's warning; the SDK sends the layer without code and exposes the warning.",
+  "source": "sdk-protocol.md §7.10, §7.12",
+  "input": {
+    "slug": "slot-contrib",
+    "surfaces": [
+      {
+        "slug": "m.kf-3d.viewport.layers.v1",
+        "kind": "layer",
+        "layer": "pin",
+        "source": "/m/slot-contrib/api/pins",
+        "key": "pins"
+      }
+    ],
+    "platform": {
+      "status": 200,
+      "body": {
+        "warnings": [
+          "surfaces[0].slug: \"m.kf-3d.viewport.layers.v1\" is not a slot the installed version of its owner declares; the contribution is stored inactive and is not served until the owner declares it"
+        ]
+      }
+    }
+  },
+  "expect": {
+    "surfaces": [
+      {
+        "slug": "m.kf-3d.viewport.layers.v1",
+        "kind": "layer",
+        "layer": "pin",
+        "source": "/m/slot-contrib/api/pins",
+        "key": "pins"
+      }
+    ],
+    "warnings": [
+      "surfaces[0].slug: \"m.kf-3d.viewport.layers.v1\" is not a slot the installed version of its owner declares; the contribution is stored inactive and is not served until the owner declares it"
+    ]
+  }
+}
