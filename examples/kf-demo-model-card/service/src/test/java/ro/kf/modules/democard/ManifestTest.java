@@ -47,16 +47,16 @@ class ManifestTest {
     }
 
     @Test
-    @DisplayName("the manifest is a valid schemaVersion 2 manifest, en and ro, no warning; identity and activation tenant")
+    @DisplayName("the manifest is a valid schemaVersion 3 manifest, en and ro, no warning; identity and activation tenant")
     void manifestIsValid() throws Exception {
         ManifestCheck.Result result = ManifestCheck.validate(manifest(), Set.of("en", "ro"));
         assertTrue(result.ok(), () -> "errors: " + result.errors());
         assertTrue(result.warnings().isEmpty(), () -> "warnings: " + result.warnings());
         Manifest m = Manifest.parse(manifest());
         assertEquals(ModuleIdentity.SOURCE_SLUG, m.slug());
-        assertEquals(2, m.schemaVersion());
-        assertThat(m.version()).matches("^\\d+\\.\\d+\\.\\d+$");
-        assertEquals(">=6.1", m.platform());
+        assertEquals(3, m.schemaVersion());
+        assertEquals("0.2.0", m.version());
+        assertEquals(">=4.1", m.platform());
         assertEquals(Manifest.Activation.TENANT, m.activation());
         assertThat(m.i18n().get("ro").keySet()).isEqualTo(m.i18n().get("en").keySet());
     }

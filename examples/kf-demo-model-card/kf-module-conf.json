@@ -1,12 +1,12 @@
 {
-  "schemaVersion": 2,
+  "schemaVersion": 3,
   "slug": "kf-demo-model-card",
   "name": "module.name",
   "description": "module.description",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "rollbackFloor": "0.1.0",
   "author": "Katty Fashion",
-  "platform": ">=6.1",
+  "platform": ">=4.1",
   "activation": "tenant",
   "tenantData": {
     "format": "kf-demo-model-card/tenant-data/v1",

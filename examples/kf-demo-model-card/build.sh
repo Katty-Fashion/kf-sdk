@@ -19,8 +19,8 @@
 #   node sdk/tools/kf-module.mjs sign dist/kf-demo-model-card-<version>.zip --key <offline>/kf-release-2026-1.key
 #   node sdk/tools/kf-module.mjs verify dist/kf-demo-model-card-<version>.zip --trust <the platform's trust-store.json>
 #
-# The module SDK is PINNED to SDK_REF, a tag sdk-vX.Y.Z of kf-platform-modules (this repo; README "Versionarea pe
-# tag"). The SDK is exported read-only with `git archive` into .sdk/ (gitignored) and built there; the repo's working
+# The module SDK is PINNED to SDK_REF, a tag sdk-vX.Y.Z of kf-platform-modules (this repo; its README explains
+# the tags). The SDK is exported read-only with `git archive` into .sdk/ (gitignored) and built there; the repo's working
 # tree is never used, so a change under sdk/ reaches the module only through a new tag and a new SDK_REF here.
 #   KF_SDK_REF   overrides SDK_REF (a commit sha for a dev build, or another tag to try)
 #   KF_SDK_REPO  the path of kf-platform-modules (default: this repo, ../..)
@@ -52,8 +52,10 @@ HERE="$(cd "$(dirname "$0")" && pwd)"
 # sdk-v0.9.1: protocol 1.3.1 -- model.v1 with modelOwner and listed without ids by
 # staff, the port model-version.garment-image.v1 (a presigned URL of 10 minutes), the surface
 # models.detail.overview.cards with ctx.href; delivered by platform 6.1 (the manifest's "platform": ">=6.1").
+# sdk-v4.1.1 (0.2.0): protocol 2.2 -- manifest schemaVersion 3 (a strict superset of 2), the platform line 4.1 (the
+# manifest's "platform": ">=4.1"); the public (external) SDK line, as this is the public example module.
 # Bump it here to move the module to a newer SDK.
-SDK_REF="${KF_SDK_REF:-sdk-v0.9.1}"
+SDK_REF="${KF_SDK_REF:-sdk-v4.1.1}"
 SDK_REPO="${KF_SDK_REPO:-$HERE/../..}"
 KF_MODULE="$SDK_REPO/sdk/tools/kf-module.mjs"
 VENDOR="$HERE/.sdk"
@@ -77,7 +79,7 @@ fi
 echo "==> module SDK: kf-platform-modules@$SDK_REF (read-only export into .sdk/)"
 if ! SDK_SHA="$(git -C "$SDK_REPO" rev-parse --verify --quiet "$SDK_REF^{commit}")"; then
   echo "SDK ref $SDK_REF not found in $SDK_REPO." >&2
-  echo "The tag is created by node sdk/tools/release-tag.mjs (kf-platform-modules README, \"Versionarea pe tag\");" >&2
+  echo "The tag is created by node sdk/tools/release-tag.mjs (kf-platform-modules README);" >&2
   echo "until it exists, build on a commit: KF_SDK_REF=<sha> ./build.sh $VERSION" >&2
   exit 1
 fi
@@ -128,7 +130,7 @@ const conf = JSON.parse(readFileSync(file, 'utf8'));
 const errors = [];
 if (conf.version !== version) errors.push(`version is ${conf.version}, expected ${version}`);
 if (conf.slug !== slug) errors.push(`slug is ${conf.slug}, expected ${slug}`);
-if (conf.schemaVersion !== 2) errors.push('schemaVersion must be 2');
+if (conf.schemaVersion !== 3) errors.push('schemaVersion must be 3');
 if (errors.length) { for (const e of errors) console.error(`kf-module-conf.json: ${e}`); process.exit(1); }
 console.log(`   manifest ok: ${conf.slug} ${conf.version} (the full check: ManifestTest, and the platform's at upload)`);
 JSEOF
@@ -165,7 +167,7 @@ rm -rf "$STAGE"
 echo "==> $DIST/$ZIP_NAME (SDK $SDK_REF = ${SDK_SHA:0:12}, ro.kf:kf-module-sdk:$SDK_VERSION)"
 node "$KF_MODULE" inspect "$DIST/$ZIP_NAME" | sed 's/^/   /'
 if [[ "$RELEASE" == "1" ]]; then
-  echo "==> next: test this zip on the dev organization, then sign it offline (README \"Build de release și semnarea\"):"
+  echo "==> next: test this zip on the dev organization, then sign it offline (see the documentation on release builds and signing):"
   echo "   node sdk/tools/kf-module.mjs sign modules/kf-demo-model-card/dist/$ZIP_NAME --key <offline>/kf-release-2026-1.key"
 else
   echo "==> dev build: kf-module sign refuses it; a release is ./build.sh $VERSION --release from a clean checkout of $SLUG-v$VERSION"

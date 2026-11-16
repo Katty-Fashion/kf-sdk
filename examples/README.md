@@ -5,7 +5,7 @@ platform's module repository, where they are built and tested; changes are made 
 
 | example | protocol | manifest `schemaVersion` | `platform` | what it shows |
 |---|---|---|---|---|
-| [`kf-demo-model-card`](kf-demo-model-card/README.md) | 1.3.1 | 2 | `>=6.1` | the tutorial module: a UI card on a platform page, a module page, its own database, platform reads, hooks, the tenant-data export |
+| [`kf-demo-model-card`](kf-demo-model-card/README.md) | 2.2 | 3 | `>=4.1` | the tutorial module: a UI card on a platform page, a module page, its own database, platform reads, hooks, the tenant-data export |
 | [`api-peer-owner-test`](api-peer-owner-test/README.md) | 2.0 | 3 | `>=4.1` | the owner side of a module-to-module call: a peer read, a command, an event, a UI slot |
 | [`api-peer-caller-test`](api-peer-caller-test/README.md) | 2.0 | 3 | `>=4.1` | the caller side: an optional dependency, peer reads and commands, a subscription, a contribution into another module's slot |
 | [`api-ui-test`](api-ui-test/README.md) | 1.1 | 2 | `>=4.1` | one contribution on each UI surface, `nav[]`, a hand-written UI module with no build step |
@@ -15,8 +15,8 @@ platform's module repository, where they are built and tested; changes are made 
 exported from SDK 4.1.0 (`sdk-v4.1.0`) and declare `platform` `>=4.1`. Modules on manifest `schemaVersion` 3
 (protocol 2.0) need a platform that speaks protocol 2.0 or later.
 
-`kf-demo-model-card` is still the example of the retired 6.x platform line (`platform` `>=6.1`): a 4.1 platform
-refuses it as it is. It is renewed with its next release.
+`kf-demo-model-card` 0.2.0 is built on SDK 4.1.1 (`sdk-v4.1.1`, protocol 2.2) and declares `platform` `>=4.1`; its
+manifest is on `schemaVersion` 3.
 
 ## Building an example
 

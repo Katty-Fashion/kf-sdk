@@ -1,11 +1,11 @@
 // Where the UI tests of kf-demo-model-card find vitest, jsdom, React and Testing Library (copied from kf-feedback, which copied it from KF-AAS-R3).
 //
-// The module installs no test package of its own: the npm gate of (Task 1) was not passed by the operator, so the
+// The module installs no test package of its own: the npm gate (Task 1) was not passed by the operator, so the
 // tests run on the packages host-ui already has, locked in ITS package-lock.json (vitest 3.2, jsdom 26, react 19.2,
 // @testing-library/react 16.3) — the same versions the plan asked for, already vetted for the host. Nothing is
 // downloaded. The directory is, in order: $KF_FE_NODE_MODULES; the super-project's host-ui/node_modules (this
-// module checked out in kf-platform/kf-platform-modules); a sibling worktree's fe/node_modules (.wt/<plan>/{modules,fe});
-// the super-project's host-ui/node_modules seen from a worktree (.wt/<plan>/modules).
+// module checked out in the platform's module repository); a sibling worktree's fe/node_modules;
+// the super-project's host-ui/node_modules seen from a worktree.
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';

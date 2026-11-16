@@ -27,7 +27,7 @@
         <revision>0.0.0-SNAPSHOT</revision>
         <!-- The Java module SDK, installed into ~/.m2 by build.sh from the PINNED tag (SDK_REF in build.sh): build.sh
              passes the version read from the pom at that tag (-Dkf-module-sdk.version), this default is for an IDE. -->
-        <kf-module-sdk.version>0.9.1</kf-module-sdk.version>
+        <kf-module-sdk.version>4.1.1</kf-module-sdk.version>
     </properties>
 
     <dependencies>

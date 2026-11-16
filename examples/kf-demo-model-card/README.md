@@ -8,7 +8,7 @@ Overview tab (surface `models.detail.overview.cards`), a module page with the pi
 Back end: Java 21 + Spring Boot on `ro.kf:kf-module-sdk`. UI: React + esbuild, `@kf/ui` and `@kf/host-sdk` from
 the host page.
 
-Protocol 1.3.1, manifest `schemaVersion` 2 (`kf-module-conf.json`).
+Protocol 2.2, manifest `schemaVersion` 3 (`kf-module-conf.json`).
 
 ## Building
 

@@ -123,7 +123,7 @@ public final class ModuleIdentity {
         return route("ui/surfaces.css");
     }
 
-    /** How the host addresses a tab of the module in {@code ?tab=}: {@code <slug>.<key>} (261029-impact-notificare-dt). */
+    /** How the host addresses a tab of the module in {@code ?tab=}: {@code <slug>.<key>}. */
     public String tab(String key) {
         return slug + "." + key;
     }
