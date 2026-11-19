@@ -1,0 +1,59 @@
+{
+  "id": "reads/order-v1-as-system-refused",
+  "area": "reads",
+  "description": "A rule evaluated with the context system via platform cannot read order.v1 (not a system port): the SDK sends the read, the platform answers 403 insufficient-rights.",
+  "source": "sdk-protocol.md §15.1, §16.4",
+  "input": {
+    "slug": "reads-mod",
+    "context": {
+      "v": 1,
+      "tenant": "00000000-0000-0000-0000-00000000000a",
+      "user": null,
+      "actor": {
+        "type": "system",
+        "via": "platform",
+        "hookId": null
+      },
+      "locale": "en",
+      "rights": [],
+      "method": "GET",
+      "path": "/m/reads-mod/rules/item-ready",
+      "query": null,
+      "ts": "$now",
+      "requestId": "req-reads-order-system"
+    },
+    "proof": "6f6f6f6f6f6f6f6f6f6f6f6f6f6f6f6f6f6f6f6f6f6f6f6f6f6f6f6f6f6f6f6f",
+    "call": "get",
+    "args": {
+      "port": "order.v1",
+      "id": "812"
+    },
+    "platform": {
+      "status": 403,
+      "body": "{\"type\":\"https://kf.ro/problems/insufficient-rights\",\"title\":\"insufficient-rights\",\"status\":403,\"detail\":\"the system context is not accepted on order.v1\",\"class\":\"permanent\"}"
+    }
+  },
+  "expect": {
+    "outcome": "error",
+    "request": {
+      "method": "GET",
+      "path": "/api/v1/platform/modules/reads-mod/reads/order.v1/812",
+      "query": null,
+      "headers": {
+        "Authorization": "Bearer kfm_conformance-token-never-logged",
+        "X-KF-Context": "$context",
+        "X-KF-Context-Proof": "6f6f6f6f6f6f6f6f6f6f6f6f6f6f6f6f6f6f6f6f6f6f6f6f6f6f6f6f6f6f6f6f"
+      },
+      "body": null
+    },
+    "error": {
+      "status": 403,
+      "class": "permanent",
+      "kind": "forbidden",
+      "reason": "insufficient-rights",
+      "messageContains": [
+        "system context"
+      ]
+    }
+  }
+}

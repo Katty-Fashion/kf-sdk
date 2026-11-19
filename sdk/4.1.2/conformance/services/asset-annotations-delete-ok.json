@@ -1,0 +1,69 @@
+{
+  "id": "services/asset-annotations-delete-ok",
+  "area": "services",
+  "description": "The module deletes the annotations of an asset it removed: DELETE …/collaboration.asset-annotations.v1/{assetId} -> 204, no query, no body.",
+  "source": "sdk-protocol.md §15.10",
+  "input": {
+    "slug": "services-mod",
+    "context": {
+      "v": 1,
+      "tenant": "00000000-0000-0000-0000-00000000000a",
+      "user": "subject-1",
+      "actor": {
+        "type": "user",
+        "via": null,
+        "hookId": null
+      },
+      "locale": "en",
+      "rights": [],
+      "method": "POST",
+      "path": "/m/services-mod/lines",
+      "query": null,
+      "ts": "$now",
+      "requestId": "req-assetann-1"
+    },
+    "proof": "5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e",
+    "manifest": {
+      "schemaVersion": 3,
+      "slug": "services-mod",
+      "name": "module.name",
+      "version": "1.0.0",
+      "platform": ">=4.1",
+      "i18n": {
+        "en": {
+          "module.name": "Services"
+        }
+      },
+      "capabilities": {
+        "services": [
+          {
+            "port": "collaboration.asset-annotations.v1"
+          }
+        ]
+      }
+    },
+    "call": "assetAnnotationsDelete",
+    "args": {
+      "assetId": "c0ffee00-0000-4000-8000-000000000001"
+    },
+    "platform": {
+      "status": 204,
+      "body": ""
+    }
+  },
+  "expect": {
+    "outcome": "ok",
+    "request": {
+      "method": "DELETE",
+      "path": "/api/v1/platform/modules/services-mod/services/collaboration.asset-annotations.v1/c0ffee00-0000-4000-8000-000000000001",
+      "query": null,
+      "headers": {
+        "Authorization": "Bearer kfm_conformance-token-never-logged",
+        "X-KF-Context": "$context",
+        "X-KF-Context-Proof": "5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e"
+      },
+      "body": null
+    },
+    "result": null
+  }
+}

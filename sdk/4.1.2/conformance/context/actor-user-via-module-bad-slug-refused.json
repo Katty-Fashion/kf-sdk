@@ -1,0 +1,22 @@
+{
+  "id": "context/actor-user-via-module-bad-slug-refused",
+  "area": "context",
+  "description": "actor via module: with a slug outside the grammar is refused. 401, class permanent.",
+  "source": "sdk-protocol.md §9.2",
+  "input": {
+    "secret": "kf-hook-secret-conformance",
+    "now": 1760000000,
+    "headers": {
+      "X-KF-Context": "eyJ2IjoxLCJ0ZW5hbnQiOiIwZjFlMmQzYy00YjVhLTQ5NjgtODc3Ni02NTU0NDMzMjIxMTAiLCJ1c2VyIjoib2lkYy1zdWItMSIsImFjdG9yIjp7InR5cGUiOiJ1c2VyIiwidmlhIjoibW9kdWxlOkJhZF9TbHVnIiwiaG9va0lkIjpudWxsfSwibG9jYWxlIjoicm8iLCJyaWdodHMiOltdLCJtZXRob2QiOiJHRVQiLCJwYXRoIjoiL2NoZWNrcyIsInF1ZXJ5IjpudWxsLCJ0cyI6MTc2MDAwMDAwMCwicmVxdWVzdElkIjoicmVxLTAzMDIifQ",
+      "X-KF-Timestamp": "1760000000",
+      "X-KF-Signature": "b9994d915c719afb6f406ba7c9497e392dec13d9025f87f6f5c43a8caf83d8cf"
+    },
+    "body": ""
+  },
+  "expect": {
+    "valid": false,
+    "status": 401,
+    "class": "permanent",
+    "reasonContains": "is not module:{slug}"
+  }
+}

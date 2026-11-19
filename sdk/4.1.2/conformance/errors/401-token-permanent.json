@@ -1,0 +1,14 @@
+{
+  "id": "errors/401-token-permanent",
+  "area": "errors",
+  "description": "A 401 of the module token filter is permanent: a wrong token does not fix itself.",
+  "source": "the platform ModuleTokenAuthenticationFilter.refuse",
+  "input": {
+    "response": {
+      "status": 401,
+      "headers": {"Content-Type": "application/problem+json"},
+      "body": {"type": "about:blank", "title": "Unauthorized", "status": 401, "detail": "Missing or invalid module token.", "class": "permanent"}
+    }
+  },
+  "expect": {"retry": false, "class": "permanent", "messageContains": ["401", "Missing or invalid module token."]}
+}

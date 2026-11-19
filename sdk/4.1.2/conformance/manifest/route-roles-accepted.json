@@ -1,0 +1,44 @@
+{
+  "id": "manifest/route-roles-accepted",
+  "area": "manifest",
+  "description": "A route proposing two global roles is accepted locally (whether the role exists is the platform's warning).",
+  "source": "the platform ModuleManifestValidator",
+  "input": {
+    "manifest": {
+      "schemaVersion": 2,
+      "slug": "man-mod",
+      "name": "module.name",
+      "version": "1.0.0",
+      "platform": ">=4.1",
+      "i18n": {
+        "en": {
+          "module.name": "Manifest module",
+          "field.priority": "Priority",
+          "tab.label": "Tab"
+        }
+      },
+      "capabilities": {
+        "routes": [
+          {
+            "method": "GET",
+            "path": "/m/man-mod/events",
+            "right": "api.v1.m.man-mod.events.get",
+            "roles": [
+              "BRAND_MANAGER",
+              "QC"
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "expect": {
+    "valid": true,
+    "read": {
+      "/capabilities/routes/0/roles": [
+        "BRAND_MANAGER",
+        "QC"
+      ]
+    }
+  }
+}

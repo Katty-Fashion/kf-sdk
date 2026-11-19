@@ -1,0 +1,93 @@
+{
+  "id": "manifest/slots-valid-all-kinds",
+  "area": "manifest",
+  "description": "One slot of each kind (A, B, D events, D commands, R), used correctly, is valid under schemaVersion 3 and read on the typed manifest.",
+  "source": "sdk-protocol.md §1, §1.A, §3.2, §7.12",
+  "input": {
+    "manifest": {
+      "schemaVersion": 3,
+      "slug": "slot-owner",
+      "name": "module.name",
+      "version": "1.0.0",
+      "platform": ">=4.1",
+      "i18n": {
+        "en": {
+          "module.name": "Slot owner",
+          "slot.layers": "Viewport layers"
+        }
+      },
+      "capabilities": {
+        "slots": [
+          {
+            "key": "studio.inspector.sections.v1",
+            "kind": "A",
+            "type": "extension",
+            "visibility": "internal",
+            "publicMembers": [
+              "model",
+              "version"
+            ],
+            "actions": [
+              "select-piece"
+            ]
+          },
+          {
+            "key": "viewport.layers.v1",
+            "kind": "B",
+            "type": "layer",
+            "visibility": "public",
+            "label": "slot.layers",
+            "layerKinds": [
+              "pin",
+              "highlight"
+            ]
+          },
+          {
+            "key": "viewport.events.v1",
+            "kind": "D",
+            "type": "events",
+            "visibility": "public",
+            "events": [
+              "piece-selected"
+            ]
+          },
+          {
+            "key": "viewport.commands.v1",
+            "kind": "D",
+            "type": "commands",
+            "visibility": "public",
+            "commands": [
+              "focus-piece"
+            ]
+          },
+          {
+            "key": "materials.v1",
+            "kind": "R",
+            "type": "resource",
+            "visibility": "public",
+            "dataSchema": "m.slot-owner.material.v1"
+          }
+        ]
+      }
+    }
+  },
+  "expect": {
+    "valid": true,
+    "warningsContain": [],
+    "read": {
+      "/capabilities/slots/0/key": "studio.inspector.sections.v1",
+      "/capabilities/slots/0/kind": "A",
+      "/capabilities/slots/0/visibility": "internal",
+      "/capabilities/slots/0/publicMembers/1": "version",
+      "/capabilities/slots/0/actions/0": "select-piece",
+      "/capabilities/slots/1/type": "layer",
+      "/capabilities/slots/1/label": "slot.layers",
+      "/capabilities/slots/1/layerKinds/1": "highlight",
+      "/capabilities/slots/2/events/0": "piece-selected",
+      "/capabilities/slots/3/commands/0": "focus-piece",
+      "/capabilities/slots/4/kind": "R",
+      "/capabilities/slots/4/visibility": "public",
+      "/capabilities/slots/4/dataSchema": "m.slot-owner.material.v1"
+    }
+  }
+}

@@ -1,0 +1,62 @@
+{
+  "id": "notifications/send-recipient-roles",
+  "area": "notifications",
+  "description": "send with recipientRoles (protocol 1.3): recipients may be empty with roles, a repeated role is sent once, recipients is always in the body (a platform before 1.3 answers no-recipients); 202 {accepted, duplicates} names no one.",
+  "source": "sdk-protocol.md §11.1",
+  "input": {
+    "slug": "notif-mod",
+    "call": "send",
+    "tenantId": "00000000-0000-0000-0000-00000000000a",
+    "key": "m2f-impact-received",
+    "recipients": [
+      "subject-1"
+    ],
+    "variables": {
+      "entityName": "Rochie"
+    },
+    "options": {
+      "idempotencyKey": "7a07a07a-0000-4000-8000-000000000222",
+      "recipientRoles": [
+        "TENANT_ADMIN",
+        "QC",
+        "TENANT_ADMIN"
+      ]
+    },
+    "platform": [
+      {
+        "status": 202,
+        "body": "{\"accepted\":3,\"duplicates\":0}"
+      }
+    ]
+  },
+  "expect": {
+    "outcome": "ok",
+    "requests": 1,
+    "request": {
+      "method": "POST",
+      "path": "/api/v1/platform/modules/notif-mod/notifications",
+      "headers": {
+        "Authorization": "Bearer kfm_conformance-token-never-logged"
+      },
+      "body": {
+        "tenantId": "00000000-0000-0000-0000-00000000000a",
+        "key": "m2f-impact-received",
+        "recipients": [
+          "subject-1"
+        ],
+        "recipientRoles": [
+          "TENANT_ADMIN",
+          "QC"
+        ],
+        "variables": {
+          "entityName": "Rochie"
+        },
+        "idempotencyKey": "7a07a07a-0000-4000-8000-000000000222"
+      }
+    },
+    "result": {
+      "accepted": 3,
+      "duplicates": 0
+    }
+  }
+}

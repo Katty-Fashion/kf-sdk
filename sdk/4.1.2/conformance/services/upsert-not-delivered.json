@@ -1,0 +1,91 @@
+{
+  "id": "services/upsert-not-delivered",
+  "area": "services",
+  "description": "A platform that does not deliver ORDER_SERVICES answers 422 not-delivered, permanent: the refused kind.",
+  "source": "sdk-protocol.md §16.6",
+  "input": {
+    "slug": "services-mod",
+    "context": {
+      "v": 1,
+      "tenant": "00000000-0000-0000-0000-00000000000a",
+      "user": "subject-1",
+      "actor": {
+        "type": "user",
+        "via": null,
+        "hookId": null
+      },
+      "locale": "en",
+      "rights": [],
+      "method": "POST",
+      "path": "/m/services-mod/lines",
+      "query": null,
+      "ts": "$now",
+      "requestId": "req-services-4"
+    },
+    "proof": "5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e",
+    "manifest": {
+      "schemaVersion": 3,
+      "slug": "services-mod",
+      "name": "module.name",
+      "version": "1.0.0",
+      "platform": ">=4.1",
+      "i18n": {
+        "en": {
+          "module.name": "Services"
+        }
+      },
+      "capabilities": {
+        "services": [
+          {
+            "port": "order.services.v1"
+          }
+        ]
+      }
+    },
+    "call": "upsert",
+    "args": {
+      "orderId": "812",
+      "entryId": "4401",
+      "name": "Embroidery",
+      "amount": "12.50",
+      "currency": "EUR",
+      "externalRef": "embroidery:4401"
+    },
+    "platform": {
+      "status": 422,
+      "body": "{\"type\":\"https://kf.ro/problems/not-delivered\",\"title\":\"Not delivered by this platform\",\"status\":422,\"detail\":\"order.services.v1 is part of protocol 2.0 but this platform does not deliver it yet (reserved)\",\"class\":\"permanent\"}"
+    }
+  },
+  "expect": {
+    "outcome": "error",
+    "request": {
+      "method": "POST",
+      "path": "/api/v1/platform/modules/services-mod/services/order.services.v1",
+      "query": null,
+      "headers": {
+        "Authorization": "Bearer kfm_conformance-token-never-logged",
+        "X-KF-Context": "$context",
+        "X-KF-Context-Proof": "5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e"
+      },
+      "body": {
+        "orderId": "812",
+        "entryId": "4401",
+        "name": "Embroidery",
+        "cost": {
+          "amount": 12.5,
+          "currency": "EUR"
+        },
+        "externalRef": "embroidery:4401"
+      }
+    },
+    "error": {
+      "status": 422,
+      "class": "permanent",
+      "kind": "refused",
+      "reason": "not-delivered",
+      "messageContains": [
+        "does not deliver it yet"
+      ]
+    }
+  }
+}

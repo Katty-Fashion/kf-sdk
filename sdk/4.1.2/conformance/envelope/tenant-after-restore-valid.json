@@ -1,0 +1,52 @@
+{
+  "id": "envelope/tenant-after-restore-valid",
+  "area": "envelope",
+  "description": "A signed tenant.after.restore (protocol 1.3, the tenant still exists: data.after = {id}) calls the tenant handler of the restore (onRestore) with TenantRestored(tenantId = data.id) and acknowledges.",
+  "source": "sdk-protocol.md §6.1",
+  "input": {
+    "envelope": {
+      "specversion": "1.0",
+      "id": "d1e2f3a4-b5c6-4d7e-8f90-a1b2c3d4e5f6",
+      "kfeventid": "0a1b2c3d-4e5f-4a6b-8c7d-9e0f1a2b3c4d",
+      "type": "kf.tenant.after.restore",
+      "source": "/tenant/7f3c0a1b-2c3d-4e5f-8a9b-0c1d2e3f4a5b",
+      "subject": "7f3c0a1b-2c3d-4e5f-8a9b-0c1d2e3f4a5b",
+      "time": "2026-10-30T18:00:01.123456Z",
+      "datacontenttype": "application/json",
+      "kfmodule": "conformance",
+      "kfflags": {},
+      "kftenant": "7f3c0a1b-2c3d-4e5f-8a9b-0c1d2e3f4a5b",
+      "kflocale": "ro",
+      "kfactor": null,
+      "kfaggregatetype": "tenant",
+      "kfenvelopeversion": "1",
+      "data": {
+        "entity": "tenant",
+        "id": "7f3c0a1b-2c3d-4e5f-8a9b-0c1d2e3f4a5b",
+        "before": {
+          "id": "7f3c0a1b-2c3d-4e5f-8a9b-0c1d2e3f4a5b"
+        },
+        "after": {
+          "id": "7f3c0a1b-2c3d-4e5f-8a9b-0c1d2e3f4a5b"
+        },
+        "changed": []
+      }
+    }
+  },
+  "expect": {
+    "status": 200,
+    "handlerCalled": true,
+    "handler": {
+      "event": "tenant.after.restore",
+      "id": "7f3c0a1b-2c3d-4e5f-8a9b-0c1d2e3f4a5b",
+      "tenant": "7f3c0a1b-2c3d-4e5f-8a9b-0c1d2e3f4a5b",
+      "eventId": "0a1b2c3d-4e5f-4a6b-8c7d-9e0f1a2b3c4d",
+      "deliveryId": "d1e2f3a4-b5c6-4d7e-8f90-a1b2c3d4e5f6",
+      "envelopeVersion": "1",
+      "aggregateType": "tenant"
+    },
+    "body": {
+      "ok": true
+    }
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "id": "manifest/description-literal-text-refused",
+  "area": "manifest",
+  "description": "Under schemaVersion 2 the description is a key, not a text: a literal sentence is refused, as for name.",
+  "source": "sdk-protocol.md §3.1",
+  "input": {
+    "manifest": {
+      "schemaVersion": 2,
+      "slug": "man-mod",
+      "name": "module.name",
+      "description": "Adds an author tab to models",
+      "version": "1.0.0",
+      "platform": ">=4.1",
+      "i18n": {
+        "en": {
+          "module.name": "Manifest module"
+        }
+      }
+    }
+  },
+  "expect": {
+    "valid": false,
+    "errorsContain": [
+      "\"description\" \"Adds an author tab to models\" is not a translation key"
+    ]
+  }
+}

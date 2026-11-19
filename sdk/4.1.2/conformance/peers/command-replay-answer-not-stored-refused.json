@@ -1,0 +1,69 @@
+{
+  "id": "peers/command-replay-answer-not-stored-refused",
+  "area": "peers",
+  "description": "The same key again, the first answer was too large to store: 409 idempotency-answer-not-stored, permanent -> a refusal of kind conflict; use a new key to run the command again.",
+  "source": "sdk-protocol.md §15.9",
+  "input": {
+    "slug": "peers-caller",
+    "context": {
+      "v": 1,
+      "tenant": "00000000-0000-0000-0000-00000000000a",
+      "user": "subject-1",
+      "actor": {
+        "type": "user",
+        "via": null,
+        "hookId": null
+      },
+      "locale": "en",
+      "rights": [],
+      "method": "GET",
+      "path": "/x",
+      "query": null,
+      "ts": "$now",
+      "requestId": "req-peers-5"
+    },
+    "proof": "4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f",
+    "call": "command",
+    "args": {
+      "owner": "kf-stock",
+      "name": "reserve",
+      "idempotencyKey": "order-17-reserve-1",
+      "body": {
+        "sku": "KF-42",
+        "qty": 3
+      }
+    },
+    "platform": {
+      "status": 409,
+      "body": "{\"type\":\"https://kf.ro/problems/idempotency-answer-not-stored\",\"title\":\"idempotency-answer-not-stored\",\"status\":409,\"detail\":\"The answer of the first call was too large to store; use a new key to run the command again.\",\"class\":\"permanent\"}"
+    }
+  },
+  "expect": {
+    "outcome": "error",
+    "request": {
+      "method": "POST",
+      "path": "/api/v1/platform/modules/peers-caller/peers/kf-stock/commands/reserve",
+      "query": null,
+      "headers": {
+        "Authorization": "Bearer kfm_conformance-token-never-logged",
+        "X-KF-Context": "$context",
+        "X-KF-Context-Proof": "4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f",
+        "Idempotency-Key": "order-17-reserve-1"
+      },
+      "body": {
+        "sku": "KF-42",
+        "qty": 3
+      }
+    },
+    "error": {
+      "status": 409,
+      "class": "permanent",
+      "kind": "conflict",
+      "reason": "idempotency-answer-not-stored",
+      "messageContains": [
+        "HTTP 409",
+        "use a new key"
+      ]
+    }
+  }
+}

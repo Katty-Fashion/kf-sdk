@@ -1,0 +1,39 @@
+{
+  "id": "manifest/audit-valid",
+  "area": "manifest",
+  "description": "capabilities.audit with write and read-own is accepted and read (declared in protocol 1.0, implemented by the platform).",
+  "source": "a rule of the SDK itself",
+  "input": {
+    "manifest": {
+      "schemaVersion": 2,
+      "slug": "man-mod",
+      "name": "module.name",
+      "version": "1.0.0",
+      "platform": ">=4.1",
+      "i18n": {
+        "en": {
+          "module.name": "Manifest module",
+          "field.priority": "Priority",
+          "tab.label": "Tab"
+        }
+      },
+      "capabilities": {
+        "audit": [
+          {
+            "access": "write"
+          },
+          {
+            "access": "read-own"
+          }
+        ]
+      }
+    }
+  },
+  "expect": {
+    "valid": true,
+    "read": {
+      "/capabilities/audit/0/access": "write",
+      "/capabilities/audit/1/access": "read-own"
+    }
+  }
+}

@@ -1,0 +1,69 @@
+{
+  "id": "peers/command-invalid-answer-refused",
+  "area": "peers",
+  "description": "The owner's answer is refused for good by the platform (not JSON, a redirect or too large): 502 invalid-answer, permanent -> a refusal of kind invalid-answer.",
+  "source": "sdk-protocol.md §15.9",
+  "input": {
+    "slug": "peers-caller",
+    "context": {
+      "v": 1,
+      "tenant": "00000000-0000-0000-0000-00000000000a",
+      "user": "subject-1",
+      "actor": {
+        "type": "user",
+        "via": null,
+        "hookId": null
+      },
+      "locale": "en",
+      "rights": [],
+      "method": "GET",
+      "path": "/x",
+      "query": null,
+      "ts": "$now",
+      "requestId": "req-peers-5"
+    },
+    "proof": "4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f",
+    "call": "command",
+    "args": {
+      "owner": "kf-stock",
+      "name": "reserve",
+      "idempotencyKey": "order-17-reserve-1",
+      "body": {
+        "sku": "KF-42",
+        "qty": 3
+      }
+    },
+    "platform": {
+      "status": 502,
+      "body": "{\"type\":\"https://kf.ro/problems/invalid-answer\",\"title\":\"invalid-answer\",\"status\":502,\"detail\":\"The answer of kf-stock is not JSON.\",\"class\":\"permanent\"}"
+    }
+  },
+  "expect": {
+    "outcome": "error",
+    "request": {
+      "method": "POST",
+      "path": "/api/v1/platform/modules/peers-caller/peers/kf-stock/commands/reserve",
+      "query": null,
+      "headers": {
+        "Authorization": "Bearer kfm_conformance-token-never-logged",
+        "X-KF-Context": "$context",
+        "X-KF-Context-Proof": "4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f",
+        "Idempotency-Key": "order-17-reserve-1"
+      },
+      "body": {
+        "sku": "KF-42",
+        "qty": 3
+      }
+    },
+    "error": {
+      "status": 502,
+      "class": "permanent",
+      "kind": "invalid-answer",
+      "reason": "invalid-answer",
+      "messageContains": [
+        "HTTP 502",
+        "is not JSON"
+      ]
+    }
+  }
+}

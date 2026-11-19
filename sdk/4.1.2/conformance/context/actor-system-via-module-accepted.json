@@ -1,0 +1,36 @@
+{
+  "id": "context/actor-system-via-module-accepted",
+  "area": "context",
+  "description": "actor system via module:kf-3d (a background job), no user, no rights: accepted.",
+  "source": "sdk-protocol.md §9.2",
+  "input": {
+    "secret": "kf-hook-secret-conformance",
+    "now": 1760000000,
+    "headers": {
+      "X-KF-Context": "eyJ2IjoxLCJ0ZW5hbnQiOiIwZjFlMmQzYy00YjVhLTQ5NjgtODc3Ni02NTU0NDMzMjIxMTAiLCJ1c2VyIjpudWxsLCJhY3RvciI6eyJ0eXBlIjoic3lzdGVtIiwidmlhIjoibW9kdWxlOmtmLTNkIiwiaG9va0lkIjpudWxsfSwibG9jYWxlIjoicm8iLCJyaWdodHMiOltdLCJtZXRob2QiOiJHRVQiLCJwYXRoIjoiL2NoZWNrcyIsInF1ZXJ5IjpudWxsLCJ0cyI6MTc2MDAwMDAwMCwicmVxdWVzdElkIjoicmVxLTAzMDMifQ",
+      "X-KF-Timestamp": "1760000000",
+      "X-KF-Signature": "b604a07f929cdf789e3ff1326c42dfd1b53baa7a9fcd1178e0bc64d22af1df3f"
+    },
+    "body": ""
+  },
+  "expect": {
+    "valid": true,
+    "context": {
+      "v": 1,
+      "tenant": "0f1e2d3c-4b5a-4968-8776-655443322110",
+      "user": null,
+      "actor": {
+        "type": "system",
+        "via": "module:kf-3d",
+        "hookId": null
+      },
+      "locale": "ro",
+      "rights": [],
+      "method": "GET",
+      "path": "/checks",
+      "query": null,
+      "ts": 1760000000,
+      "requestId": "req-0303"
+    }
+  }
+}

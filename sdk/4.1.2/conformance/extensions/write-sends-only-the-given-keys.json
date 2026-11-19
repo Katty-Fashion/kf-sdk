@@ -1,0 +1,61 @@
+{
+  "id": "extensions/write-sends-only-the-given-keys",
+  "area": "extensions",
+  "description": "write(context, entity, id, values): PATCH …/extensions/{entity}/{id} with exactly the given keys (null clears); the answer is the module values.",
+  "source": "sdk-protocol.md §15.4",
+  "input": {
+    "slug": "ext-mod",
+    "context": {
+      "v": 1,
+      "tenant": "00000000-0000-0000-0000-00000000000a",
+      "user": "subject-1",
+      "actor": {
+        "type": "user",
+        "via": null,
+        "hookId": null
+      },
+      "locale": "en",
+      "rights": [],
+      "method": "POST",
+      "path": "/push",
+      "query": null,
+      "ts": "$now",
+      "requestId": "req-ext-1"
+    },
+    "proof": "3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f",
+    "call": "write",
+    "args": {
+      "entity": "model_version",
+      "id": "17",
+      "values": {
+        "aas_shell": "X",
+        "aas_last_push": null
+      }
+    },
+    "platform": {
+      "status": 200,
+      "body": "{\"aas_shell\":\"X\",\"aas_last_push\":null}"
+    }
+  },
+  "expect": {
+    "outcome": "ok",
+    "request": {
+      "method": "PATCH",
+      "path": "/api/v1/platform/modules/ext-mod/extensions/model_version/17",
+      "query": null,
+      "headers": {
+        "Authorization": "Bearer kfm_conformance-token-never-logged",
+        "X-KF-Context": "$context",
+        "X-KF-Context-Proof": "3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f"
+      },
+      "body": {
+        "aas_shell": "X",
+        "aas_last_push": null
+      }
+    },
+    "result": {
+      "aas_shell": "X",
+      "aas_last_push": null
+    }
+  }
+}

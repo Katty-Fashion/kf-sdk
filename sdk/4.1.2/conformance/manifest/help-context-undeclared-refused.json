@@ -1,0 +1,72 @@
+{
+  "id": "manifest/help-context-undeclared-refused",
+  "area": "manifest",
+  "description": "A context page that this manifest does not declare on module.pages is refused, and a repeated one too.",
+  "source": "sdk-protocol.md §3.2, §7.13",
+  "input": {
+    "manifest": {
+      "schemaVersion": 3,
+      "slug": "kf-aas-r3",
+      "name": "module.name",
+      "version": "1.0.0",
+      "platform": ">=4.1",
+      "i18n": {
+        "en": {
+          "module.name": "AAS",
+          "page.utils-help": "AAS help",
+          "help.aas-overview.summary": "What the AAS pages do and how they connect"
+        }
+      },
+      "capabilities": {
+        "routes": [
+          {
+            "method": "GET",
+            "path": "/m/kf-aas-r3/shells",
+            "right": "api.v1.m.kf-aas-r3.shells.get"
+          }
+        ],
+        "surfaces": [
+          {
+            "slug": "module.pages",
+            "kind": "react",
+            "page": "utils-help"
+          },
+          {
+            "slug": "module.pages",
+            "kind": "react",
+            "page": "utils-shells"
+          },
+          {
+            "slug": "module.pages",
+            "kind": "react",
+            "page": "mapping"
+          },
+          {
+            "slug": "setup.sections",
+            "kind": "react",
+            "page": "platforms"
+          }
+        ],
+        "help": [
+          {
+            "key": "aas-overview",
+            "title": "page.utils-help",
+            "page": "utils-help",
+            "context": [
+              "utils-shells",
+              "nowhere",
+              "utils-shells"
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "expect": {
+    "valid": false,
+    "errorsContain": [
+      "kf-module-conf.json: capabilities.help[0].context[1] \"nowhere\" is not a page this module declares on module.pages (capabilities.surfaces[].page)",
+      "kf-module-conf.json: capabilities.help[0].context[2] \"utils-shells\" is listed twice"
+    ]
+  }
+}

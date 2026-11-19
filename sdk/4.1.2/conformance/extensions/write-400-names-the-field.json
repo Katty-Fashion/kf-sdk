@@ -1,0 +1,67 @@
+{
+  "id": "extensions/write-400-names-the-field",
+  "area": "extensions",
+  "description": "400 with errors[\"extensions.<slug>.<field>\"] is the invalid refusal, carrying the field.",
+  "source": "sdk-protocol.md §15.4",
+  "input": {
+    "slug": "ext-mod",
+    "context": {
+      "v": 1,
+      "tenant": "00000000-0000-0000-0000-00000000000a",
+      "user": "subject-1",
+      "actor": {
+        "type": "user",
+        "via": null,
+        "hookId": null
+      },
+      "locale": "en",
+      "rights": [],
+      "method": "GET",
+      "path": "/x",
+      "query": null,
+      "ts": "$now",
+      "requestId": "req-ext-2"
+    },
+    "proof": "3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f",
+    "call": "write",
+    "args": {
+      "entity": "model_version",
+      "id": "17",
+      "values": {
+        "aas_shell": 12
+      }
+    },
+    "platform": {
+      "status": 400,
+      "body": "{\"type\":\"https://kf.ro/problems/validation\",\"title\":\"validation\",\"status\":400,\"detail\":\"invalid extension values\",\"class\":\"permanent\",\"errors\":{\"extensions.ext-mod.aas_shell\":\"must be text\"}}"
+    }
+  },
+  "expect": {
+    "outcome": "error",
+    "request": {
+      "method": "PATCH",
+      "path": "/api/v1/platform/modules/ext-mod/extensions/model_version/17",
+      "query": null,
+      "headers": {
+        "Authorization": "Bearer kfm_conformance-token-never-logged",
+        "X-KF-Context": "$context",
+        "X-KF-Context-Proof": "3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f"
+      },
+      "body": {
+        "aas_shell": 12
+      }
+    },
+    "error": {
+      "status": 400,
+      "class": "permanent",
+      "kind": "invalid",
+      "reason": "validation",
+      "errors": {
+        "extensions.ext-mod.aas_shell": "must be text"
+      },
+      "messageContains": [
+        "extensions.ext-mod.aas_shell"
+      ]
+    }
+  }
+}

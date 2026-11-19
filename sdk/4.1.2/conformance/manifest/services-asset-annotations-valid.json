@@ -1,0 +1,51 @@
+{
+  "id": "manifest/services-asset-annotations-valid",
+  "area": "manifest",
+  "description": "capabilities.services may name collaboration.asset-annotations.v1 besides order.services.v1, each once.",
+  "source": "sdk-protocol.md §3.2, §15.10",
+  "input": {
+    "manifest": {
+      "schemaVersion": 3,
+      "slug": "kf-step",
+      "name": "module.name",
+      "version": "1.0.0",
+      "platform": ">=4.1",
+      "i18n": {
+        "en": {
+          "module.name": "Step",
+          "step.label": "Item check"
+        }
+      },
+      "capabilities": {
+        "routes": [
+          {
+            "method": "GET",
+            "path": "/m/kf-step/rules/item-ready",
+            "right": "api.v1.m.kf-step.rules.item-ready.get"
+          },
+          {
+            "method": "POST",
+            "path": "/m/kf-step/items",
+            "right": "api.v1.m.kf-step.items.post"
+          }
+        ],
+        "services": [
+          {
+            "port": "order.services.v1"
+          },
+          {
+            "port": "collaboration.asset-annotations.v1"
+          }
+        ]
+      }
+    }
+  },
+  "expect": {
+    "valid": true,
+    "warningsContain": [],
+    "read": {
+      "/capabilities/services/0/port": "order.services.v1",
+      "/capabilities/services/1/port": "collaboration.asset-annotations.v1"
+    }
+  }
+}

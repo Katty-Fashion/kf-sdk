@@ -1,0 +1,37 @@
+{
+  "id": "manifest/slots-resource-without-schema-refused",
+  "area": "manifest",
+  "description": "A slot of kind R without dataSchema is refused: R is data only, validated by the owner.",
+  "source": "sdk-protocol.md §1, §1.A, §3.2, §7.12",
+  "input": {
+    "manifest": {
+      "schemaVersion": 3,
+      "slug": "slot-owner",
+      "name": "module.name",
+      "version": "1.0.0",
+      "platform": ">=4.1",
+      "i18n": {
+        "en": {
+          "module.name": "Slot owner",
+          "slot.layers": "Viewport layers"
+        }
+      },
+      "capabilities": {
+        "slots": [
+          {
+            "key": "materials.v1",
+            "kind": "R",
+            "type": "resource",
+            "visibility": "public"
+          }
+        ]
+      }
+    }
+  },
+  "expect": {
+    "valid": false,
+    "errorsContain": [
+      "capabilities.slots[0].dataSchema null is required on kind R"
+    ]
+  }
+}

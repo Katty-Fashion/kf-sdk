@@ -1,0 +1,22 @@
+{
+  "id": "context/body-swapped-refused",
+  "area": "context",
+  "description": "The same context with another body is refused: the body is covered by the signature.",
+  "source": "the platform HttpModuleApiForwarder.encodeContext",
+  "input": {
+    "secret": "kf-hook-secret-conformance",
+    "now": 1760000000,
+    "headers": {
+      "X-KF-Context": "eyJ2IjoxLCJ0ZW5hbnQiOiIwZjFlMmQzYy00YjVhLTQ5NjgtODc3Ni02NTU0NDMzMjIxMTAiLCJ1c2VyIjoib2lkYy1zdWItMSIsImxvY2FsZSI6InJvIiwicmlnaHRzIjpbImFwaS52MS5tLmNvbmZvcm1hbmNlLmV2ZW50cy5nZXQiLCJhcGkudjEubS5jb25mb3JtYW5jZS5ub3Rlcy5wb3N0Il0sIm1ldGhvZCI6IlBPU1QiLCJwYXRoIjoiL25vdGVzIiwicXVlcnkiOm51bGwsInRzIjoxNzYwMDAwMDAwLCJyZXF1ZXN0SWQiOiJyZXEtMDAwMiJ9",
+      "X-KF-Timestamp": "1760000000",
+      "X-KF-Signature": "c3716b8df49337eb6dea4495323b00bc3beb5ae9523550393a9339a465de8412"
+    },
+    "body": "{\"text\":\"altered\"}"
+  },
+  "expect": {
+    "valid": false,
+    "status": 401,
+    "class": "permanent",
+    "reasonContains": "bad signature"
+  }
+}

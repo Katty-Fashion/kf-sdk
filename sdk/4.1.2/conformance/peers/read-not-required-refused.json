@@ -1,0 +1,60 @@
+{
+  "id": "peers/read-not-required-refused",
+  "area": "peers",
+  "description": "The owner is not in the caller's requires: 403 peer-not-required, permanent.",
+  "source": "sdk-protocol.md §15.9",
+  "input": {
+    "slug": "peers-caller",
+    "context": {
+      "v": 1,
+      "tenant": "00000000-0000-0000-0000-00000000000a",
+      "user": "subject-1",
+      "actor": {
+        "type": "user",
+        "via": null,
+        "hookId": null
+      },
+      "locale": "en",
+      "rights": [],
+      "method": "GET",
+      "path": "/x",
+      "query": null,
+      "ts": "$now",
+      "requestId": "req-peers-3"
+    },
+    "proof": "4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f",
+    "call": "read",
+    "args": {
+      "owner": "kf-stock",
+      "port": "m.kf-stock.level.v1",
+      "query": {}
+    },
+    "platform": {
+      "status": 403,
+      "body": "{\"type\":\"https://kf.ro/problems/peer-not-required\",\"title\":\"peer-not-required\",\"status\":403,\"detail\":\"kf-stock is not in the requires of peers-caller.\",\"class\":\"permanent\"}"
+    }
+  },
+  "expect": {
+    "outcome": "error",
+    "request": {
+      "method": "GET",
+      "path": "/api/v1/platform/modules/peers-caller/peers/kf-stock/reads/m.kf-stock.level.v1",
+      "query": null,
+      "headers": {
+        "Authorization": "Bearer kfm_conformance-token-never-logged",
+        "X-KF-Context": "$context",
+        "X-KF-Context-Proof": "4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f"
+      },
+      "body": null
+    },
+    "error": {
+      "status": 403,
+      "class": "permanent",
+      "kind": "forbidden",
+      "reason": "peer-not-required",
+      "messageContains": [
+        "HTTP 403"
+      ]
+    }
+  }
+}

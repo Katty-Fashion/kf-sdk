@@ -1,0 +1,50 @@
+{
+  "id": "manifest/peers-owner-not-required-refused",
+  "area": "manifest",
+  "description": "A peer whose owner is not in requires is refused.",
+  "source": "sdk-protocol.md §3.2, §15.9, §6.3",
+  "input": {
+    "manifest": {
+      "schemaVersion": 3,
+      "slug": "kf-3d",
+      "name": "module.name",
+      "version": "1.0.0",
+      "platform": ">=4.1",
+      "i18n": {
+        "en": {
+          "module.name": "3D"
+        }
+      },
+      "requires": [
+        {
+          "slug": "kf-other",
+          "versionRange": ">=1.0.0"
+        }
+      ],
+      "capabilities": {
+        "peers": [
+          {
+            "owner": "kf-qc",
+            "reads": [
+              "m.kf-qc.checks.v1"
+            ],
+            "commands": [
+              "open-check"
+            ]
+          }
+        ],
+        "hooks": [
+          {
+            "point": "m.kf-qc.after.check-closed"
+          }
+        ]
+      }
+    }
+  },
+  "expect": {
+    "valid": false,
+    "errorsContain": [
+      "capabilities.peers[0].owner \"kf-qc\" is not in requires (declare it there, mandatory or optional)"
+    ]
+  }
+}

@@ -1,0 +1,65 @@
+{
+  "id": "events/emit-undeclared-refused-locally",
+  "area": "events",
+  "description": "With the manifest known, an event outside capabilities.events is refused by the SDK, permanent, before any request (the platform would answer 422 event-not-declared).",
+  "source": "sdk-protocol.md §6.3",
+  "input": {
+    "slug": "kf-stock",
+    "manifest": {
+      "schemaVersion": 3,
+      "slug": "kf-stock",
+      "name": "n",
+      "version": "1.0.0",
+      "capabilities": {
+        "events": [
+          {
+            "name": "level-changed",
+            "visibility": "public"
+          }
+        ]
+      }
+    },
+    "context": {
+      "v": 1,
+      "tenant": "00000000-0000-0000-0000-00000000000a",
+      "user": "subject-1",
+      "actor": {
+        "type": "user",
+        "via": null,
+        "hookId": null
+      },
+      "locale": "en",
+      "rights": [],
+      "method": "GET",
+      "path": "/x",
+      "query": null,
+      "ts": "$now",
+      "requestId": "req-events-2"
+    },
+    "proof": "4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f",
+    "call": "emit",
+    "args": {
+      "name": "price-changed",
+      "data": {
+        "sku": "KF-42"
+      }
+    },
+    "platform": {
+      "status": 202,
+      "body": "{}"
+    }
+  },
+  "expect": {
+    "outcome": "error",
+    "request": null,
+    "error": {
+      "status": 0,
+      "class": "permanent",
+      "kind": "other",
+      "messageContains": [
+        "price-changed",
+        "capabilities.events"
+      ]
+    }
+  }
+}

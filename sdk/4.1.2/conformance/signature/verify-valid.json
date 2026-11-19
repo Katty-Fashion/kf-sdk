@@ -1,0 +1,16 @@
+{
+  "id": "signature/verify-valid",
+  "area": "signature",
+  "description": "The platform's signature verifies at the same second.",
+  "source": "the platform HookSignatureSigner.sign",
+  "input": {
+    "secret": "kf-hook-secret-conformance",
+    "timestamp": "1760000000",
+    "body": "{\"data\":{\"name\":\"Rochie „Ana” — ăîșțâ €\"}}",
+    "now": 1760000000,
+    "signature": "165ec842eadae3c94ac6b0eb32209a693e95b75846a99e19e0c2aacaa9439cb5"
+  },
+  "expect": {
+    "valid": true
+  }
+}

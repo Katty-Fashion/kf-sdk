@@ -1,0 +1,8 @@
+{
+  "id": "errors/500-no-body-transient",
+  "area": "errors",
+  "description": "A 500 without a body carries no class: the status table makes it transient and the SDK retries.",
+  "source": "the platform ProblemClass.forStatus",
+  "input": {"response": {"status": 500}},
+  "expect": {"retry": true, "class": "transient", "messageContains": ["500"]}
+}

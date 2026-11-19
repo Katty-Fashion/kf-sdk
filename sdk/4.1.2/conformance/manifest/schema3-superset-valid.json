@@ -1,0 +1,28 @@
+{
+  "id": "manifest/schema3-superset-valid",
+  "area": "manifest",
+  "description": "A manifest valid under schemaVersion 2 is valid under 3 with only the number changed (3 is a strict superset of 2).",
+  "source": "sdk-protocol.md §1, §1.A, §3.2, §7.12",
+  "input": {
+    "manifest": {
+      "schemaVersion": 3,
+      "slug": "slot-owner",
+      "name": "module.name",
+      "version": "1.0.0",
+      "platform": ">=4.1",
+      "i18n": {
+        "en": {
+          "module.name": "Slot owner",
+          "slot.layers": "Viewport layers"
+        }
+      }
+    }
+  },
+  "expect": {
+    "valid": true,
+    "warningsContain": [],
+    "read": {
+      "/schemaVersion": 3
+    }
+  }
+}

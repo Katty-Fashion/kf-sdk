@@ -1,0 +1,48 @@
+{
+  "id": "manifest/commands-path-with-param-refused",
+  "area": "manifest",
+  "description": "A command on a route with a {param} segment is refused.",
+  "source": "sdk-protocol.md §3.2, §15.9, §16.4",
+  "input": {
+    "manifest": {
+      "schemaVersion": 3,
+      "slug": "kf-qc",
+      "name": "module.name",
+      "version": "1.0.0",
+      "platform": ">=4.1",
+      "i18n": {
+        "en": {
+          "module.name": "Quality"
+        }
+      },
+      "capabilities": {
+        "routes": [
+          {
+            "method": "GET",
+            "path": "/m/kf-qc/peer/checks/{id}",
+            "right": "api.v1.m.kf-qc.peer.checks.id.get"
+          },
+          {
+            "method": "POST",
+            "path": "/m/kf-qc/peer/checks/{id}",
+            "right": "api.v1.m.kf-qc.peer.checks.id.post"
+          }
+        ],
+        "commands": [
+          {
+            "name": "open-check",
+            "path": "/m/kf-qc/peer/checks/{id}",
+            "method": "POST",
+            "visibility": "public"
+          }
+        ]
+      }
+    }
+  },
+  "expect": {
+    "valid": false,
+    "errorsContain": [
+      "kf-module-conf.json: capabilities.commands[0].path \"/m/kf-qc/peer/checks/{id}\" must be a route with literal segments only (no {param} segment)"
+    ]
+  }
+}

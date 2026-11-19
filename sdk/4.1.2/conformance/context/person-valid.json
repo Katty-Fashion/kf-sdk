@@ -1,0 +1,40 @@
+{
+  "id": "context/person-valid",
+  "area": "context",
+  "description": "person {email, displayName} on a member route: read as given, after requestId.",
+  "source": "sdk-protocol.md §9.2",
+  "input": {
+    "secret": "kf-hook-secret-conformance",
+    "now": 1760000000,
+    "headers": {
+      "X-KF-Context": "eyJ2IjoxLCJ0ZW5hbnQiOiIwZjFlMmQzYy00YjVhLTQ5NjgtODc3Ni02NTU0NDMzMjIxMTAiLCJ1c2VyIjoib2lkYy1zdWItMSIsImFjdG9yIjp7InR5cGUiOiJ1c2VyIiwidmlhIjpudWxsLCJob29rSWQiOm51bGx9LCJsb2NhbGUiOiJybyIsInJpZ2h0cyI6W10sIm1ldGhvZCI6IlBPU1QiLCJwYXRoIjoiL3RpY2tldHMiLCJxdWVyeSI6bnVsbCwidHMiOjE3NjAwMDAwMDAsInJlcXVlc3RJZCI6InJlcS0wMjAxIiwicGVyc29uIjp7ImVtYWlsIjoiYW5hLnBvcEBrZi5ybyIsImRpc3BsYXlOYW1lIjoiQW5hIFBvcCJ9fQ",
+      "X-KF-Timestamp": "1760000000",
+      "X-KF-Signature": "7094948f151f91427e1dc099781b2bbf0721fb30175a0377077250f039b24481"
+    },
+    "body": ""
+  },
+  "expect": {
+    "valid": true,
+    "context": {
+      "v": 1,
+      "tenant": "0f1e2d3c-4b5a-4968-8776-655443322110",
+      "user": "oidc-sub-1",
+      "actor": {
+        "type": "user",
+        "via": null,
+        "hookId": null
+      },
+      "locale": "ro",
+      "rights": [],
+      "method": "POST",
+      "path": "/tickets",
+      "query": null,
+      "ts": 1760000000,
+      "requestId": "req-0201",
+      "person": {
+        "email": "ana.pop@kf.ro",
+        "displayName": "Ana Pop"
+      }
+    }
+  }
+}

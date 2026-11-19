@@ -1,0 +1,267 @@
+{
+  "catalogVersion": 2,
+  "generator": "host-ui/scripts/surfaces-catalog.mjs",
+  "surfaces": [
+    {
+      "slug": "app.overlay",
+      "type": "extension",
+      "ctx": "{ route: string; inPortal: boolean; appVersion: string | null }",
+      "hooks": {},
+      "actions": {
+        "toast": {
+          "signature": "(message: string, options?: { type?: 'error' | 'success' | 'info'; description?: string }) => void"
+        }
+      },
+      "callbacks": {}
+    },
+    {
+      "slug": "models.detail.overview.cards",
+      "type": "extension",
+      "ctx": "{ model: { id: number | null; name: string | null; styleNumber: string | null; status: 'DRAFT' | 'SAMPLING' | 'PRODUCTION' | 'ARCHIVED' | null; createdAt: string | null; updatedAt: string | null; extensions: { [key: string]: { [key: string]: unknown } } }; version: { id: number; name: string | null } | null; href: string }",
+      "hooks": {},
+      "actions": {
+        "navigate": {
+          "signature": "(href: string) => void"
+        },
+        "toast": {
+          "signature": "(message: string, options?: { type?: 'error' | 'success' | 'info'; description?: string }) => void"
+        }
+      },
+      "callbacks": {}
+    },
+    {
+      "slug": "models.detail.tabs",
+      "type": "tab",
+      "hostOrders": {
+        "overview": 0,
+        "composition": 1000,
+        "sizing": 2000,
+        "consumption": 3000,
+        "pattern": 3500,
+        "3d-studio": 4000,
+        "qa": 5000,
+        "docs-notes": 6000,
+        "cost-impact": 7000,
+        "bill-of-labour": 8000,
+        "passport": 9000
+      },
+      "parts": {
+        "trigger": {
+          "ctx": "{}",
+          "hooks": {},
+          "actions": {},
+          "callbacks": {}
+        },
+        "panel": {
+          "ctx": "{ model: { id: number | null; name: string | null; styleNumber: string | null; status: 'DRAFT' | 'SAMPLING' | 'PRODUCTION' | 'ARCHIVED' | null; createdAt: string | null; updatedAt: string | null; extensions: { [key: string]: { [key: string]: unknown } } }; isActive: boolean; version: { id: number; name: string | null } | null }",
+          "hooks": {},
+          "actions": {
+            "navigate": {
+              "signature": "(href: string) => void"
+            },
+            "refresh": {
+              "signature": "() => Promise<void>"
+            },
+            "toast": {
+              "signature": "(message: string, options?: { type?: 'error' | 'success' | 'info'; description?: string }) => void"
+            }
+          },
+          "callbacks": {}
+        }
+      }
+    },
+    {
+      "slug": "models.form.create.fields.after",
+      "type": "extension",
+      "ctx": "{ mode: 'create'; values: { name: string; styleNumber: string; status: string }; extensions: { [key: string]: { [key: string]: unknown } }; errors: { [key: string]: string } }",
+      "hooks": {
+        "useFormValue": {
+          "signature": "(path: string) => unknown"
+        }
+      },
+      "actions": {
+        "toast": {
+          "signature": "(message: string, options?: { type?: 'error' | 'success' | 'info'; description?: string }) => void"
+        }
+      },
+      "callbacks": {
+        "setExtensionValue": {
+          "signature": "(field: string, value: unknown) => void"
+        },
+        "setFieldError": {
+          "signature": "(field: string, message: string | null) => void"
+        }
+      }
+    },
+    {
+      "slug": "models.form.edit.fields.after",
+      "type": "extension",
+      "ctx": "{ mode: 'edit'; model: { id: number | null; name: string | null; styleNumber: string | null; status: 'DRAFT' | 'SAMPLING' | 'PRODUCTION' | 'ARCHIVED' | null; createdAt: string | null; updatedAt: string | null; extensions: { [key: string]: { [key: string]: unknown } } }; values: { collectionId?: number | null; seasonId?: number | null; technicianId?: number | null; name?: string; styleNumber?: string; modelOwner?: string }; extensions: { [key: string]: { [key: string]: unknown } }; errors: { [key: string]: string } }",
+      "hooks": {
+        "useFormValue": {
+          "signature": "(path: string) => unknown"
+        }
+      },
+      "actions": {
+        "toast": {
+          "signature": "(message: string, options?: { type?: 'error' | 'success' | 'info'; description?: string }) => void"
+        }
+      },
+      "callbacks": {
+        "setExtensionValue": {
+          "signature": "(field: string, value: unknown) => void"
+        },
+        "setFieldError": {
+          "signature": "(field: string, message: string | null) => void"
+        }
+      }
+    },
+    {
+      "slug": "models.list.card.after",
+      "type": "extension",
+      "ctx": "{ row: { id: number | null; name: string | null; styleNumber: string | null; status: 'DRAFT' | 'SAMPLING' | 'PRODUCTION' | 'ARCHIVED' | null; createdAt: string | null; updatedAt: string | null; extensions: { [key: string]: { [key: string]: unknown } } } }",
+      "hooks": {},
+      "actions": {},
+      "callbacks": {}
+    },
+    {
+      "slug": "models.list.columns",
+      "type": "column",
+      "parts": {
+        "header": {
+          "ctx": "{}",
+          "hooks": {},
+          "actions": {},
+          "callbacks": {}
+        },
+        "cell": {
+          "ctx": "{ row: { id: number | null; name: string | null; styleNumber: string | null; status: 'DRAFT' | 'SAMPLING' | 'PRODUCTION' | 'ARCHIVED' | null; createdAt: string | null; updatedAt: string | null; extensions: { [key: string]: { [key: string]: unknown } } } }",
+          "hooks": {},
+          "actions": {},
+          "callbacks": {}
+        }
+      }
+    },
+    {
+      "slug": "module.pages",
+      "type": "page",
+      "ctx": "{ page: string; path: string[]; query: { [key: string]: string } }",
+      "hooks": {},
+      "actions": {
+        "navigate": {
+          "signature": "(href: string) => void"
+        },
+        "setTitle": {
+          "signature": "(title: string) => void"
+        },
+        "toast": {
+          "signature": "(message: string, options?: { type?: 'error' | 'success' | 'info'; description?: string }) => void"
+        }
+      },
+      "callbacks": {}
+    },
+    {
+      "slug": "orderflow.rail.sections",
+      "type": "extension",
+      "ctx": "{ order: { id: number; name: string; status: string } }",
+      "hooks": {},
+      "actions": {
+        "navigate": {
+          "signature": "(href: string) => void"
+        },
+        "refresh": {
+          "signature": "() => Promise<void>"
+        },
+        "toast": {
+          "signature": "(message: string, options?: { type?: 'error' | 'success' | 'info'; description?: string }) => void"
+        }
+      },
+      "callbacks": {}
+    },
+    {
+      "slug": "orderflow.review.after",
+      "type": "extension",
+      "ctx": "{ order: { id: number; name: string; status: string } }",
+      "hooks": {},
+      "actions": {
+        "navigate": {
+          "signature": "(href: string) => void"
+        },
+        "refresh": {
+          "signature": "() => Promise<void>"
+        },
+        "toast": {
+          "signature": "(message: string, options?: { type?: 'error' | 'success' | 'info'; description?: string }) => void"
+        }
+      },
+      "callbacks": {}
+    },
+    {
+      "slug": "orderflow.step",
+      "type": "extension",
+      "ctx": "{ order: { id: number; name: string; status: string }; step: { key: string; name: string; stepInstanceId: number }; instance: { id: number; flowKey: string; flowVersion: number }; line: { id: number; modelVersionId: number } | null }",
+      "hooks": {},
+      "actions": {
+        "navigate": {
+          "signature": "(href: string) => void"
+        },
+        "toast": {
+          "signature": "(message: string, options?: { type?: 'error' | 'success' | 'info'; description?: string }) => void"
+        }
+      },
+      "callbacks": {}
+    },
+    {
+      "slug": "overview.cards",
+      "type": "extension",
+      "hostOrders": {
+        "orders": 0,
+        "collections": 1000,
+        "customers": 2000,
+        "models": 3000,
+        "recent-activity": 9000
+      },
+      "ctx": "{}",
+      "hooks": {},
+      "actions": {
+        "navigate": {
+          "signature": "(href: string) => void"
+        }
+      },
+      "callbacks": {}
+    },
+    {
+      "slug": "setup.sections",
+      "type": "page",
+      "ctx": "{ section: string }",
+      "hooks": {},
+      "actions": {
+        "navigate": {
+          "signature": "(href: string) => void"
+        },
+        "setTitle": {
+          "signature": "(title: string) => void"
+        },
+        "toast": {
+          "signature": "(message: string, options?: { type?: 'error' | 'success' | 'info'; description?: string }) => void"
+        }
+      },
+      "callbacks": {}
+    },
+    {
+      "slug": "tenant-management.cards",
+      "type": "extension",
+      "ctx": "{ tenant: { id: string; name: string } }",
+      "hooks": {},
+      "actions": {
+        "refresh": {
+          "signature": "() => Promise<void>"
+        },
+        "toast": {
+          "signature": "(message: string, options?: { type?: 'error' | 'success' | 'info'; description?: string }) => void"
+        }
+      },
+      "callbacks": {}
+    }
+  ]
+}

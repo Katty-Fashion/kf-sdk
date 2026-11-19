@@ -1,0 +1,22 @@
+{
+  "id": "context/actor-unknown-type-refused",
+  "area": "context",
+  "description": "an actor type other than user or system is refused. 401, class permanent.",
+  "source": "a rule of the SDK itself",
+  "input": {
+    "secret": "kf-hook-secret-conformance",
+    "now": 1760000000,
+    "headers": {
+      "X-KF-Context": "eyJ2IjoxLCJ0ZW5hbnQiOiIwZjFlMmQzYy00YjVhLTQ5NjgtODc3Ni02NTU0NDMzMjIxMTAiLCJ1c2VyIjoib2lkYy1zdWItMSIsImFjdG9yIjp7InR5cGUiOiJyb2JvdCIsInZpYSI6bnVsbCwiaG9va0lkIjpudWxsfSwibG9jYWxlIjoicm8iLCJyaWdodHMiOlsiYXBpLnYxLm0uY29uZm9ybWFuY2Uubm90ZXMucG9zdCJdLCJtZXRob2QiOiJHRVQiLCJwYXRoIjoiL2V2ZW50cyIsInF1ZXJ5IjpudWxsLCJ0cyI6MTc2MDAwMDAwMCwicmVxdWVzdElkIjoicmVxLTAwMDgifQ",
+      "X-KF-Timestamp": "1760000000",
+      "X-KF-Signature": "77ca9fe5988d4e41e69edb0e0be9865387ef0b040a3e7a159c88ec0f0c012694"
+    },
+    "body": ""
+  },
+  "expect": {
+    "valid": false,
+    "status": 401,
+    "class": "permanent",
+    "reasonContains": "is not user or system"
+  }
+}

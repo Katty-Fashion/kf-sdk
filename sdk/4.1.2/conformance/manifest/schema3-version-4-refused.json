@@ -1,0 +1,28 @@
+{
+  "id": "manifest/schema3-version-4-refused",
+  "area": "manifest",
+  "description": "A schemaVersion newer than the SDK speaks (3, protocol 2.0) is refused, naming the supported interval.",
+  "source": "the platform ManifestSchemaVersion",
+  "input": {
+    "manifest": {
+      "schemaVersion": 4,
+      "slug": "slot-owner",
+      "name": "module.name",
+      "version": "1.0.0",
+      "platform": ">=4.1",
+      "i18n": {
+        "en": {
+          "module.name": "Slot owner",
+          "slot.layers": "Viewport layers"
+        }
+      }
+    }
+  },
+  "expect": {
+    "valid": false,
+    "errorsContain": [
+      "\"schemaVersion\" 4 is not supported",
+      "supported: 1..3"
+    ]
+  }
+}

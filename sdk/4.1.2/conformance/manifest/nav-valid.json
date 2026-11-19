@@ -1,0 +1,66 @@
+{
+  "id": "manifest/nav-valid",
+  "area": "manifest",
+  "description": "A staff menu entry with the right of one of the module's own routes, an icon, an order and a declared flag is valid; the typed manifest reads every key.",
+  "source": "sdk-protocol.md §3.2, §7.11",
+  "input": {
+    "manifest": {
+      "schemaVersion": 2,
+      "slug": "man-mod",
+      "name": "module.name",
+      "version": "1.0.0",
+      "platform": ">=4.1",
+      "featureFlags": [
+        {
+          "key": "beta-menu",
+          "label": "flag.beta",
+          "default": false
+        }
+      ],
+      "i18n": {
+        "en": {
+          "module.name": "Manifest module",
+          "nav.events": "Events",
+          "flag.beta": "Beta menu"
+        }
+      },
+      "capabilities": {
+        "routes": [
+          {
+            "method": "GET",
+            "path": "/m/man-mod/events",
+            "right": "api.v1.m.man-mod.events.get"
+          }
+        ],
+        "nav": [
+          {
+            "surface": "staff",
+            "group": "admin-utils",
+            "key": "events",
+            "label": "nav.events",
+            "url": "/modules",
+            "icon": "Boxes",
+            "right": "api.v1.m.man-mod.events.get",
+            "order": 20,
+            "flag": "beta-menu"
+          }
+        ]
+      }
+    }
+  },
+  "expect": {
+    "valid": true,
+    "warningsContain": [],
+    "read": {
+      "/capabilities/nav/0/surface": "staff",
+      "/capabilities/nav/0/group": "admin-utils",
+      "/capabilities/nav/0/key": "events",
+      "/capabilities/nav/0/label": "nav.events",
+      "/capabilities/nav/0/url": "/modules",
+      "/capabilities/nav/0/icon": "Boxes",
+      "/capabilities/nav/0/right": "api.v1.m.man-mod.events.get",
+      "/capabilities/nav/0/order": 20,
+      "/capabilities/nav/0/flag": "beta-menu"
+    }
+  }
+}

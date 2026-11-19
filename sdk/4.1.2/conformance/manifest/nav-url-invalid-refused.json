@@ -1,0 +1,61 @@
+{
+  "id": "manifest/nav-url-invalid-refused",
+  "area": "manifest",
+  "description": "A nav url that is not an in-app path is refused: a protocol-relative url (//), a .. segment, a scheme.",
+  "source": "sdk-protocol.md §3.2, §7.11",
+  "input": {
+    "manifest": {
+      "schemaVersion": 2,
+      "slug": "man-mod",
+      "name": "module.name",
+      "version": "1.0.0",
+      "platform": ">=4.1",
+      "i18n": {
+        "en": {
+          "module.name": "Manifest module",
+          "nav.events": "Events"
+        }
+      },
+      "capabilities": {
+        "routes": [
+          {
+            "method": "GET",
+            "path": "/m/man-mod/events",
+            "right": "api.v1.m.man-mod.events.get"
+          }
+        ],
+        "nav": [
+          {
+            "surface": "staff",
+            "group": "admin-utils",
+            "key": "a",
+            "label": "nav.events",
+            "url": "//evil.example/x"
+          },
+          {
+            "surface": "staff",
+            "group": "admin-utils",
+            "key": "b",
+            "label": "nav.events",
+            "url": "/a/../setup"
+          },
+          {
+            "surface": "staff",
+            "group": "admin-utils",
+            "key": "c",
+            "label": "nav.events",
+            "url": "https://evil.example"
+          }
+        ]
+      }
+    }
+  },
+  "expect": {
+    "valid": false,
+    "errorsContain": [
+      "capabilities.nav[0].url must be an in-app path",
+      "capabilities.nav[1].url must be an in-app path",
+      "capabilities.nav[2].url must be an in-app path"
+    ]
+  }
+}

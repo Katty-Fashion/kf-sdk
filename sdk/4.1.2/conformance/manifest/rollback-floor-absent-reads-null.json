@@ -1,0 +1,28 @@
+{
+  "id": "manifest/rollback-floor-absent-reads-null",
+  "area": "manifest",
+  "description": "A manifest without rollbackFloor (or with rollbackFloor null) is valid; the typed Manifest reads null and the platform takes the version itself as the floor.",
+  "source": "sdk-protocol.md §3.1, §12",
+  "input": {
+    "manifest": {
+      "schemaVersion": 2,
+      "slug": "man-mod",
+      "name": "module.name",
+      "version": "1.2.0",
+      "rollbackFloor": null,
+      "platform": ">=4.1",
+      "i18n": {
+        "en": {
+          "module.name": "Manifest module"
+        }
+      }
+    }
+  },
+  "expect": {
+    "valid": true,
+    "warningsContain": [],
+    "read": {
+      "/rollbackFloor": null
+    }
+  }
+}

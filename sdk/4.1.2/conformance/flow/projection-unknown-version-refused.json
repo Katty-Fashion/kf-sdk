@@ -1,0 +1,13 @@
+{
+  "id": "flow/projection-unknown-version-refused",
+  "area": "flow",
+  "description": "A projection the rule does not know (order.flow-rule.v2) is refused: the module answers 400, which the engine reads as a block.",
+  "source": "sdk-protocol.md §16.4",
+  "input": {
+    "query": "projection=order.flow-rule.v2&rule.key=item-ready&order.id=812&order.status=CONFIRMED&flow.key=g3-production&flow.version=4&instance.id=31&step.key=cutting&step.to=sewing&order.number=PO+2026%2F7&order.internal=false&order.customerId=55&step.behavesLike=IN_PRODUCTION&order.stages=production&order.stages=sampling&line.id=4401&line.modelId=90&line.modelVersionId=901&line.quantity=120"
+  },
+  "expect": {
+    "valid": false,
+    "errorContains": "\"order.flow-rule.v2\" is not known"
+  }
+}

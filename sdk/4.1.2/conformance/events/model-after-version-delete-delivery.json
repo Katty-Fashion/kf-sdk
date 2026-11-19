@@ -1,0 +1,63 @@
+{
+  "id": "events/model-after-version-delete-delivery",
+  "area": "events",
+  "description": "A signed model.after.version-delete reaches the afterVersionDelete handler: before.versionId names the deleted version, after is null.",
+  "source": "sdk-protocol.md §6.1",
+  "input": {
+    "envelope": {
+      "specversion": "1.0",
+      "id": "5e1a0000-0000-4000-8000-000000000002",
+      "kfeventid": "5e1a0000-0000-4000-8000-0000000000a2",
+      "type": "kf.model.after.version-delete",
+      "source": "/api/v1/models/42",
+      "subject": "42",
+      "time": "2026-11-13T10:15:30.123Z",
+      "datacontenttype": "application/json",
+      "kfmodule": "conformance",
+      "kfflags": {},
+      "kftenant": "0f1e2d3c-4b5a-4968-8776-655443322110",
+      "kflocale": "ro",
+      "kfactor": null,
+      "kfaggregatetype": "model",
+      "kfenvelopeversion": "1",
+      "data": {
+        "entity": "model",
+        "id": "42",
+        "before": {
+          "versionId": "17"
+        },
+        "after": null,
+        "changed": [
+          "versions"
+        ]
+      }
+    }
+  },
+  "expect": {
+    "status": 200,
+    "handlerCalled": true,
+    "handler": {
+      "event": "model.after.version-delete",
+      "id": "42",
+      "tenant": "0f1e2d3c-4b5a-4968-8776-655443322110",
+      "eventId": "5e1a0000-0000-4000-8000-0000000000a2",
+      "deliveryId": "5e1a0000-0000-4000-8000-000000000002",
+      "envelopeVersion": "1",
+      "aggregateType": "model",
+      "data": {
+        "entity": "model",
+        "id": "42",
+        "before": {
+          "versionId": "17"
+        },
+        "after": null,
+        "changed": [
+          "versions"
+        ]
+      }
+    },
+    "body": {
+      "ok": true
+    }
+  }
+}

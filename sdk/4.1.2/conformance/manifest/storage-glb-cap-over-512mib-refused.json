@@ -1,0 +1,44 @@
+{
+  "id": "manifest/storage-glb-cap-over-512mib-refused",
+  "area": "manifest",
+  "description": "maxBytes 536870913 is refused even for a lone GLB.",
+  "source": "sdk-protocol.md §3.2, §3.5, §15.7",
+  "input": {
+    "manifest": {
+      "schemaVersion": 2,
+      "slug": "man-mod",
+      "name": "module.name",
+      "version": "1.0.0",
+      "platform": ">=4.1",
+      "i18n": {
+        "en": {
+          "module.name": "Manifest module",
+          "widget.label": "Feedback"
+        }
+      },
+      "capabilities": {
+        "routes": [
+          {
+            "method": "POST",
+            "path": "/m/man-mod/tickets",
+            "right": "api.v1.m.man-mod.tickets.post"
+          }
+        ],
+        "storage": [
+          {
+            "contentTypes": [
+              "model/gltf-binary"
+            ],
+            "maxBytes": 536870913
+          }
+        ]
+      }
+    }
+  },
+  "expect": {
+    "valid": false,
+    "errorsContain": [
+      "capabilities.storage[0].maxBytes must be a whole number of bytes between 1 and 536870912 (got 536870913)"
+    ]
+  }
+}

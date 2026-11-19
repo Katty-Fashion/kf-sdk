@@ -1,0 +1,78 @@
+{
+  "id": "before/patch-own-fields-and-extensions",
+  "area": "before",
+  "description": "A patch sets own fields of the entity and the module's own extensions (extensions.{slug}.{field}).",
+  "source": "the platform HookDecision.from",
+  "input": {
+    "envelope": {
+      "specversion": "1.0",
+      "id": "b9f43a5e-87fe-334e-a088-bfbdb5c39004",
+      "kfeventid": "7a8b9c0d-1e2f-4a3b-8c4d-5e6f7a8b9c0d",
+      "type": "kf.model.before.update",
+      "source": "/api/v1/models/42",
+      "subject": "42",
+      "time": "2026-10-19T10:15:30.123Z",
+      "datacontenttype": "application/json",
+      "kfmodule": "conformance",
+      "kfflags": {
+        "author-form": true,
+        "author-tab": false
+      },
+      "kftenant": "0f1e2d3c-4b5a-4968-8776-655443322110",
+      "kflocale": "ro",
+      "kfactor": "oidc-sub-1",
+      "kfaggregatetype": "model",
+      "kfenvelopeversion": "1",
+      "data": {
+        "entity": "model",
+        "id": "42",
+        "before": {
+          "id": 42,
+          "name": "Rochie Ana",
+          "materialList": [],
+          "extensions": {
+            "conformance": {
+              "author": "Ana"
+            }
+          }
+        },
+        "after": {
+          "id": 42,
+          "name": "Rochie Ana 2",
+          "materialList": [],
+          "extensions": {
+            "conformance": {
+              "author": "Ana"
+            }
+          }
+        },
+        "changed": [
+          "name"
+        ]
+      }
+    },
+    "answer": {
+      "decision": "patch",
+      "set": {
+        "name": "Rochie Ana (verificat)"
+      },
+      "extensions": {
+        "author": "Ana P."
+      }
+    }
+  },
+  "expect": {
+    "status": 200,
+    "body": {
+      "decision": "patch",
+      "patch": {
+        "name": "Rochie Ana (verificat)",
+        "extensions": {
+          "conformance": {
+            "author": "Ana P."
+          }
+        }
+      }
+    }
+  }
+}

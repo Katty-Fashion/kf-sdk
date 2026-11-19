@@ -1,0 +1,14 @@
+{
+  "id": "errors/503-first-install-transient",
+  "area": "errors",
+  "description": "The 503 answered while the module's first install runs is transient: the SDK retries (Retry-After paces it, up to the schedule's longest step).",
+  "source": "the platform ModuleSdkExceptionAdvice.handleModuleInstallInProgress",
+  "input": {
+    "response": {
+      "status": 503,
+      "headers": {"Content-Type": "application/problem+json", "Retry-After": "5"},
+      "body": {"type": "https://kf.ro/problems/unavailable", "title": "Service Unavailable", "status": 503, "detail": "Module conformance is being installed (version 1.0.0); retry the registration shortly", "state": "INSTALLING", "class": "transient"}
+    }
+  },
+  "expect": {"retry": true, "class": "transient", "messageContains": ["503", "is being installed"]}
+}

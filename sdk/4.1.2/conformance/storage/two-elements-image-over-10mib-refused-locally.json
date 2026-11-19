@@ -1,0 +1,76 @@
+{
+  "id": "storage/two-elements-image-over-10mib-refused-locally",
+  "area": "storage",
+  "description": "With a GLB element (512 MiB) and an images element (10 MiB), an image upload above 10 MiB is refused locally: the element that declares the content type sets the ceiling.",
+  "source": "sdk-protocol.md §3.5, §15.7",
+  "input": {
+    "slug": "fb-mod",
+    "context": {
+      "v": 1,
+      "tenant": "00000000-0000-0000-0000-00000000000a",
+      "user": "subject-1",
+      "actor": {
+        "type": "user",
+        "via": null,
+        "hookId": null
+      },
+      "locale": "en",
+      "rights": [],
+      "method": "POST",
+      "path": "/feedback",
+      "query": null,
+      "ts": "$now",
+      "requestId": "req-st-two-1"
+    },
+    "proof": "3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f",
+    "manifest": {
+      "schemaVersion": 3,
+      "slug": "fb-mod",
+      "version": "0.1.0",
+      "name": "app.name",
+      "i18n": {
+        "en": {
+          "app.name": "Feedback"
+        }
+      },
+      "capabilities": {
+        "storage": [
+          {
+            "contentTypes": [
+              "model/gltf-binary"
+            ],
+            "maxBytes": 536870912
+          },
+          {
+            "contentTypes": [
+              "image/png"
+            ],
+            "maxBytes": 10485760
+          }
+        ]
+      },
+      "platform": ">=4.1"
+    },
+    "call": "uploadUrl",
+    "args": {
+      "contentType": "image/png",
+      "size": 10485761
+    },
+    "platform": {
+      "status": 200,
+      "body": "{\"key\":\"kf-modules/fb-mod/00000000-0000-0000-0000-00000000000a/5b1f0c1e-1111-4222-8333-444455556666.glb\",\"url\":\"https://s3.local/kf-assets/put?sig=1\",\"method\":\"PUT\",\"headers\":{\"Content-Type\":\"model/gltf-binary\",\"Content-Length\":\"536870912\"},\"expiresAt\":\"2026-10-29T10:10:00Z\"}"
+    }
+  },
+  "expect": {
+    "outcome": "error",
+    "request": null,
+    "error": {
+      "status": 0,
+      "class": "permanent",
+      "kind": "other",
+      "messageContains": [
+        "above capabilities.storage maxBytes 10485760"
+      ]
+    }
+  }
+}

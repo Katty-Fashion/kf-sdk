@@ -1,0 +1,59 @@
+{
+  "id": "notifications/transient-503-retried-same-request",
+  "area": "notifications",
+  "description": "A transient answer is retried and the retry is the SAME request, with the same idempotency key, so the platform writes the notification once; the second answer reports the duplicates.",
+  "source": "a rule of the SDK itself",
+  "input": {
+    "slug": "notif-mod",
+    "call": "send",
+    "tenantId": "00000000-0000-0000-0000-00000000000a",
+    "key": "author-changed",
+    "recipients": [
+      "subject-1",
+      "subject-2"
+    ],
+    "variables": {
+      "modelName": "Rochie"
+    },
+    "options": {
+      "idempotencyKey": "7a07a07a-0000-4000-8000-000000000207"
+    },
+    "platform": [
+      {
+        "status": 503,
+        "body": "{\"type\":\"https://kf.ro/problems/unavailable\",\"status\":503,\"detail\":\"busy\",\"class\":\"transient\"}"
+      },
+      {
+        "status": 202,
+        "body": "{\"accepted\":0,\"duplicates\":4}"
+      }
+    ]
+  },
+  "expect": {
+    "outcome": "ok",
+    "requests": 2,
+    "request": {
+      "method": "POST",
+      "path": "/api/v1/platform/modules/notif-mod/notifications",
+      "headers": {
+        "Authorization": "Bearer kfm_conformance-token-never-logged"
+      },
+      "body": {
+        "tenantId": "00000000-0000-0000-0000-00000000000a",
+        "key": "author-changed",
+        "recipients": [
+          "subject-1",
+          "subject-2"
+        ],
+        "variables": {
+          "modelName": "Rochie"
+        },
+        "idempotencyKey": "7a07a07a-0000-4000-8000-000000000207"
+      }
+    },
+    "result": {
+      "accepted": 0,
+      "duplicates": 4
+    }
+  }
+}

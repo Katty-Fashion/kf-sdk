@@ -1,0 +1,66 @@
+{
+  "id": "manifest/help-section-undeclared-refused",
+  "area": "manifest",
+  "description": "A section that is not a surfaces[].page of this manifest on setup.sections is refused (here a module.pages page).",
+  "source": "sdk-protocol.md §3.2, §7.13",
+  "input": {
+    "manifest": {
+      "schemaVersion": 3,
+      "slug": "kf-aas-r3",
+      "name": "module.name",
+      "version": "1.0.0",
+      "platform": ">=4.1",
+      "i18n": {
+        "en": {
+          "module.name": "AAS",
+          "page.utils-help": "AAS help",
+          "help.aas-overview.summary": "What the AAS pages do and how they connect"
+        }
+      },
+      "capabilities": {
+        "routes": [
+          {
+            "method": "GET",
+            "path": "/m/kf-aas-r3/shells",
+            "right": "api.v1.m.kf-aas-r3.shells.get"
+          }
+        ],
+        "surfaces": [
+          {
+            "slug": "module.pages",
+            "kind": "react",
+            "page": "utils-help"
+          },
+          {
+            "slug": "module.pages",
+            "kind": "react",
+            "page": "utils-shells"
+          },
+          {
+            "slug": "module.pages",
+            "kind": "react",
+            "page": "mapping"
+          },
+          {
+            "slug": "setup.sections",
+            "kind": "react",
+            "page": "platforms"
+          }
+        ],
+        "help": [
+          {
+            "key": "platforms",
+            "title": "page.utils-help",
+            "section": "utils-help"
+          }
+        ]
+      }
+    }
+  },
+  "expect": {
+    "valid": false,
+    "errorsContain": [
+      "kf-module-conf.json: capabilities.help[0].section \"utils-help\" is not a section this module declares on setup.sections (capabilities.surfaces[].page)"
+    ]
+  }
+}

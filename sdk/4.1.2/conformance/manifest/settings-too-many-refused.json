@@ -1,0 +1,246 @@
+{
+  "id": "manifest/settings-too-many-refused",
+  "area": "manifest",
+  "description": "More than 30 settings are refused.",
+  "source": "sdk-protocol.md §3.2, §15",
+  "input": {
+    "manifest": {
+      "schemaVersion": 2,
+      "slug": "man-mod",
+      "name": "module.name",
+      "version": "1.0.0",
+      "platform": ">=4.1",
+      "i18n": {
+        "en": {
+          "module.name": "Manifest module",
+          "setting.push": "Push on save",
+          "setting.timeout": "Timeout",
+          "setting.mode": "Mode",
+          "setting.mode.help": "How the module pushes",
+          "tab.label": "AAS"
+        }
+      },
+      "capabilities": {
+        "routes": [
+          {
+            "method": "GET",
+            "path": "/m/man-mod/stations",
+            "right": "api.v1.m.man-mod.stations.get"
+          },
+          {
+            "method": "GET",
+            "path": "/m/man-mod/admin/config",
+            "right": "api.v1.m.man-mod.admin.config.get",
+            "admin": "tenant"
+          },
+          {
+            "method": "PUT",
+            "path": "/m/man-mod/admin/keys",
+            "right": "api.v1.m.man-mod.admin.keys.put",
+            "admin": "platform"
+          },
+          {
+            "method": "PUT",
+            "path": "/m/man-mod/admin/tenant-keys",
+            "right": "api.v1.m.man-mod.admin.tenant-keys.put",
+            "admin": "tenant"
+          }
+        ],
+        "settings": [
+          {
+            "key": "s0x",
+            "type": "BOOLEAN",
+            "default": true,
+            "label": "setting.push"
+          },
+          {
+            "key": "s1x",
+            "type": "BOOLEAN",
+            "default": true,
+            "label": "setting.push"
+          },
+          {
+            "key": "s2x",
+            "type": "BOOLEAN",
+            "default": true,
+            "label": "setting.push"
+          },
+          {
+            "key": "s3x",
+            "type": "BOOLEAN",
+            "default": true,
+            "label": "setting.push"
+          },
+          {
+            "key": "s4x",
+            "type": "BOOLEAN",
+            "default": true,
+            "label": "setting.push"
+          },
+          {
+            "key": "s5x",
+            "type": "BOOLEAN",
+            "default": true,
+            "label": "setting.push"
+          },
+          {
+            "key": "s6x",
+            "type": "BOOLEAN",
+            "default": true,
+            "label": "setting.push"
+          },
+          {
+            "key": "s7x",
+            "type": "BOOLEAN",
+            "default": true,
+            "label": "setting.push"
+          },
+          {
+            "key": "s8x",
+            "type": "BOOLEAN",
+            "default": true,
+            "label": "setting.push"
+          },
+          {
+            "key": "s9x",
+            "type": "BOOLEAN",
+            "default": true,
+            "label": "setting.push"
+          },
+          {
+            "key": "s10x",
+            "type": "BOOLEAN",
+            "default": true,
+            "label": "setting.push"
+          },
+          {
+            "key": "s11x",
+            "type": "BOOLEAN",
+            "default": true,
+            "label": "setting.push"
+          },
+          {
+            "key": "s12x",
+            "type": "BOOLEAN",
+            "default": true,
+            "label": "setting.push"
+          },
+          {
+            "key": "s13x",
+            "type": "BOOLEAN",
+            "default": true,
+            "label": "setting.push"
+          },
+          {
+            "key": "s14x",
+            "type": "BOOLEAN",
+            "default": true,
+            "label": "setting.push"
+          },
+          {
+            "key": "s15x",
+            "type": "BOOLEAN",
+            "default": true,
+            "label": "setting.push"
+          },
+          {
+            "key": "s16x",
+            "type": "BOOLEAN",
+            "default": true,
+            "label": "setting.push"
+          },
+          {
+            "key": "s17x",
+            "type": "BOOLEAN",
+            "default": true,
+            "label": "setting.push"
+          },
+          {
+            "key": "s18x",
+            "type": "BOOLEAN",
+            "default": true,
+            "label": "setting.push"
+          },
+          {
+            "key": "s19x",
+            "type": "BOOLEAN",
+            "default": true,
+            "label": "setting.push"
+          },
+          {
+            "key": "s20x",
+            "type": "BOOLEAN",
+            "default": true,
+            "label": "setting.push"
+          },
+          {
+            "key": "s21x",
+            "type": "BOOLEAN",
+            "default": true,
+            "label": "setting.push"
+          },
+          {
+            "key": "s22x",
+            "type": "BOOLEAN",
+            "default": true,
+            "label": "setting.push"
+          },
+          {
+            "key": "s23x",
+            "type": "BOOLEAN",
+            "default": true,
+            "label": "setting.push"
+          },
+          {
+            "key": "s24x",
+            "type": "BOOLEAN",
+            "default": true,
+            "label": "setting.push"
+          },
+          {
+            "key": "s25x",
+            "type": "BOOLEAN",
+            "default": true,
+            "label": "setting.push"
+          },
+          {
+            "key": "s26x",
+            "type": "BOOLEAN",
+            "default": true,
+            "label": "setting.push"
+          },
+          {
+            "key": "s27x",
+            "type": "BOOLEAN",
+            "default": true,
+            "label": "setting.push"
+          },
+          {
+            "key": "s28x",
+            "type": "BOOLEAN",
+            "default": true,
+            "label": "setting.push"
+          },
+          {
+            "key": "s29x",
+            "type": "BOOLEAN",
+            "default": true,
+            "label": "setting.push"
+          },
+          {
+            "key": "s30x",
+            "type": "BOOLEAN",
+            "default": true,
+            "label": "setting.push"
+          }
+        ]
+      }
+    }
+  },
+  "expect": {
+    "valid": false,
+    "errorsContain": [
+      "at most 30 settings are allowed"
+    ]
+  }
+}

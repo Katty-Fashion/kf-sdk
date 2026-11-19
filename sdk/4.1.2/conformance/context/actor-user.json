@@ -1,0 +1,38 @@
+{
+  "id": "context/actor-user",
+  "area": "context",
+  "description": "actor {type: user, via: null, hookId: null} with a user (the shape sends on the user's path); actor right after user in the JSON.",
+  "source": "a rule of the SDK itself",
+  "input": {
+    "secret": "kf-hook-secret-conformance",
+    "now": 1760000000,
+    "headers": {
+      "X-KF-Context": "eyJ2IjoxLCJ0ZW5hbnQiOiIwZjFlMmQzYy00YjVhLTQ5NjgtODc3Ni02NTU0NDMzMjIxMTAiLCJ1c2VyIjoib2lkYy1zdWItMSIsImFjdG9yIjp7InR5cGUiOiJ1c2VyIiwidmlhIjpudWxsLCJob29rSWQiOm51bGx9LCJsb2NhbGUiOiJybyIsInJpZ2h0cyI6WyJhcGkudjEubS5jb25mb3JtYW5jZS5ub3Rlcy5wb3N0Il0sIm1ldGhvZCI6IkdFVCIsInBhdGgiOiIvZXZlbnRzIiwicXVlcnkiOm51bGwsInRzIjoxNzYwMDAwMDAwLCJyZXF1ZXN0SWQiOiJyZXEtMDAwMyJ9",
+      "X-KF-Timestamp": "1760000000",
+      "X-KF-Signature": "ad7a5c0ae4b74b1fabaa111121f5c772fe1b205cb10b0661efee4b4fc969b874"
+    },
+    "body": ""
+  },
+  "expect": {
+    "valid": true,
+    "context": {
+      "v": 1,
+      "tenant": "0f1e2d3c-4b5a-4968-8776-655443322110",
+      "user": "oidc-sub-1",
+      "actor": {
+        "type": "user",
+        "via": null,
+        "hookId": null
+      },
+      "locale": "ro",
+      "rights": [
+        "api.v1.m.conformance.notes.post"
+      ],
+      "method": "GET",
+      "path": "/events",
+      "query": null,
+      "ts": 1760000000,
+      "requestId": "req-0003"
+    }
+  }
+}

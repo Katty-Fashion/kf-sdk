@@ -1,0 +1,67 @@
+{
+  "id": "services/asset-annotations-not-declared-refused-locally",
+  "area": "services",
+  "description": "A module that declares only order.services.v1 cannot delete asset annotations: refused locally, nothing sent.",
+  "source": "sdk-protocol.md §15.10",
+  "input": {
+    "slug": "services-mod",
+    "context": {
+      "v": 1,
+      "tenant": "00000000-0000-0000-0000-00000000000a",
+      "user": "subject-1",
+      "actor": {
+        "type": "user",
+        "via": null,
+        "hookId": null
+      },
+      "locale": "en",
+      "rights": [],
+      "method": "POST",
+      "path": "/m/services-mod/lines",
+      "query": null,
+      "ts": "$now",
+      "requestId": "req-assetann-2"
+    },
+    "proof": "5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e",
+    "manifest": {
+      "schemaVersion": 3,
+      "slug": "services-mod",
+      "name": "module.name",
+      "version": "1.0.0",
+      "platform": ">=4.1",
+      "i18n": {
+        "en": {
+          "module.name": "Services"
+        }
+      },
+      "capabilities": {
+        "services": [
+          {
+            "port": "order.services.v1"
+          }
+        ]
+      }
+    },
+    "call": "assetAnnotationsDelete",
+    "args": {
+      "assetId": "c0ffee00-0000-4000-8000-000000000001"
+    },
+    "platform": {
+      "status": 204,
+      "body": ""
+    }
+  },
+  "expect": {
+    "outcome": "error",
+    "request": null,
+    "error": {
+      "status": 0,
+      "class": "permanent",
+      "kind": "other",
+      "messageContains": [
+        "collaboration.asset-annotations.v1",
+        "not declared in capabilities.services"
+      ]
+    }
+  }
+}

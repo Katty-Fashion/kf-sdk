@@ -1,0 +1,21 @@
+{
+  "id": "context/missing-header-refused",
+  "area": "context",
+  "description": "A request without X-KF-Context is refused.",
+  "source": "the platform HttpModuleApiForwarder.encodeContext",
+  "input": {
+    "secret": "kf-hook-secret-conformance",
+    "now": 1760000000,
+    "headers": {
+      "X-KF-Timestamp": "1760000000",
+      "X-KF-Signature": "9533145fdb6a55419a0e69d0dc051d93ecdeefd32a3da7a6ee862aed22465ae3"
+    },
+    "body": ""
+  },
+  "expect": {
+    "valid": false,
+    "status": 401,
+    "class": "permanent",
+    "reasonContains": "missing X-KF-Context"
+  }
+}

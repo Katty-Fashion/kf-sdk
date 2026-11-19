@@ -1,0 +1,118 @@
+{
+  "id": "envelope/model-version-after-update",
+  "area": "envelope",
+  "description": "The after-event of a write on model_version: the handler reads the same changed version paths and values as the before hook.",
+  "source": "the platform ModuleExtensionWriteService.writeModelChild",
+  "input": {
+    "envelope": {
+      "specversion": "1.0",
+      "id": "4d2e3f5a-6b7c-3d8e-9f0a-1b2c3d4e5f6a",
+      "kfeventid": "7a8b9c0d-1e2f-4a3b-8c4d-5e6f7a8b9c0d",
+      "type": "kf.model.after.update",
+      "source": "/api/v1/models/42",
+      "subject": "42",
+      "time": "2026-10-28T10:15:30.123Z",
+      "datacontenttype": "application/json",
+      "kfmodule": "conformance",
+      "kfflags": {
+        "author-form": true,
+        "author-tab": false
+      },
+      "kftenant": "0f1e2d3c-4b5a-4968-8776-655443322110",
+      "kflocale": "ro",
+      "kfactor": null,
+      "kfaggregatetype": "model",
+      "kfenvelopeversion": "1",
+      "data": {
+        "entity": "model",
+        "id": "42",
+        "before": {
+          "id": 42,
+          "name": "Rochie Ana",
+          "materialList": [],
+          "extensions": {
+            "conformance": {
+              "author": "Ana"
+            }
+          },
+          "versions": {
+            "17": {
+              "extensions": {
+                "kf-aas-r3": {
+                  "aas_shell": null,
+                  "aas_pushed": false
+                }
+              }
+            }
+          }
+        },
+        "after": {
+          "id": 42,
+          "name": "Rochie Ana",
+          "materialList": [],
+          "extensions": {
+            "conformance": {
+              "author": "Ana"
+            }
+          },
+          "versions": {
+            "17": {
+              "extensions": {
+                "kf-aas-r3": {
+                  "aas_shell": "TechnicalPack-17",
+                  "aas_pushed": true
+                }
+              }
+            }
+          }
+        },
+        "changed": [
+          "versions.17.extensions.kf-aas-r3.aas_shell",
+          "versions.17.extensions.kf-aas-r3.aas_pushed"
+        ]
+      }
+    }
+  },
+  "expect": {
+    "status": 200,
+    "handlerCalled": true,
+    "handler": {
+      "event": "model.after.update",
+      "id": "42",
+      "changedVersionIds": [
+        "17"
+      ],
+      "changedVersionFields": [
+        {
+          "versionId": "17",
+          "slug": "kf-aas-r3",
+          "field": "aas_shell"
+        },
+        {
+          "versionId": "17",
+          "slug": "kf-aas-r3",
+          "field": "aas_pushed"
+        }
+      ],
+      "versionValues": [
+        {
+          "versionId": "17",
+          "slug": "kf-aas-r3",
+          "field": "aas_shell",
+          "before": null,
+          "after": "TechnicalPack-17"
+        },
+        {
+          "versionId": "17",
+          "slug": "kf-aas-r3",
+          "field": "aas_pushed",
+          "before": false,
+          "after": true
+        }
+      ]
+    },
+    "body": {
+      "ok": true
+    }
+  }
+}

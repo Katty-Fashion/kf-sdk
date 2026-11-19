@@ -1,0 +1,63 @@
+{
+  "id": "peers/command-empty-answer-ok",
+  "area": "peers",
+  "description": "The owner answered 204 without a body: the platform passes its status with no body and the SDK returns an Answer whose body is null.",
+  "source": "sdk-protocol.md §15.9",
+  "input": {
+    "slug": "peers-caller",
+    "context": {
+      "v": 1,
+      "tenant": "00000000-0000-0000-0000-00000000000a",
+      "user": "subject-1",
+      "actor": {
+        "type": "user",
+        "via": null,
+        "hookId": null
+      },
+      "locale": "en",
+      "rights": [],
+      "method": "GET",
+      "path": "/x",
+      "query": null,
+      "ts": "$now",
+      "requestId": "req-peers-5"
+    },
+    "proof": "4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f",
+    "call": "command",
+    "args": {
+      "owner": "kf-stock",
+      "name": "reserve",
+      "idempotencyKey": "order-17-reserve-1",
+      "body": {
+        "sku": "KF-42",
+        "qty": 3
+      }
+    },
+    "platform": {
+      "status": 204,
+      "body": ""
+    }
+  },
+  "expect": {
+    "outcome": "ok",
+    "request": {
+      "method": "POST",
+      "path": "/api/v1/platform/modules/peers-caller/peers/kf-stock/commands/reserve",
+      "query": null,
+      "headers": {
+        "Authorization": "Bearer kfm_conformance-token-never-logged",
+        "X-KF-Context": "$context",
+        "X-KF-Context-Proof": "4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f",
+        "Idempotency-Key": "order-17-reserve-1"
+      },
+      "body": {
+        "sku": "KF-42",
+        "qty": 3
+      }
+    },
+    "result": {
+      "status": 204,
+      "body": null
+    }
+  }
+}

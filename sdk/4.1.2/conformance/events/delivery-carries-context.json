@@ -1,0 +1,68 @@
+{
+  "id": "events/delivery-carries-context",
+  "area": "events",
+  "description": "A module event m.{owner}.after.{name} reaches the subscribed handler with the owner's data unchanged, the event's kfeventid, and the delivery's context and proof for a background job.",
+  "source": "sdk-protocol.md §6.3 and §5.5",
+  "input": {
+    "subscribe": {
+      "owner": "kf-stock",
+      "name": "level-changed"
+    },
+    "envelope": {
+      "specversion": "1.0",
+      "id": "d-events-3",
+      "kfeventid": "6f1c2d3e-0000-4000-8000-000000000003",
+      "type": "kf.m.kf-stock.after.level-changed",
+      "source": "/module-event/kf-stock",
+      "subject": "kf-stock",
+      "time": "2026-11-09T10:00:00Z",
+      "datacontenttype": "application/json",
+      "kfmodule": "conformance",
+      "kftenant": "00000000-0000-0000-0000-00000000000a",
+      "kflocale": "en",
+      "kfactor": "subject-1",
+      "kfaggregatetype": "module-event",
+      "kfenvelopeversion": "1",
+      "data": {
+        "sku": "KF-42",
+        "level": 7
+      }
+    },
+    "context": {
+      "v": 1,
+      "tenant": "00000000-0000-0000-0000-00000000000a",
+      "user": null,
+      "actor": {
+        "type": "system",
+        "via": "hook",
+        "hookId": "d-events-3"
+      },
+      "locale": "en",
+      "rights": [],
+      "method": "POST",
+      "path": "/_kf/hooks",
+      "query": null,
+      "ts": "$now",
+      "requestId": "d-events-3"
+    },
+    "proof": "4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f"
+  },
+  "expect": {
+    "status": 200,
+    "handler": {
+      "owner": "kf-stock",
+      "name": "level-changed",
+      "eventId": "6f1c2d3e-0000-4000-8000-000000000003",
+      "tenant": "00000000-0000-0000-0000-00000000000a",
+      "data": {
+        "sku": "KF-42",
+        "level": 7
+      },
+      "deliveryContext": {
+        "tenant": "00000000-0000-0000-0000-00000000000a",
+        "contextHeader": "$context",
+        "proof": "4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f"
+      }
+    }
+  }
+}

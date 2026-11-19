@@ -1,0 +1,53 @@
+{
+  "id": "manifest/slots-duplicate-key-refused",
+  "area": "manifest",
+  "description": "The same slot key declared twice in one manifest is refused.",
+  "source": "sdk-protocol.md §1, §1.A, §3.2, §7.12",
+  "input": {
+    "manifest": {
+      "schemaVersion": 3,
+      "slug": "slot-owner",
+      "name": "module.name",
+      "version": "1.0.0",
+      "platform": ">=4.1",
+      "i18n": {
+        "en": {
+          "module.name": "Slot owner",
+          "slot.layers": "Viewport layers"
+        }
+      },
+      "capabilities": {
+        "slots": [
+          {
+            "key": "viewport.layers.v1",
+            "kind": "B",
+            "type": "layer",
+            "visibility": "public",
+            "label": "slot.layers",
+            "layerKinds": [
+              "pin",
+              "highlight"
+            ]
+          },
+          {
+            "key": "viewport.layers.v1",
+            "kind": "B",
+            "type": "layer",
+            "visibility": "public",
+            "label": null,
+            "layerKinds": [
+              "pin",
+              "highlight"
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "expect": {
+    "valid": false,
+    "errorsContain": [
+      "capabilities.slots[1].key \"viewport.layers.v1\" is declared twice"
+    ]
+  }
+}

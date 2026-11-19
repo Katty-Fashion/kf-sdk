@@ -1,0 +1,51 @@
+{
+  "id": "peers/read-with-expired-delivery-context-refused-locally",
+  "area": "peers",
+  "description": "A delivery's context older than 300 s is refused by the SDK, permanent, before any request: the platform would refuse it (401 invalid-context).",
+  "source": "sdk-protocol.md §5.5 and §15.9",
+  "input": {
+    "slug": "peers-caller",
+    "contextSource": "delivery",
+    "contextAgeSeconds": 301,
+    "context": {
+      "v": 1,
+      "tenant": "00000000-0000-0000-0000-00000000000a",
+      "user": null,
+      "actor": {
+        "type": "system",
+        "via": "hook",
+        "hookId": "d-peers-8"
+      },
+      "locale": "en",
+      "rights": [],
+      "method": "POST",
+      "path": "/_kf/hooks",
+      "query": null,
+      "ts": "$now",
+      "requestId": "d-peers-8"
+    },
+    "proof": "4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f4f",
+    "call": "read",
+    "args": {
+      "owner": "kf-stock",
+      "port": "m.kf-stock.level.v1",
+      "query": {}
+    },
+    "platform": {
+      "status": 200,
+      "body": "{}"
+    }
+  },
+  "expect": {
+    "outcome": "error",
+    "request": null,
+    "error": {
+      "status": 0,
+      "class": "permanent",
+      "kind": "other",
+      "messageContains": [
+        "300 s"
+      ]
+    }
+  }
+}

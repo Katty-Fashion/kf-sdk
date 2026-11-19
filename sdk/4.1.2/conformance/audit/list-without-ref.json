@@ -1,0 +1,45 @@
+{
+  "id": "audit/list-without-ref",
+  "area": "audit",
+  "description": "list without aggregateRef: only aggregateType is sent.",
+  "source": "the platform ModuleAuditController / ModuleAuditService / ModuleAuditPortIT",
+  "input": {
+    "slug": "audit-mod",
+    "context": {
+      "v": 1,
+      "tenant": "00000000-0000-0000-0000-00000000000a",
+      "user": "subject-1",
+      "locale": "en",
+      "rights": [],
+      "method": "POST",
+      "path": "/notes",
+      "query": null,
+      "ts": "$now",
+      "requestId": "req-audit-1"
+    },
+    "proof": "3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f",
+    "call": "list",
+    "query": {
+      "aggregateType": "Note"
+    },
+    "platform": {
+      "status": 200,
+      "body": "{\"rows\":[]}"
+    }
+  },
+  "expect": {
+    "outcome": "ok",
+    "request": {
+      "method": "GET",
+      "path": "/api/v1/platform/modules/audit-mod/audit",
+      "query": "aggregateType=Note",
+      "headers": {
+        "Authorization": "Bearer kfm_conformance-token-never-logged",
+        "X-KF-Context": "$context",
+        "X-KF-Context-Proof": "3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f"
+      },
+      "body": null
+    },
+    "rows": []
+  }
+}

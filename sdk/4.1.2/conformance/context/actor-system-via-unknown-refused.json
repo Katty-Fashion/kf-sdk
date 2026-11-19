@@ -1,0 +1,22 @@
+{
+  "id": "context/actor-system-via-unknown-refused",
+  "area": "context",
+  "description": "actor system via a channel other than hook or platform is refused. 401, class permanent.",
+  "source": "sdk-protocol.md §9.2",
+  "input": {
+    "secret": "kf-hook-secret-conformance",
+    "now": 1760000000,
+    "headers": {
+      "X-KF-Context": "eyJ2IjoxLCJ0ZW5hbnQiOiIwZjFlMmQzYy00YjVhLTQ5NjgtODc3Ni02NTU0NDMzMjIxMTAiLCJ1c2VyIjpudWxsLCJhY3RvciI6eyJ0eXBlIjoic3lzdGVtIiwidmlhIjoiY3JvbiIsImhvb2tJZCI6bnVsbH0sImxvY2FsZSI6InJvIiwicmlnaHRzIjpbXSwibWV0aG9kIjoiR0VUIiwicGF0aCI6Ii9zdGF0aW9ucyIsInF1ZXJ5IjpudWxsLCJ0cyI6MTc2MDAwMDAwMCwicmVxdWVzdElkIjoicmVxLTAxMDEifQ",
+      "X-KF-Timestamp": "1760000000",
+      "X-KF-Signature": "740b0ceb521e54f2b5ea9797e105110e3196730773b252c2a7c685684a205c8b"
+    },
+    "body": ""
+  },
+  "expect": {
+    "valid": false,
+    "status": 401,
+    "class": "permanent",
+    "reasonContains": "actor system requires via = hook or platform"
+  }
+}

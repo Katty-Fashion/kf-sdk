@@ -1,0 +1,57 @@
+{
+  "id": "manifest/storage-two-elements-valid",
+  "area": "manifest",
+  "description": "Two storage elements are valid (protocol 2.3): a GLB at 512 MiB and images at 10 MiB, each checked on its own.",
+  "source": "sdk-protocol.md §3.2, §15.7",
+  "input": {
+    "manifest": {
+      "schemaVersion": 2,
+      "slug": "man-mod",
+      "name": "module.name",
+      "version": "1.0.0",
+      "platform": ">=4.1",
+      "i18n": {
+        "en": {
+          "module.name": "Manifest module",
+          "widget.label": "Feedback"
+        }
+      },
+      "capabilities": {
+        "routes": [
+          {
+            "method": "POST",
+            "path": "/m/man-mod/tickets",
+            "right": "api.v1.m.man-mod.tickets.post"
+          }
+        ],
+        "storage": [
+          {
+            "contentTypes": [
+              "model/gltf-binary"
+            ],
+            "maxBytes": 536870912
+          },
+          {
+            "contentTypes": [
+              "image/jpeg",
+              "image/png"
+            ],
+            "maxBytes": 10485760
+          }
+        ]
+      }
+    }
+  },
+  "expect": {
+    "valid": true,
+    "warningsContain": [],
+    "read": {
+      "/capabilities/storage/0/maxBytes": 536870912,
+      "/capabilities/storage/1/maxBytes": 10485760,
+      "/capabilities/storage/1/contentTypes": [
+        "image/jpeg",
+        "image/png"
+      ]
+    }
+  }
+}

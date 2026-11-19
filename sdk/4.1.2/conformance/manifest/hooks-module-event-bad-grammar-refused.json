@@ -1,0 +1,39 @@
+{
+  "id": "manifest/hooks-module-event-bad-grammar-refused",
+  "area": "manifest",
+  "description": "A point in the m. namespace outside m.{owner}.after.{name} is not an event of a module.",
+  "source": "sdk-protocol.md §6.1, §6.3",
+  "input": {
+    "manifest": {
+      "schemaVersion": 3,
+      "slug": "kf-3d",
+      "name": "module.name",
+      "version": "1.0.0",
+      "platform": ">=4.1",
+      "i18n": {
+        "en": {
+          "module.name": "3D"
+        }
+      },
+      "requires": [
+        {
+          "slug": "kf-stock",
+          "versionRange": ">=1.0.0"
+        }
+      ],
+      "capabilities": {
+        "hooks": [
+          {
+            "point": "m.kf-stock.after"
+          }
+        ]
+      }
+    }
+  },
+  "expect": {
+    "valid": false,
+    "errorsContain": [
+      "capabilities.hooks[0].point \"m.kf-stock.after\" is not an event of a module (m.{owner}.after.{name})"
+    ]
+  }
+}

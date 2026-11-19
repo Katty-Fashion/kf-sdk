@@ -1,0 +1,59 @@
+{
+  "id": "reads/system-context-on-a-port-without-system",
+  "area": "reads",
+  "description": "A system context (hook) asks an object of a port not marked system: the SDK sends it (it does not know the platform flags) and the platform refusal 403 is the forbidden refusal.",
+  "source": "sdk-protocol.md §15.1",
+  "input": {
+    "slug": "reads-mod",
+    "context": {
+      "v": 1,
+      "tenant": "00000000-0000-0000-0000-00000000000a",
+      "user": null,
+      "actor": {
+        "type": "system",
+        "via": "hook",
+        "hookId": "3c2b1a09-8f7e-4d6c-9b5a-4f3e2d1c0b0a"
+      },
+      "locale": "en",
+      "rights": [],
+      "method": "POST",
+      "path": "/hooked",
+      "query": null,
+      "ts": "$now",
+      "requestId": "req-reads-11"
+    },
+    "proof": "3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f",
+    "call": "get",
+    "args": {
+      "port": "document.v1",
+      "id": "5"
+    },
+    "platform": {
+      "status": 403,
+      "body": "{\"type\":\"https://kf.ro/problems/insufficient-rights\",\"title\":\"insufficient-rights\",\"status\":403,\"detail\":\"the system context is not accepted on document.v1\",\"class\":\"permanent\"}"
+    }
+  },
+  "expect": {
+    "outcome": "error",
+    "request": {
+      "method": "GET",
+      "path": "/api/v1/platform/modules/reads-mod/reads/document.v1/5",
+      "query": null,
+      "headers": {
+        "Authorization": "Bearer kfm_conformance-token-never-logged",
+        "X-KF-Context": "$context",
+        "X-KF-Context-Proof": "3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f"
+      },
+      "body": null
+    },
+    "error": {
+      "status": 403,
+      "class": "permanent",
+      "kind": "forbidden",
+      "reason": "insufficient-rights",
+      "messageContains": [
+        "system context"
+      ]
+    }
+  }
+}

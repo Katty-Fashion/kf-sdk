@@ -1,0 +1,166 @@
+{
+  "id": "manifest/help-too-many-refused",
+  "area": "manifest",
+  "description": "More than 20 help notes are refused.",
+  "source": "sdk-protocol.md §3.2, §7.13",
+  "input": {
+    "manifest": {
+      "schemaVersion": 3,
+      "slug": "kf-aas-r3",
+      "name": "module.name",
+      "version": "1.0.0",
+      "platform": ">=4.1",
+      "i18n": {
+        "en": {
+          "module.name": "AAS",
+          "page.utils-help": "AAS help",
+          "help.aas-overview.summary": "What the AAS pages do and how they connect"
+        }
+      },
+      "capabilities": {
+        "routes": [
+          {
+            "method": "GET",
+            "path": "/m/kf-aas-r3/shells",
+            "right": "api.v1.m.kf-aas-r3.shells.get"
+          }
+        ],
+        "surfaces": [
+          {
+            "slug": "module.pages",
+            "kind": "react",
+            "page": "utils-help"
+          },
+          {
+            "slug": "module.pages",
+            "kind": "react",
+            "page": "utils-shells"
+          },
+          {
+            "slug": "module.pages",
+            "kind": "react",
+            "page": "mapping"
+          },
+          {
+            "slug": "setup.sections",
+            "kind": "react",
+            "page": "platforms"
+          }
+        ],
+        "help": [
+          {
+            "key": "note-0",
+            "title": "page.utils-help",
+            "page": "utils-help"
+          },
+          {
+            "key": "note-1",
+            "title": "page.utils-help",
+            "page": "utils-help"
+          },
+          {
+            "key": "note-2",
+            "title": "page.utils-help",
+            "page": "utils-help"
+          },
+          {
+            "key": "note-3",
+            "title": "page.utils-help",
+            "page": "utils-help"
+          },
+          {
+            "key": "note-4",
+            "title": "page.utils-help",
+            "page": "utils-help"
+          },
+          {
+            "key": "note-5",
+            "title": "page.utils-help",
+            "page": "utils-help"
+          },
+          {
+            "key": "note-6",
+            "title": "page.utils-help",
+            "page": "utils-help"
+          },
+          {
+            "key": "note-7",
+            "title": "page.utils-help",
+            "page": "utils-help"
+          },
+          {
+            "key": "note-8",
+            "title": "page.utils-help",
+            "page": "utils-help"
+          },
+          {
+            "key": "note-9",
+            "title": "page.utils-help",
+            "page": "utils-help"
+          },
+          {
+            "key": "note-10",
+            "title": "page.utils-help",
+            "page": "utils-help"
+          },
+          {
+            "key": "note-11",
+            "title": "page.utils-help",
+            "page": "utils-help"
+          },
+          {
+            "key": "note-12",
+            "title": "page.utils-help",
+            "page": "utils-help"
+          },
+          {
+            "key": "note-13",
+            "title": "page.utils-help",
+            "page": "utils-help"
+          },
+          {
+            "key": "note-14",
+            "title": "page.utils-help",
+            "page": "utils-help"
+          },
+          {
+            "key": "note-15",
+            "title": "page.utils-help",
+            "page": "utils-help"
+          },
+          {
+            "key": "note-16",
+            "title": "page.utils-help",
+            "page": "utils-help"
+          },
+          {
+            "key": "note-17",
+            "title": "page.utils-help",
+            "page": "utils-help"
+          },
+          {
+            "key": "note-18",
+            "title": "page.utils-help",
+            "page": "utils-help"
+          },
+          {
+            "key": "note-19",
+            "title": "page.utils-help",
+            "page": "utils-help"
+          },
+          {
+            "key": "note-20",
+            "title": "page.utils-help",
+            "page": "utils-help"
+          }
+        ]
+      }
+    }
+  },
+  "expect": {
+    "valid": false,
+    "errorsContain": [
+      "kf-module-conf.json: capabilities.help holds at most 20 notes (got 21)"
+    ]
+  }
+}
