@@ -2,6 +2,13 @@
 
 Signed releases of the tutorial module. Each section is the body of the module's GitHub release.
 
+## 0.2.1 — 2026-11-19
+
+Maintenance release on module SDK 4.1.2 (protocol 2.3). No functional change.
+
+### Changed
+- Built on module SDK 4.1.2 (protocol 2.3). Still requires platform `>=4.1`; the manifest stays on `schemaVersion` 3.
+
 ## 0.2.0 — 2026-11-15
 
 Maintenance release on the current platform and module SDK. No functional change.

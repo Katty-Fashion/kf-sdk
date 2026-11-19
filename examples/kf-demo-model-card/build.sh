@@ -55,7 +55,8 @@ HERE="$(cd "$(dirname "$0")" && pwd)"
 # sdk-v4.1.1 (0.2.0): protocol 2.2 -- manifest schemaVersion 3 (a strict superset of 2), the platform line 4.1 (the
 # manifest's "platform": ">=4.1"); the public (external) SDK line, as this is the public example module.
 # Bump it here to move the module to a newer SDK.
-SDK_REF="${KF_SDK_REF:-sdk-v4.1.1}"
+# sdk-v4.1.2 (0.2.1): protocol 2.3 (additive over 2.2, no new schemaVersion); a patch release, no functional change.
+SDK_REF="${KF_SDK_REF:-sdk-v4.1.2}"
 SDK_REPO="${KF_SDK_REPO:-$HERE/../..}"
 KF_MODULE="$SDK_REPO/sdk/tools/kf-module.mjs"
 VENDOR="$HERE/.sdk"

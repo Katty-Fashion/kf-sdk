@@ -3,7 +3,7 @@
   "slug": "kf-demo-model-card",
   "name": "module.name",
   "description": "module.description",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "rollbackFloor": "0.1.0",
   "author": "Katty Fashion",
   "platform": ">=4.1",

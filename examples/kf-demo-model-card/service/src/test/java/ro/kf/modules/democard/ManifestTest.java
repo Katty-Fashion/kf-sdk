@@ -55,7 +55,7 @@ class ManifestTest {
         Manifest m = Manifest.parse(manifest());
         assertEquals(ModuleIdentity.SOURCE_SLUG, m.slug());
         assertEquals(3, m.schemaVersion());
-        assertEquals("0.2.0", m.version());
+        assertEquals("0.2.1", m.version());
         assertEquals(">=4.1", m.platform());
         assertEquals(Manifest.Activation.TENANT, m.activation());
         assertThat(m.i18n().get("ro").keySet()).isEqualTo(m.i18n().get("en").keySet());
